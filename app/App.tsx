@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { AppLoading } from 'expo';
-import { Container, Text } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import TopStack from './navigation/TopStack';
 
 const App = () => {
   const [ready, setReady] = useState(false);
@@ -24,9 +25,9 @@ const App = () => {
   }
 
   return (
-    <Container>
-      <Text>Open up App.js to start working on your app!</Text>
-    </Container>
+    <NavigationContainer>
+      <TopStack/>
+    </NavigationContainer>
   );
 }
 
