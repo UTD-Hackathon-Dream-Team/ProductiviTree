@@ -1,11 +1,16 @@
 import React from "react";
-import { Container, Content, Text } from "native-base";
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Container, Content, Text, Button } from "native-base";
 
-const LogIn = () => {
+type Props = {
+  navigation: StackNavigationProp<any, 'LogIn'>;
+};
+
+const LogIn: React.FC<Props> = ({ navigation }) => {
   return (
     <Container>
       <Content>
-        <Text>log in</Text>
+        <Button onPress={() => navigation.navigate('Profile')}><Text>Log In</Text></Button>
       </Content>
     </Container>
   );
