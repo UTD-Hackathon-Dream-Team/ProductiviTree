@@ -1,9 +1,15 @@
 const express = require('express');
 var cors = require('cors');
 
+const connectDB = require('./config/db');
+
 //Set up environment
 const dotenv = require('dotenv');
 dotenv.config({ path: './config/config.env' });
+
+connectDB();
+
+const users = require('./router/userRouter');
 
 //Initialize app as express app
 const app = express();
@@ -19,6 +25,11 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
 });
+
+app.use(
+    '/api/v1/users', 
+    users
+);
 
 //Set up and start app connection
 const PORT = process.env.PORT || 8000;
