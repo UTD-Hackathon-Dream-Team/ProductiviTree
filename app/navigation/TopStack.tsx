@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 const TopStack = () => { // depending on log in have diff. stacks
   return (
     <Stack.Navigator>
-    <Stack.Screen name="LogIn" component={LogIn} />
+      <Stack.Screen name="LogIn" component={LogIn} />
       <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
