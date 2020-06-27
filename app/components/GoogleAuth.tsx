@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Content, Text, Button } from "native-base";
+import { TouchableOpacity , Image } from 'react-native';
+import { Container, Content, Text, Button , Thumbnail } from "native-base";
 
 const GoogleAuth = ({navigate} : { navigate: any}) => {
 
-  return (
-    <Content>
-        <Button onPress={() => navigate.navigate('MainStack')}>
-            <Text>Sign In With Google</Text>
-        </Button>
-      </Content>
-  );
+    const signInWithGoogle = async () => {
+        navigate.navigate('MainStack')
+    };
+
+    return (
+        <Content>
+            <TouchableOpacity onPress={signInWithGoogle}>
+                <Image
+                    source={require('../assets/googe_sign_in.png')}
+                />
+            </TouchableOpacity>
+        </Content>
+    );
 }
 
 export default GoogleAuth;
