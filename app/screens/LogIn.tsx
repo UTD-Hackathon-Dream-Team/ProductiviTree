@@ -10,7 +10,7 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
   return (
     <Container>
       <Content>
-        <Button onPress={() => navigation.navigate('Profile')}><Text>Log In</Text></Button>
+        <Button onPress={() => navigation.navigate('MainStack')}><Text>Log In</Text></Button>
       </Content>
     </Container>
   );
