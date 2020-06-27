@@ -30,7 +30,7 @@ exports.getUser = async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            data: user
+            data: user[0]
         });
     } catch (error) {
         return res.status(500).json({
@@ -46,7 +46,7 @@ exports.addUser = async (req, res, next) => {
 
         return res.status(201).json({
             success: true,
-            data: user
+            data: user[0]
         });
     } catch (error) {
         if(error.name === 'ValidationError') {
@@ -83,7 +83,7 @@ exports.deleteUser = async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            data: user
+            data: user[0]
         });
 
     } catch (error) {
@@ -204,7 +204,7 @@ exports.updateUser = async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            data: user
+            data: user[0]
         });
 
     } catch (error) {
