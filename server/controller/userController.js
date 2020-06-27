@@ -79,7 +79,7 @@ exports.deleteUser = async (req, res, next) => {
             });
         }
 
-        await User.remove({googleID : req.params.id});
+        await User.deleteOne({googleID : req.params.googleId});
 
         return res.status(200).json({
             success: true,
