@@ -11,7 +11,7 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
 
     const signInWithGoogle = async () => {
         try {
-            const { type, accessToken, user } = await Google.logInAsync({
+            const LogInResult = await Google.logInAsync({
               iosClientId: IOS_CLIENT_ID,
               androidClientId: ANDROID_CLIENT_ID,
               androidStandaloneAppClientId: ANDROID_APK_CLIENT_ID,
@@ -19,10 +19,10 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
               scopes: ["profile", "email"],
             });
       
-            if (type === "success") {
-              console.log("Logged in", user);
+            if (LogInResult.type === "success") {
+              console.log("Logged in", LogInResult.user);
               navigate.navigate('MainStack');
-              return accessToken;
+              return LogInResult.accessToken;
             } else {
               return { cancelled: true };
             }
