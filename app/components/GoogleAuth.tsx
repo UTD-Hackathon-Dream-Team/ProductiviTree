@@ -9,6 +9,17 @@ import { ANDROID_CLIENT_ID, IOS_CLIENT_ID , ANDROID_APK_CLIENT_ID , IOS_APP_CLIE
 
 const GoogleAuth = ({navigate} : { navigate: any}) => {
 
+    const newProfile = (user) => {
+        const newUser = {
+            googleID: user.id,
+            Username: user.name,
+            ProfilePic: user.photoUrl,
+            Email: user.email
+        };
+        
+        console.log("User created", newUser);
+      };
+
     const signInWithGoogle = async () => {
         try {
             const LogInResult = await Google.logInAsync({
@@ -20,7 +31,8 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
             });
       
             if (LogInResult.type === "success") {
-              console.log("Logged in", LogInResult.user);
+              //console.log("Logged in", LogInResult.user);
+              newProfile(LogInResult.user);
               navigate.navigate('MainStack');
               return LogInResult.accessToken;
             } else {
