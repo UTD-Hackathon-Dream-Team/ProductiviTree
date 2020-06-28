@@ -1,8 +1,8 @@
 //Source for google auth: https://docs.expo.io/versions/latest/sdk/google/
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TouchableOpacity , Image } from 'react-native';
-import { Container, Content, Text, Button , Thumbnail } from "native-base";
+import { Content } from "native-base";
 import * as Google from "expo-google-app-auth";
 
 import { ANDROID_CLIENT_ID, IOS_CLIENT_ID , ANDROID_APK_CLIENT_ID , IOS_APP_CLIENT_ID} from "../config";
