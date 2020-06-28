@@ -45,7 +45,6 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
                 console.log("Error in getting user", error);
             }
         })
-        .then(function () {});
       };
 
     const signInWithGoogle = async () => {
@@ -64,7 +63,6 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
               //console.log("Logged in", LogInResult.user);
               newProfile(LogInResult.user);
               navigate.navigate('MainStack');
-              return LogInResult.accessToken;
             } else {
               return { cancelled: true };
             }
