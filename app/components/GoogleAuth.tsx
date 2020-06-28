@@ -7,21 +7,50 @@ import * as Google from "expo-google-app-auth";
 
 import { ANDROID_CLIENT_ID, IOS_CLIENT_ID , ANDROID_APK_CLIENT_ID , IOS_APP_CLIENT_ID} from "../config";
 
+const axios = require("axios").default;
+
 const GoogleAuth = ({navigate} : { navigate: any}) => {
 
-    const newProfile = (user) => {
+    const newProfile = async (user) => {
+        //Creating  a user object to enter in database
         const newUser = {
             googleID: user.id,
             Username: user.name,
             ProfilePic: user.photoUrl,
             Email: user.email
         };
+
+        //console.log("New user", newUser);
         
-        console.log("User created", newUser);
+        //Check if user already exists in database
+        await axios
+        .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${newUser.googleID}`)
+        .then(function (response) {
+            console.log("User already exists");
+        })
+        .catch(function (error) {
+            //If user does not exist, add in database
+            if (error.response.status === 404){
+                console.log("User does not exist");
+                axios
+                .post("https://productivitree.wl.r.appspot.com/api/v1/users", newUser)
+                .then(function (response) {
+                    console.log("User added");
+                })
+                .catch(function (error) {
+                    console.log("Error in adding user", error.response);
+                });
+            }
+            else{
+                console.log("Error in getting user", error);
+            }
+        })
+        .then(function () {});
       };
 
     const signInWithGoogle = async () => {
         try {
+            //Log in with Google
             const LogInResult = await Google.logInAsync({
               iosClientId: IOS_CLIENT_ID,
               androidClientId: ANDROID_CLIENT_ID,
@@ -30,6 +59,7 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
               scopes: ["profile", "email"],
             });
       
+            //If login was successful, create a new profile and then go navigate to MainStack(Bottom Nav)
             if (LogInResult.type === "success") {
               //console.log("Logged in", LogInResult.user);
               newProfile(LogInResult.user);
