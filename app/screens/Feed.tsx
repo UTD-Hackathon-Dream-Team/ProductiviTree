@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Container, Content, Text } from "native-base";
+import {context} from "../context" ;
+import GoogleLogOut from "../components/GoogleLogOut";
 
 const Feed = () => {
+  console.log("Feed", context._currentValue.googleID);
   return (
     <Container>
       <Content>
