@@ -4,6 +4,7 @@ import {context} from "../context" ;
 import GoogleLogOut from "../components/GoogleLogOut";
 
 const Feed = () => {
+  // Get googleID from context._currentValue.googleID
   console.log("Feed", context._currentValue.googleID);
   return (
     <Container>

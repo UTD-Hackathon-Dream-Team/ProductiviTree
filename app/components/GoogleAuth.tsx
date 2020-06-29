@@ -1,4 +1,5 @@
 //Source for google auth: https://docs.expo.io/versions/latest/sdk/google/
+//Source for context: https://github.com/ReshmiCode/mern-app/blob/master/src/user/pages/Auth.js
 
 import React, { useContext } from 'react';
 import { TouchableOpacity , Image } from 'react-native';
@@ -64,6 +65,7 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
             //If login was successful, create a new profile and then go navigate to MainStack(Bottom Nav)
             if (LogInResult.type === "success") {
               //console.log("Logged in", LogInResult.user);
+              //set context
               auth.login(LogInResult.user.id, LogInResult.accessToken);
               newProfile(LogInResult.user);
               navigate.navigate('MainStack');

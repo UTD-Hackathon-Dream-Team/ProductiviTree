@@ -1,4 +1,5 @@
 //Source for google auth: https://docs.expo.io/versions/latest/sdk/google/
+//Source for context: https://github.com/ReshmiCode/mern-app/blob/master/src/user/pages/Auth.js
 
 import React, { useContext } from 'react';
 import { TouchableOpacity , Image } from 'react-native';
@@ -12,6 +13,7 @@ const GoogleLogOut = ({navigate} : { navigate: any}) => {
 
     const signOutWithGoogle = async () => {
       const auth = useContext(context);
+      //reset context
       auth.logout();
       try {
         const { type, accessToken, user } = await Google.logOutAsync({

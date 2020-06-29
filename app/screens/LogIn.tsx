@@ -9,6 +9,7 @@ type Props = {
 };
 
 const LogIn: React.FC<Props> = ({ navigation }) => {
+  // Get googleID from context._currentValue.googleID
   console.log("Login", context._currentValue.googleID);
 
   return (

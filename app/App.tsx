@@ -1,3 +1,5 @@
+//Source for context: https://github.com/ReshmiCode/mern-app/blob/master/src/App.js
+
 import React, { useState, useEffect , useCallback } from 'react';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
@@ -8,19 +10,18 @@ import {context} from "./context" ;
 
 const App = () => {
   const [ready, setReady] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
 
+  //login for context
   const login = useCallback((googleID, accesstoken) => {
     // useCallback so not rerendered
-    setIsLoggedIn(true);
     setUserId(googleID);
     setToken(accesstoken);
   }, []);
   
+  //logout for context
   const logout = useCallback(() => {
-    setIsLoggedIn(false);
     setUserId(null);
     setToken(null);
   }, []);
@@ -45,13 +46,12 @@ const App = () => {
   return (
     <context.Provider
       value={{
-      isLoggedIn: !!token,
       accesstoken: token,
       googleID: userId,
       login: login,
       logout: logout,
       }}
-      >
+    >
       <NavigationContainer>
         <TopStack/>
       </NavigationContainer>
