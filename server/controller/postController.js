@@ -65,3 +65,28 @@ exports.deletePost = async (req, res, next) => {
     });
   }
 };
+
+exports.updatePost = async (req, res, next) => {
+  try {
+    const post = Post.findById(req.params.id);
+    if (post.length == 0) {
+      return res.status(404).json({
+        success: false,
+        error: "No post found",
+      });
+    }
+    post.Caption = req.body.Caption;
+    post.save();
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+// note: we should add a seperate addLikes method so you can just add the user to the current list instead of patching the whole list
+
+exports.getUserPost = async (req, res, next) => {
+  // need to get models to ref each other and use populate
+};
