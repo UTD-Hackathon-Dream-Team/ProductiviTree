@@ -31,13 +31,12 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     color: "#ffffff"
   }
-}); 
+});
 
-export default class ProfileInfo extends React.Component{
- 
-  render(){
+const ProfileInfo = () => {
+  
     return (
-      <Container>
+        <Container>
         <LinearGradient
         colors={["#C8F0EE", "#A1C6F1"]}
         style={{ flex: 1 }}
@@ -95,7 +94,8 @@ export default class ProfileInfo extends React.Component{
                 </View>                
             </Content>
         </LinearGradient>  
-      </Container>      
-    ); 
-  } 
-}
+      </Container>
+    );
+};
+  
+export default ProfileInfo;
