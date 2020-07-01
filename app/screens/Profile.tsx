@@ -1,17 +1,36 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Content, Text } from "native-base";
+import {  LinearGradient }from "expo-linear-gradient";
 import {context} from "../context" ;
 import ProfileInfo from "../components/ProfileInfo"
 
-const Profile = () => {
+const axios = require("axios").default;
 
-  console.log("Profile", context._currentValue.googleID);
+const Profile = () => {
+  let [userID, setUserID] = useState(context._currentValue.googleID);
+  let [user, setUser] = useState({});
+
+  console.log("Profile", userID);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${userID}`
+      );
+      setUser(result.data.payload);
+      //console.log("User", user);
+    }
+    fetchData();
+  }, []);
 
   return (
     <Container>
-      <Content>
-        <ProfileInfo/>
-      </Content>
+      <LinearGradient
+        colors={["#C8F0EE", "#A1C6F1"]}
+        style={{ flex: 1 }}
+        >
+          <ProfileInfo user={user}/>
+      </LinearGradient>
     </Container>
   );
 };
