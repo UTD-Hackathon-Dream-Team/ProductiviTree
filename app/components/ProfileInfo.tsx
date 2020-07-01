@@ -4,6 +4,7 @@ import {
   Text,
   View,  
   StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 import {  LinearGradient }from "expo-linear-gradient";
 import { 
@@ -33,68 +34,56 @@ const styles = StyleSheet.create({
   }
 });
 
-const ProfileInfo = () => {
+const ProfileInfo = ({user} : { user: any}) => {
+    let [userFollowers, setUserFollowers] = useState(0);
+    let [userFollowing, setUserFollowing] = useState(0);
+
+    useEffect(() => {
+        async function fetchData() {
+            setUserFollowers(user.Followers.length);
+            setUserFollowing(user.Following.length);
+        }
+        fetchData();
+      }, []);
   
     return (
-        <Container>
-        <LinearGradient
-        colors={["#C8F0EE", "#A1C6F1"]}
-        style={{ flex: 1 }}
-        >      
-            <Content padder>
-                {/* <Body>
+        <Content padder>
+            <View style={{ flexDirection: "row", padding: 8, paddingLeft: 25 }}>
+                <Image
+                    source={{
+                    uri: user.ProfilePic,
+                    }}
+                    style={{
+                    height: 100,
+                    width: 100,
+                    borderRadius: 120,
+                    }}
+                />
+                <Body
+                    style={{
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    padding: 30,
+                    }}
+                >
                     <Title>
-                        <Text style={{ fontSize: 30, fontWeight: "bold" }}>Profile</Text>
+                        <Text style={{ fontSize: 25, fontWeight: "bold" }}> {user.Username} </Text>
                     </Title>
-                </Body> */}
-                <View style={{ flexDirection: "row", padding: 8, paddingLeft: 25 }}>
-                    <Image
-                        source={{
-                        uri: "https://lh3.googleusercontent.com/a-/AOh14GjD3RtSISuOb0l9-cQvrin2baf74l2lPtqpNMu3dA",
-                        }}
-                        style={{
-                        height: 150,
-                        width: 150,
-                        borderRadius: 120,
-                        }}
-                    />
-                    <Body
-                        style={{
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        padding: 30,
-                        }}
-                    >
-                        <Title>
-                            <Text style={{ fontSize: 25, fontWeight: "bold" }}> Username </Text>
-                        </Title>
-                        <Title>
-                            <Text style={{ fontSize: 20, fontWeight: "bold" }}> X Trees Planted </Text>
-                        </Title>
-                        <Title>
-                            <Text> A Followers </Text>
-                        </Title>
-                        <Title>
-                            <Text> B Following </Text>
-                        </Title>
-                    </Body>
-                </View>
-                <View>
-                    <Body
-                        style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        padding: 10,
-                        }}
-                    >
-                        <Title>
-                            <Text> Bio </Text>
-                        </Title>
-                    </Body>
-                </View>                
-            </Content>
-        </LinearGradient>  
-      </Container>
+                    <Title>
+                        <Text style={{ fontSize: 20, fontWeight: "bold" }}> {user.Trees} Trees Planted </Text>
+                    </Title>
+                    <TouchableOpacity>
+                        <Text> {userFollowers} Followers </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text> {userFollowing} Following </Text>
+                    </TouchableOpacity>
+                </Body>
+            </View>
+            <View>
+                <Text> Bio: {user.Bio} </Text>
+            </View>                
+        </Content>
     );
 };
   
