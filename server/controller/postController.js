@@ -30,3 +30,38 @@ exports.getPost = async (req, res, next) => {
     return res.status(500).json({ success: false, error: "Server Error" });
   }
 };
+
+exports.addPost = async (req, res, next) => {
+  try {
+    const post = await Post.create(req.body);
+    return res.status(201).json({ success: true, payload: post });
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({ success: false, error: messages });
+    }
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+
+exports.deletePost = async (req, res, next) => {
+  try {
+    const post = Post.findById(req.params.id);
+    if (post.length == 0) {
+      return res.status(404).json({
+        success: false,
+        error: "No post found",
+      });
+    }
+    await Post.deleteOne({ _id: req.params.id });
+    return res.status(200).json({
+      success: true,
+      payload: post[0],
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
