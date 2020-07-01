@@ -11,8 +11,8 @@ const Tab = createBottomTabNavigator();
 const TabStack = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Profile} />
-      <Tab.Screen name="Stats" component={Stats} />
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Stats" component={Profile} />
       <Tab.Screen name="Challenges" component={Challenges} />
     </Tab.Navigator>
   );
