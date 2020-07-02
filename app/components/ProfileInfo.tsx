@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const ProfileInfo = ({user} : { user: any}) => {
-    
+const ProfileInfo = (props) => {
+    const user = props.user;
     let [userFollowers, setUserFollowers] = useState(0);
     let [userFollowing, setUserFollowing] = useState(0);
 
