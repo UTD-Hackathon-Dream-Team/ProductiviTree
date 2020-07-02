@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 });
 
 const ProfileInfo = ({user} : { user: any}) => {
+    
     let [userFollowers, setUserFollowers] = useState(0);
     let [userFollowing, setUserFollowing] = useState(0);
 
@@ -56,32 +57,28 @@ const ProfileInfo = ({user} : { user: any}) => {
                     style={{
                     height: 100,
                     width: 100,
-                    borderRadius: 120,
+                    borderRadius: 100
                     }}
                 />
                 <Body
                     style={{
                     flexDirection: "column",
                     alignItems: "flex-start",
-                    padding: 30,
+                    paddingLeft: 30
                     }}
                 >
-                    <Title>
-                        <Text style={{ fontSize: 25, fontWeight: "bold" }}> {user.Username} </Text>
-                    </Title>
-                    <Title>
-                        <Text style={{ fontSize: 20, fontWeight: "bold" }}> {user.Trees} Trees Planted </Text>
-                    </Title>
+                    <Text style={{ fontSize: 25, fontWeight: "bold" }}> {user.Username} </Text>
+                    <Text style={{ fontSize: 20, fontWeight: "bold" }}> {user.Trees} Trees Planted </Text>
                     <TouchableOpacity>
-                        <Text> {userFollowers} Followers </Text>
+                        <Text style={{ fontSize: 20, fontWeight: "bold"}}> {userFollowers} Followers </Text>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Text> {userFollowing} Following </Text>
+                        <Text style={{ fontSize: 20, fontWeight: "bold"}}> {userFollowing} Following </Text>
                     </TouchableOpacity>
                 </Body>
             </View>
             <View>
-                <Text> Bio: {user.Bio} </Text>
+                <Text style={{ fontSize: 18}}> Bio: {user.Bio} </Text>
             </View>                
         </Content>
     );
