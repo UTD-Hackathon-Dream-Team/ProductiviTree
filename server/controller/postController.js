@@ -88,5 +88,13 @@ exports.updatePost = async (req, res, next) => {
 // note: we should add a seperate addLikes method so you can just add the user to the current list instead of patching the whole list
 
 exports.getUserPost = async (req, res, next) => {
-  // need to get models to ref each other and use populate
+  try {
+    const posts = await Post.find({ Author: req.params.userid });
+
+    return res
+      .status(200)
+      .json({ success: true, count: posts.length, payload: posts });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
 };

@@ -13,6 +13,7 @@ const PostSchema = new Schema({
   },
   Caption: {
     type: String,
+    default: "",
   },
   Activity: mongoose.Schema.Types.ObjectId,
   Likes: [mongoose.Schema.Types.ObjectId],
