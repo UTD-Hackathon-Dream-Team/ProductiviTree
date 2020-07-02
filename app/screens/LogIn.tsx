@@ -25,10 +25,9 @@ var styles = {
     padding: 20,
   },
   icon: {
-    flex: 2.2,
-    paddingTop: 50,
-    height: null,
-    width: 330,
+    flex: 1.5,
+    paddingTop: 100,
+    resizeMode: "contain",
   },
 };
 
