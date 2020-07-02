@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Container, Content, Text } from "native-base";
+import { Container, Content, Text , View , Button} from "native-base";
 import {  LinearGradient }from "expo-linear-gradient";
 import {context} from "../context" ;
 import ProfileInfo from "../components/ProfileInfo"
@@ -29,7 +29,9 @@ const Profile = () => {
         colors={["#C8F0EE", "#A1C6F1"]}
         style={{ flex: 1 }}
         >
-          <ProfileInfo user={user}/>
+          <Content>
+            <ProfileInfo user={user}/>
+          </Content>
       </LinearGradient>
     </Container>
   );
