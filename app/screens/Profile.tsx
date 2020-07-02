@@ -31,6 +31,11 @@ const Profile = () => {
         >
           <Content>
             <ProfileInfo user={user}/>
+            <View>
+              <Button style={{justifyContent: "center",alignItems: "center"}}>
+                <Text>Settings</Text>
+              </Button>
+            </View>
           </Content>
       </LinearGradient>
     </Container>
