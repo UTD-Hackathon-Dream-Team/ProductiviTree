@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
 const Profile = () => {
   let [userID, setUserID] = useState(context._currentValue.googleID);
   let [user, setUser] = useState({});
-  const [refreshing, setRefreshing] = React.useState(false);
+  let [refreshing, setRefreshing] = useState(false);
+  let [userFollowers, setUserFollowers] = useState(0);
+  let [userFollowing, setUserFollowing] = useState(0);
 
   console.log("Profile", userID);
 
@@ -31,6 +33,9 @@ const Profile = () => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/${userID}`
     );
     setUser(result.data.payload);
+    console.log(result.data.payload.Followers.length);
+    await setUserFollowers(result.data.payload.Followers);
+    await setUserFollowing(result.data.payload.Following);
     //console.log("User", user);
   } 
 
@@ -60,7 +65,7 @@ const Profile = () => {
             <ScrollView
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             >
-              <ProfileInfo user={user}/>
+              <ProfileInfo user={user} followers={userFollowers} following={userFollowing}/>
               <View>
                 <Button style={{justifyContent: "center",alignItems: "center"}}>
                   <Text>Settings</Text>

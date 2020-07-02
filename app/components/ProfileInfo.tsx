@@ -35,17 +35,10 @@ const styles = StyleSheet.create({
 });
 
 const ProfileInfo = (props) => {
+    //console.log(props);
     const user = props.user;
-    let [userFollowers, setUserFollowers] = useState(0);
-    let [userFollowing, setUserFollowing] = useState(0);
-
-    useEffect(() => {
-        async function fetchData() {
-            setUserFollowers(user.Followers.length);
-            setUserFollowing(user.Following.length);
-        }
-        fetchData();
-      }, []);
+    const followers = props.followers;
+    const following = props.following;
   
     return (
         <Content padder>
@@ -69,11 +62,11 @@ const ProfileInfo = (props) => {
                 >
                     <Text style={{ fontSize: 25, fontWeight: "bold" }}> {user.Username} </Text>
                     <Text style={{ fontSize: 20, fontWeight: "bold" }}> {user.Trees} Trees Planted </Text>
-                    <TouchableOpacity>
-                        <Text style={{ fontSize: 20, fontWeight: "bold"}}> {userFollowers} Followers </Text>
+                    <TouchableOpacity onPress={() => {console.log("Followers", followers)}}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold"}}> {followers.length} Followers </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={{ fontSize: 20, fontWeight: "bold"}}> {userFollowing} Following </Text>
+                    <TouchableOpacity onPress={() => {console.log("Following", following)}}>
+                        <Text style={{ fontSize: 20, fontWeight: "bold"}}> {following.length} Following </Text>
                     </TouchableOpacity>
                 </Body>
             </View>
