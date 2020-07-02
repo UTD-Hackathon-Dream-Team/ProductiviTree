@@ -55,6 +55,10 @@ const Profile = () => {
     wait(1000).then(() => setRefreshing(false));
   }, [refreshing]);
 
+  function goToSettings() {
+    console.log("Settings Page Here");
+  }
+
   return (
     <Container>
       <LinearGradient
@@ -67,7 +71,7 @@ const Profile = () => {
             >
               <ProfileInfo user={user} followers={userFollowers} following={userFollowing}/>
               <View>
-                <Button style={{justifyContent: "center",alignItems: "center"}}>
+                <Button style={{justifyContent: "center",alignItems: "center"}} onPress={goToSettings}>
                   <Text>Settings</Text>
                 </Button>
               </View>

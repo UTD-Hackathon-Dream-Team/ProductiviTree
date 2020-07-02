@@ -39,6 +39,16 @@ const ProfileInfo = (props) => {
     const user = props.user;
     const followers = props.followers;
     const following = props.following;
+
+    function goToFollowers() {
+        console.log("Followers Page Here");
+        console.log("Followers", followers);
+    }
+
+    function goToFollowing() {
+        console.log("Following Page Here");
+        console.log("Following", following);
+    }
   
     return (
         <Content padder>
@@ -62,10 +72,10 @@ const ProfileInfo = (props) => {
                 >
                     <Text style={{ fontSize: 25, fontWeight: "bold" }}> {user.Username} </Text>
                     <Text style={{ fontSize: 20, fontWeight: "bold" }}> {user.Trees} Trees Planted </Text>
-                    <TouchableOpacity onPress={() => {console.log("Followers", followers)}}>
+                    <TouchableOpacity onPress={goToFollowers}>
                         <Text style={{ fontSize: 20, fontWeight: "bold"}}> {followers.length} Followers </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {console.log("Following", following)}}>
+                    <TouchableOpacity onPress={goToFollowing}>
                         <Text style={{ fontSize: 20, fontWeight: "bold"}}> {following.length} Following </Text>
                     </TouchableOpacity>
                 </Body>
