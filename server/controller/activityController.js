@@ -46,7 +46,7 @@ exports.addActivity = async (req, res, next) => {
 
         return res.status(201).json({
             success: true,
-            payload: activity[0]
+            payload: activity
         });
     } catch (error) {
         if(error.name === 'ValidationError') {

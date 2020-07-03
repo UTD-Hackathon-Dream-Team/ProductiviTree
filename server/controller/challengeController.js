@@ -46,7 +46,7 @@ exports.addChallenge = async (req, res, next) => {
 
         return res.status(201).json({
             success: true,
-            payload: challenge[0]
+            payload: challenge
         });
     } catch (error) {
         if(error.name === 'ValidationError') {
@@ -114,10 +114,10 @@ exports.updateChallenge = async (req, res, next) => {
             });
         }
 
-        if(req.body.category != null) {
+        if(req.body.type != null) {
             await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
                 $set: { 
-                    category: req.body.category
+                    type: req.body.type
                 } 
             });
         }
@@ -144,9 +144,9 @@ exports.updateChallenge = async (req, res, next) => {
     }
 }
 
-exports.getCategoryChallenge = async (req, res, next) => {
+exports.getTypeChallenge = async (req, res, next) => {
     try {
-        const challenge = await Challenge.find({}).where({ "category": req.params.category});
+        const challenge = await Challenge.find({}).where({ "type": req.params.type});
 
         if(challenge.length == 0){
             return res.status(404).json({
@@ -167,9 +167,9 @@ exports.getCategoryChallenge = async (req, res, next) => {
     }
 }
 
-exports.deleteCategoryChallenge = async (req, res, next) => {
+exports.deleteTypeChallenge = async (req, res, next) => {
     try {
-        const challenge = await Challenge.find({}).where({ "category": req.params.category});
+        const challenge = await Challenge.find({}).where({ "type": req.params.type});
         
         if(challenge.length == 0){
             return res.status(404).json({
@@ -178,7 +178,7 @@ exports.deleteCategoryChallenge = async (req, res, next) => {
             });
         }
 
-        await Challenge.deleteMany({category: req.params.category});
+        await Challenge.deleteMany({type: req.params.type});
 
         return res.status(200).json({
             success: true,

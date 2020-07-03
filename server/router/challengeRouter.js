@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getChallenges, addChallenge , getChallenge , deleteChallenge , updateChallenge, getCategoryChallenge, deleteCategoryChallenge} = require('../controller/challengeController');
+const { getChallenges, addChallenge , getChallenge , deleteChallenge , updateChallenge, getTypeChallenge, deleteTypeChallenge} = require('../controller/challengeController');
 
 router
     .route('/')
@@ -14,8 +14,8 @@ router
     .patch(updateChallenge);
 
 router
-    .route('/category/:category')
-    .get(getCategoryChallenge)
-    .delete(deleteCategoryChallenge);
+    .route('/type/:type')
+    .get(getTypeChallenge)
+    .delete(deleteTypeChallenge);
 
 module.exports = router;

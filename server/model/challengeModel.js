@@ -5,9 +5,9 @@ const ChallengeSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         required: [true, 'Add a list of activities']
     },
-    category: {
+    type: {
         type: String,
-        required: [true, 'Add a category']
+        required: [true, 'Add a type']
     },
     points: {
         type: Number,
