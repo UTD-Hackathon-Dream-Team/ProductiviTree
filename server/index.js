@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use("/api/v1/users", users);
-app.use("api/v1/posts", posts);
+app.use("/api/v1/posts", posts);
 
 //Set up and start app connection
 const PORT = process.env.PORT || 8000;

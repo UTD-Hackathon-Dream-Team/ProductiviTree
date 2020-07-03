@@ -7,7 +7,7 @@ const {
   updatePost,
   deletePost,
   getUserPost,
-} = require("../controller/userController");
+} = require("../controller/postController");
 
 router.route("/").get(getPosts).post(addPost);
 
