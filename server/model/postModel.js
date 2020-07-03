@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   Author: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: [true, "Add an author"],
   },
   Picture: {
@@ -15,8 +15,11 @@ const PostSchema = new Schema({
     type: String,
     default: "",
   },
-  Activity: mongoose.Schema.Types.ObjectId,
-  Likes: [mongoose.Schema.Types.ObjectId],
+  Activity: mongoose.Schema.Types.ObjectId, // make this required after we add the model
+  Likes: {
+    type: [String],
+    default: [],
+  },
   Public: {
     type: Boolean,
     default: true,
