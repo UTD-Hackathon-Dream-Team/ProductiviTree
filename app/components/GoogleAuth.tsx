@@ -20,28 +20,25 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
   const auth = useContext(AuthContext);
 
   const newProfile = async (user) => {
-    //Creating  a user object to enter in database
-    const newUser = {
-      googleID: user.id,
-      Username: user.name,
-      ProfilePic: user.photoUrl,
-      Email: user.email,
-    };
-
-    //console.log("New user", newUser);
-
     //Check if user already exists in database
     await axios
-      .get(
-        `https://productivitree.wl.r.appspot.com/api/v1/users/${newUser.googleID}`
-      )
+      .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${user.id}`)
       .then(function (response) {
         console.log("User already exists");
+        navigate.navigate("MainStack");
       })
       .catch(function (error) {
         //If user does not exist, add in database
         if (error.response.status === 404) {
           console.log("User does not exist");
+          const newUser = {
+            googleID: user.id,
+            Username: user.name,
+            ProfilePic: user.photoUrl,
+            Email: user.email,
+          };
+          //console.log("New user", newUser);
+
           axios
             .post(
               "https://productivitree.wl.r.appspot.com/api/v1/users",
@@ -49,6 +46,7 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
             )
             .then(function (response) {
               console.log("User added");
+              navigate.navigate("MainStack");
             })
             .catch(function (error) {
               console.log("Error in adding user", error.response);
@@ -76,7 +74,7 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
         //set context
         auth.login(LogInResult.user.id, LogInResult.accessToken);
         newProfile(LogInResult.user);
-        navigate.navigate("MainStack");
+        //navigate.navigate('MainStack');
       } else {
         return { cancelled: true };
       }
