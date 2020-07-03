@@ -4,7 +4,7 @@ import { Container, Content, Text, Button, View } from "native-base";
 import { Image } from "react-native";
 import Swiper from "react-native-swiper";
 import GoogleAuth from "../components/GoogleAuth";
-import { context } from "../context";
+import { AuthContext } from "../AuthContext";
 import { LinearGradient } from "expo-linear-gradient";
 import logo from "../assets/logo_icon.png";
 import tree from "../assets/tree_icon.png";
@@ -36,8 +36,7 @@ type Props = {
 };
 
 const LogIn: React.FC<Props> = ({ navigation }) => {
-  // Get googleID from context._currentValue.googleID
-  console.log("Login", context._currentValue.googleID);
+  const auth = useContext(AuthContext);
 
   return (
     <LinearGradient
