@@ -46,7 +46,7 @@ exports.addUser = async (req, res, next) => {
 
         return res.status(201).json({
             success: true,
-            payload: user[0]
+            payload: user
         });
     } catch (error) {
         if(error.name === 'ValidationError') {
