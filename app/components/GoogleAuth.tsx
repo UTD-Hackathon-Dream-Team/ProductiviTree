@@ -16,19 +16,10 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
     const auth = useContext(context);
 
     const newProfile = async (user) => {
-        //Creating  a user object to enter in database
-        const newUser = {
-            googleID: user.id,
-            Username: user.name,
-            ProfilePic: user.photoUrl,
-            Email: user.email
-        };
-
-        //console.log("New user", newUser);
         
         //Check if user already exists in database
         await axios
-        .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${newUser.googleID}`)
+        .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${user.id}`)
         .then(function (response) {
             console.log("User already exists");
         })
@@ -36,6 +27,14 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
             //If user does not exist, add in database
             if (error.response.status === 404){
                 console.log("User does not exist");
+                const newUser = {
+                    googleID: user.id,
+                    Username: user.name,
+                    ProfilePic: user.photoUrl,
+                    Email: user.email
+                };
+                //console.log("New user", newUser);
+
                 axios
                 .post("https://productivitree.wl.r.appspot.com/api/v1/users", newUser)
                 .then(function (response) {
