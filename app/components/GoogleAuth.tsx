@@ -22,6 +22,7 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
         .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${user.id}`)
         .then(function (response) {
             console.log("User already exists");
+            navigate.navigate('MainStack');
         })
         .catch(function (error) {
             //If user does not exist, add in database
@@ -39,6 +40,7 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
                 .post("https://productivitree.wl.r.appspot.com/api/v1/users", newUser)
                 .then(function (response) {
                     console.log("User added");
+                    navigate.navigate('MainStack');
                 })
                 .catch(function (error) {
                     console.log("Error in adding user", error.response);
@@ -67,7 +69,7 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
               //set context
               auth.login(LogInResult.user.id, LogInResult.accessToken);
               newProfile(LogInResult.user);
-              navigate.navigate('MainStack');
+              //navigate.navigate('MainStack');
             } else {
               return { cancelled: true };
             }
