@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Post = require("../model/postModel");
 const User = require("../model/userModel");
 
@@ -34,8 +35,24 @@ exports.getPost = async (req, res) => {
 
 exports.addPost = async (req, res) => {
   try {
-    const post = await Post.create(req.body);
-    return res.status(201).json({ success: true, payload: post });
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    const post = await Post.create([{ ...req.body }], { session: sess });
+    try {
+      searchAuthor = await User.find({}).where({ googleID: post[0].Author });
+    } catch (err) {
+      post[0].remove();
+      return res.status(404).json({
+        success: false,
+        error: "Post author not found so removed the post",
+      });
+    }
+    user = searchAuthor[0];
+    user.Posts = user.Posts.push(post[0]._id);
+    await user.save({ session: sess });
+    console.log("um ^ can't cast");
+    sess.commitTransaction();
+    return res.status(201).json({ success: true, payload: post[0] });
   } catch (err) {
     if (err.name === "ValidationError") {
       const messages = Object.values(err.errors).map((val) => val.message);
@@ -57,7 +74,7 @@ exports.deletePost = async (req, res) => {
       });
     }
     try {
-      user = await User.find({}).where({ googleID: post.Author })[0];
+      searchAuthor = await User.find({}).where({ googleID: post.Author });
     } catch (err) {
       post.remove();
       return res.status(404).json({
@@ -65,11 +82,13 @@ exports.deletePost = async (req, res) => {
         error: "Post author not found but removed the post",
       });
     }
+    user = searchAuthor[0];
     user.Posts = user.Posts.filter((val) => val !== post._id);
     const sess = await mongoose.startSession();
+    sess.startTransaction();
     post.remove({ session: sess });
     user.save({ session: sess });
-    await sess.commitTransaction();
+    sess.commitTransaction();
     return res.status(200).json({
       success: true,
       payload: post,
