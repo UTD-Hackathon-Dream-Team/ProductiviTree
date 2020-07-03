@@ -1,4 +1,5 @@
 const Post = require("../model/postModel");
+const User = require("../model/userModel");
 
 exports.getPosts = async (req, res) => {
   try {
@@ -46,7 +47,7 @@ exports.addPost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    let post;
+    let post, user;
     try {
       post = await Post.findById(req.params.id);
     } catch (err) {
@@ -55,7 +56,20 @@ exports.deletePost = async (req, res) => {
         error: "No post found",
       });
     }
-    post.remove();
+    try {
+      user = await User.find({}).where({ googleID: post.Author })[0];
+    } catch (err) {
+      post.remove();
+      return res.status(404).json({
+        success: false,
+        error: "Post author not found but removed the post",
+      });
+    }
+    user.Posts = user.Posts.filter((val) => val !== post._id);
+    const sess = await mongoose.startSession();
+    post.remove({ session: sess });
+    user.save({ session: sess });
+    await sess.commitTransaction();
     return res.status(200).json({
       success: true,
       payload: post,
