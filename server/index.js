@@ -10,6 +10,8 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 const users = require('./router/userRouter');
+const challenges = require('./router/challengeRouter');
+const activities = require('./router/activityRouter');
 
 //Initialize app as express app
 const app = express();
@@ -31,6 +33,16 @@ app.use(express.json());
 app.use(
     '/api/v1/users', 
     users
+);
+
+app.use(
+    '/api/v1/activities', 
+    activities
+);
+
+app.use(
+    '/api/v1/challenges', 
+    challenges
 );
 
 //Set up and start app connection
