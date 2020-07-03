@@ -18,7 +18,7 @@ exports.getPost = async (req, res) => {
     if (!post) {
       return res.status(404).json({
         success: false,
-        error: "No user found",
+        error: "No post found",
       });
     }
 
@@ -46,14 +46,16 @@ exports.addPost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    const post = Post.findById(req.params.id);
-    if (post.length == 0) {
+    let post;
+    try {
+      post = await Post.findById(req.params.id);
+    } catch (err) {
       return res.status(404).json({
         success: false,
         error: "No post found",
       });
     }
-    await Post.deleteOne({ _id: req.params.id });
+    post.remove();
     return res.status(200).json({
       success: true,
       payload: post,
@@ -68,21 +70,17 @@ exports.deletePost = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const post = Post.findById(req.params.id);
-    if (post.length == 0) {
+    let post;
+    try {
+      post = await Post.findById(req.params.id);
+    } catch (err) {
       return res.status(404).json({
         success: false,
         error: "No post found",
       });
     }
-    await post.replaceOne(
-      {},
-      {
-        $set: {
-          Caption: req.body.Caption,
-        },
-      }
-    );
+    post.Caption = req.body.Caption;
+    post.save();
     return res.status(200).json({
       success: true,
       payload: post,
