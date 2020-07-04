@@ -2,9 +2,9 @@
 
 import { createContext } from "react";
 
-export const context = createContext({
+export const AuthContext = createContext({
   accesstoken: null,
   googleID: null,
-  login: (googleID, accesstoken) => {},
+  login: (googleID: String, accesstoken: String) => {},
   logout: () => {},
 });

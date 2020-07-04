@@ -1,58 +1,32 @@
-import React, {useState, useEffect} from "react";
-import { Container, Content, Text , View , Button} from "native-base";
-import {ScrollView, RefreshControl, StyleSheet} from 'react-native';
-import {  LinearGradient }from "expo-linear-gradient";
-import {context} from "../context" ;
-import ProfileInfo from "../components/ProfileInfo"
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Content, Text, View, Button } from "native-base";
+import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../AuthContext";
+import ProfileInfo from "../components/ProfileInfo";
 
 const axios = require("axios").default;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
 const Profile = () => {
-  let [userID, setUserID] = useState(context._currentValue.googleID);
-  let [user, setUser] = useState({});
+  const auth = useContext(AuthContext);
+  let [user, setUser] = useState(null);
   let [refreshing, setRefreshing] = useState(false);
-  let [userFollowers, setUserFollowers] = useState(0);
-  let [userFollowing, setUserFollowing] = useState(0);
-
-  console.log("Profile", userID);
 
   async function fetchData() {
+    setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${userID}`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
     setUser(result.data.payload);
-    console.log(result.data.payload.Followers.length);
-    await setUserFollowers(result.data.payload.Followers);
-    await setUserFollowing(result.data.payload.Following);
-    //console.log("User", user);
-  } 
+    setRefreshing(false);
+  }
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  function wait(timeout) {
-    return new Promise(resolve => {
-      setTimeout(resolve, timeout);
-    });
-  }
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    fetchData();
-    wait(1000).then(() => setRefreshing(false));
+  const onRefresh = React.useCallback(async () => {
+    await fetchData();
   }, [refreshing]);
 
   function goToSettings() {
@@ -60,25 +34,21 @@ const Profile = () => {
   }
 
   return (
-    <Container>
-      <LinearGradient
-        colors={["#C8F0EE", "#A1C6F1"]}
-        style={{ flex: 1 }}
+    <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {user && <ProfileInfo user={user} />}
+        <Button
+          style={{ justifyContent: "center", alignItems: "center" }}
+          onPress={goToSettings}
         >
-          <Content>
-            <ScrollView
-              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-            >
-              <ProfileInfo user={user} followers={userFollowers} following={userFollowing}/>
-              <View>
-                <Button style={{justifyContent: "center",alignItems: "center"}} onPress={goToSettings}>
-                  <Text>Settings</Text>
-                </Button>
-              </View>
-            </ScrollView >
-          </Content>
-      </LinearGradient>
-    </Container>
+          <Text>Settings</Text>
+        </Button>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 

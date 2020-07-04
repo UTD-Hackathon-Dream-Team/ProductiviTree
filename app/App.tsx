@@ -1,12 +1,12 @@
 //Source for context: https://github.com/ReshmiCode/mern-app/blob/master/src/App.js
 
-import React, { useState, useEffect , useCallback } from 'react';
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import TopStack from './navigation/TopStack';
-import {context} from "./context" ;
+import React, { useState, useEffect, useCallback } from "react";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
+import TopStack from "./navigation/TopStack";
+import { AuthContext } from "./AuthContext";
 
 const App = () => {
   const [ready, setReady] = useState(false);
@@ -19,19 +19,18 @@ const App = () => {
     setUserId(googleID);
     setToken(accesstoken);
   }, []);
-  
+
   //logout for context
   const logout = useCallback(() => {
     setUserId(null);
     setToken(null);
   }, []);
-  
 
   useEffect(() => {
     async function load() {
       await Font.loadAsync({
-        Roboto: require('native-base/Fonts/Roboto.ttf'),
-        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+        Roboto: require("native-base/Fonts/Roboto.ttf"),
+        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
         ...Ionicons.font,
       });
       setReady(true);
@@ -44,19 +43,19 @@ const App = () => {
   }
 
   return (
-    <context.Provider
+    <AuthContext.Provider
       value={{
-      accesstoken: token,
-      googleID: userId,
-      login: login,
-      logout: logout,
+        accesstoken: token,
+        googleID: userId,
+        login: login,
+        logout: logout,
       }}
     >
       <NavigationContainer>
-        <TopStack/>
+        <TopStack />
       </NavigationContainer>
-    </context.Provider>
+    </AuthContext.Provider>
   );
-}
+};
 
 export default App;
