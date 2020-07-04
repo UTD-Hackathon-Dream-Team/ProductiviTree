@@ -1,9 +1,11 @@
 //Source for google auth: https://docs.expo.io/versions/latest/sdk/google/
+//Source for context: https://github.com/ReshmiCode/mern-app/blob/master/src/user/pages/Auth.js
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { TouchableOpacity , Image } from 'react-native';
 import { Content } from "native-base";
 import * as Google from "expo-google-app-auth";
+import {context} from "../context" ;
 
 import { ANDROID_CLIENT_ID, IOS_CLIENT_ID , ANDROID_APK_CLIENT_ID , IOS_APP_CLIENT_ID} from "../config";
 
@@ -11,31 +13,34 @@ const axios = require("axios").default;
 
 const GoogleAuth = ({navigate} : { navigate: any}) => {
 
-    const newProfile = async (user) => {
-        //Creating  a user object to enter in database
-        const newUser = {
-            googleID: user.id,
-            Username: user.name,
-            ProfilePic: user.photoUrl,
-            Email: user.email
-        };
+    const auth = useContext(context);
 
-        //console.log("New user", newUser);
+    const newProfile = async (user) => {
         
         //Check if user already exists in database
         await axios
-        .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${newUser.googleID}`)
+        .get(`https://productivitree.wl.r.appspot.com/api/v1/users/${user.id}`)
         .then(function (response) {
             console.log("User already exists");
+            navigate.navigate('MainStack');
         })
         .catch(function (error) {
             //If user does not exist, add in database
             if (error.response.status === 404){
                 console.log("User does not exist");
+                const newUser = {
+                    googleID: user.id,
+                    Username: user.name,
+                    ProfilePic: user.photoUrl,
+                    Email: user.email
+                };
+                //console.log("New user", newUser);
+
                 axios
                 .post("https://productivitree.wl.r.appspot.com/api/v1/users", newUser)
                 .then(function (response) {
                     console.log("User added");
+                    navigate.navigate('MainStack');
                 })
                 .catch(function (error) {
                     console.log("Error in adding user", error.response);
@@ -61,8 +66,10 @@ const GoogleAuth = ({navigate} : { navigate: any}) => {
             //If login was successful, create a new profile and then go navigate to MainStack(Bottom Nav)
             if (LogInResult.type === "success") {
               //console.log("Logged in", LogInResult.user);
+              //set context
+              auth.login(LogInResult.user.id, LogInResult.accessToken);
               newProfile(LogInResult.user);
-              navigate.navigate('MainStack');
+              //navigate.navigate('MainStack');
             } else {
               return { cancelled: true };
             }
