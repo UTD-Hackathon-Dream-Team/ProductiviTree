@@ -48,9 +48,8 @@ exports.addPost = async (req, res) => {
       });
     }
     user = searchAuthor[0];
-    user.Posts = user.Posts.push(post[0]._id);
+    user.Posts.push(mongoose.Types.ObjectId(post[0]._id));
     await user.save({ session: sess });
-    console.log("um ^ can't cast");
     sess.commitTransaction();
     return res.status(201).json({ success: true, payload: post[0] });
   } catch (err) {
@@ -83,11 +82,13 @@ exports.deletePost = async (req, res) => {
       });
     }
     user = searchAuthor[0];
-    user.Posts = user.Posts.filter((val) => val !== post._id);
+    user.Posts = user.Posts.filter(
+      (val) => JSON.stringify(val) !== JSON.stringify(post._id)
+    );
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    post.remove({ session: sess });
-    user.save({ session: sess });
+    await post.remove({ session: sess });
+    await user.save({ session: sess });
     sess.commitTransaction();
     return res.status(200).json({
       success: true,
