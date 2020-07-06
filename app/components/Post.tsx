@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 var moment = require("moment");
 import { Image } from "react-native";
 import {
@@ -14,6 +14,21 @@ import {
 } from "native-base";
 
 const PostCard = (props) => {
+
+    const axios = require("axios").default;
+
+    let [user, setUser] = useState(null);
+    
+    useEffect(() => {
+        async function fetchData() {
+            const result = await axios(
+              `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+            );
+            setUser(result.data.payload);
+        }
+        fetchData();
+    }, []);
+
   return (
     <Card>
       <CardItem>
