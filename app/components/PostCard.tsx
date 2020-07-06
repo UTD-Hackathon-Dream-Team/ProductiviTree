@@ -46,7 +46,7 @@ const PostCard = (props) => {
   }
 
   return (
-    <Card>
+    <Card style={{ borderRadius: 1000}}>
       <TouchableOpacity onPress={goToUser}>
         <CardItem>
           <Left>
@@ -87,7 +87,7 @@ const PostCard = (props) => {
         <Text> {post.Caption} </Text>
       </CardItem>
       <CardItem>
-        <Text> {activity.category} - {activity.activity} </Text>
+        <Text> Activity: {activity.activity} ( {activity.category} ) </Text>
       </CardItem>
     </Card>
   );
