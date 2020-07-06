@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 var moment = require("moment");
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import {
   Card,
   CardItem,
@@ -12,12 +12,15 @@ import {
   Body,
   Right,
 } from "native-base";
+import { AuthContext } from "../AuthContext";
 const axios = require("axios").default;
 
 const PostCard = (props) => {
 
+  const auth = useContext(AuthContext);
   const post = props.post;
   let [user, setUser] = useState({});
+  let [activity, setActivity] = useState({});
   
   useEffect(() => {
     async function fetchData() {
@@ -25,32 +28,44 @@ const PostCard = (props) => {
           `https://productivitree.wl.r.appspot.com/api/v1/users/${post.Author}`
         );
         setUser(result.data.payload);
+        const response = await axios(
+          `https://productivitree.wl.r.appspot.com/api/v1/activities/${post.Activity}`
+        );
+        setActivity(response.data.payload);
     }
     fetchData();
   }, []);
 
+  function goToUser() {
+    console.log("User Page Here");
+    console.log("User", user.googleID);
+  }
+
+  function likePost() {
+    console.log(`Post ${post._id} liked / unliked by ${auth.googleID}`);
+  }
+
   return (
     <Card>
-      <CardItem>
-        <Left>
-          <Thumbnail
-            source={{
-              uri: user.ProfilePic,
-            }}
-            style={{
-                height: 30,
-                width: 30,
-                borderRadius: 30,
-            }}
-          />
-          <Body>
-            <Text>{user.Username}</Text>
-          </Body>
-        </Left>
-        {/* <Right>
-          <Icon name={post.category} />
-        </Right> */}
-      </CardItem>
+      <TouchableOpacity onPress={goToUser}>
+        <CardItem>
+          <Left>
+              <Thumbnail
+                source={{
+                  uri: user.ProfilePic,
+                }}
+                style={{
+                    height: 30,
+                    width: 30,
+                    borderRadius: 30,
+                }}
+              />
+              <Body>
+                <Text>{user.Username}</Text>
+              </Body>
+          </Left>
+        </CardItem>
+      </TouchableOpacity>
       <CardItem cardBody >
         <Image
           source={{ uri: post.Picture }}
@@ -62,16 +77,17 @@ const PostCard = (props) => {
           <Text>{moment(post.TimeStamp).fromNow()}</Text>
         </Left>
         <Right>
-          <Button transparent>
-            {/* <Text>{post.Likes.length}</Text> */}
+          <Button transparent onPress={likePost}>
+            <Text>{post.Likes.length}</Text>
             <Icon name="md-thumbs-up" />
           </Button>
         </Right>
       </CardItem>
       <CardItem>
-        <Text style={{ marginBottom: 20, marginLeft: 10 }}>
-          {post.Caption}
-        </Text>
+        <Text> {post.Caption} </Text>
+      </CardItem>
+      <CardItem>
+        <Text> {activity.category} - {activity.activity} </Text>
       </CardItem>
     </Card>
   );

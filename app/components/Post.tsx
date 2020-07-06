@@ -1,9 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View, Button } from "native-base";
-import { ScrollView, RefreshControl, StyleSheet, FlatList } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { AuthContext } from "../AuthContext";
-import ProfileInfo from "../components/ProfileInfo";
+import React, { useState, useEffect } from "react";
+import { View } from "native-base";
 import PostCard from "./PostCard";
 
 const axios = require("axios").default;
@@ -26,7 +22,9 @@ const Post = (props) => {
     <View>
         { posts.map(function (post, i) {
             return (
-                <PostCard post={ post } key={ i }/>
+                <View key={ i }>
+                    {posts && <PostCard post={ post }/>}
+                </View>
             );
         })}
     </View>
