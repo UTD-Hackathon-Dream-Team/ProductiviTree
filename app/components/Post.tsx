@@ -13,58 +13,60 @@ import {
   Right,
 } from "native-base";
 
-const PostCard = (props) => {
+const PostCard = () => {
 
     const axios = require("axios").default;
 
-    let [user, setUser] = useState(null);
+    let [post, setPost] = useState({});
     
     useEffect(() => {
         async function fetchData() {
             const result = await axios(
-              `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+              `https://productivitree.wl.r.appspot.com/api/v1/posts/5effd148c368a5ee46cf232f`
             );
-            setUser(result.data.payload);
+            setPost(result.data.payload);
         }
         fetchData();
+        console.log(post.Picture);
     }, []);
 
   return (
     <Card>
       <CardItem>
         <Left>
-          <Thumbnail
+          {/* <Thumbnail
             source={{
-              uri: props.post.profilePic,
+              uri: post.profilePic,
             }}
-          />
+          /> */}
           <Body>
-            <Text>{props.post.userName}</Text>
+            <Text>{post.Author}</Text>
           </Body>
         </Left>
-        <Right>
-          <Icon name={props.post.category} />
-        </Right>
+        {/* <Right>
+          <Icon name={post.category} />
+        </Right> */}
       </CardItem>
-      <CardItem cardBody>
+      <CardItem cardBody >
         <Image
-          source={{ uri: props.post.image }}
+          source={{ uri: post.Picture }}
+          style={{height: 200, width: null, flex: 1}}
         />
       </CardItem>
       <CardItem>
         <Left>
-          <Text>{moment(props.post.date_added).fromNow()}</Text>
+          <Text>{moment(post.TimeStamp).fromNow()}</Text>
         </Left>
         <Right>
           <Button transparent>
-            <Text>{props.post.likesCount}</Text>
+            {/* <Text>{post.Likes.length}</Text> */}
             <Icon name="md-thumbs-up" />
           </Button>
         </Right>
       </CardItem>
       <CardItem>
         <Text style={{ marginBottom: 20, marginLeft: 10 }}>
-          {props.post.description}
+          {post.Caption}
         </Text>
       </CardItem>
     </Card>
