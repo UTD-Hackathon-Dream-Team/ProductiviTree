@@ -1,76 +1,36 @@
-import React, {useState, useEffect} from "react";
-var moment = require("moment");
-import { Image } from "react-native";
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-} from "native-base";
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Content, Text, View, Button } from "native-base";
+import { ScrollView, RefreshControl, StyleSheet, FlatList } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../AuthContext";
+import ProfileInfo from "../components/ProfileInfo";
+import PostCard from "./PostCard";
 
-const PostCard = () => {
+const axios = require("axios").default;
 
-    const axios = require("axios").default;
+const Post = (props) => {
+  let [posts, setPosts] = useState([]);
 
-    let [post, setPost] = useState({});
-    
-    useEffect(() => {
-        async function fetchData() {
-            const result = await axios(
-              `https://productivitree.wl.r.appspot.com/api/v1/posts/5effd148c368a5ee46cf232f`
-            );
-            setPost(result.data.payload);
-        }
-        fetchData();
-        console.log(post.Picture);
-    }, []);
+  async function fetchData() {
+    const result = await axios(
+      `https://productivitree.wl.r.appspot.com/api/v1/posts/user/${props.user}`
+    );
+    setPosts(result.data.payload);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <Card>
-      <CardItem>
-        <Left>
-          {/* <Thumbnail
-            source={{
-              uri: post.profilePic,
-            }}
-          /> */}
-          <Body>
-            <Text>{post.Author}</Text>
-          </Body>
-        </Left>
-        {/* <Right>
-          <Icon name={post.category} />
-        </Right> */}
-      </CardItem>
-      <CardItem cardBody >
-        <Image
-          source={{ uri: post.Picture }}
-          style={{height: 200, width: null, flex: 1}}
-        />
-      </CardItem>
-      <CardItem>
-        <Left>
-          <Text>{moment(post.TimeStamp).fromNow()}</Text>
-        </Left>
-        <Right>
-          <Button transparent>
-            {/* <Text>{post.Likes.length}</Text> */}
-            <Icon name="md-thumbs-up" />
-          </Button>
-        </Right>
-      </CardItem>
-      <CardItem>
-        <Text style={{ marginBottom: 20, marginLeft: 10 }}>
-          {post.Caption}
-        </Text>
-      </CardItem>
-    </Card>
+    <View>
+        { posts.map(function (post, i) {
+            return (
+                <PostCard post={ post } key={ i }/>
+            );
+        })}
+    </View>
   );
 };
 
-export default PostCard;
+export default Post;

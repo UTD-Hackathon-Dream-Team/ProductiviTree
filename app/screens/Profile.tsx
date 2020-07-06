@@ -4,7 +4,7 @@ import { ScrollView, RefreshControl, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 import ProfileInfo from "../components/ProfileInfo";
-import PostCard from "../components/Post";
+import Post from "../components/Post";
 
 const axios = require("axios").default;
 
@@ -48,7 +48,7 @@ const Profile = () => {
         >
           <Text>Settings</Text>
         </Button>
-        <PostCard/>
+        {user && <Post user={auth.googleID} />}
       </ScrollView>
     </LinearGradient>
   );
