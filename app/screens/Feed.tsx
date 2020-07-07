@@ -20,11 +20,15 @@ const Feed = () => {
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
-    await setFollowing(result.data.payload.Following);
+    setFollowing(result.data.payload.Following);
     const response = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/posts`
     );
-    await setPosts(result.data.payload);
+    setPosts(response.data.payload);
+  }
+
+  async function adjustData() {
+    console.log("Posts" , posts);
     await posts.forEach(post => {
       let author = post.Author;
       if (following.includes(author)){
@@ -38,6 +42,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchData();
+    adjustData();
     console.log("Following", following);
   }, []);
 
