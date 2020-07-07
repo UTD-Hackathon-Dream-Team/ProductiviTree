@@ -4,7 +4,7 @@ import { ScrollView, RefreshControl, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 import ProfileInfo from "../components/ProfileInfo";
-import Post from "../components/Post";
+import Post from "../components/PostList";
 
 const axios = require("axios").default;
 
