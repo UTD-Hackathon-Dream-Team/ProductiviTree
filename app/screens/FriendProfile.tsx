@@ -30,8 +30,8 @@ const FriendProfile = (props) => {
     await fetchData();
   }, [refreshing]);
 
-  function followUser(user) {
-    console.log(`Following user ${user.googleID} now`);
+  function followUser() {
+    console.log(`Un/Following user ${user.googleID} now`);
   }
 
   return (
@@ -44,7 +44,7 @@ const FriendProfile = (props) => {
         {user && <ProfileInfo user={user} />}        
         <Button
           style={{ justifyContent: "center", alignItems: "center" }}
-          //onPress={followUser(user)}
+          onPress={followUser}
         >
           <Text>Un/follow</Text>
         </Button>
