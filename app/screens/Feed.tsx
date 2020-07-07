@@ -1,16 +1,69 @@
-import React, { useContext } from "react";
-import { Container, Content, Text } from "native-base";
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Content, Text , View} from "native-base";
+import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+
 import { AuthContext } from "../AuthContext";
-import GoogleLogOut from "../components/GoogleLogOut";
+import PostCard from "../components/PostCard";
+
+const axios = require("axios").default;
 
 const Feed = () => {
   const auth = useContext(AuthContext);
+  let [refreshing, setRefreshing] = useState(false);
+  let [following, setFollowing] = useState([]);
+  let [posts, setPosts] = useState([]);
+  let [feed, setFeed] = useState([]);
+
+  async function fetchData() {
+    setRefreshing(true);
+    const result = await axios(
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+    );
+    await setFollowing(result.data.payload.Following);
+    const response = await axios(
+      `https://productivitree.wl.r.appspot.com/api/v1/posts`
+    );
+    await setPosts(result.data.payload);
+    await posts.forEach(post => {
+      let author = post.Author;
+      if (following.includes(author)){
+        let newFeed = feed;
+        newFeed.push(post);
+        setFeed(newFeed);
+      }
+    });
+    setRefreshing(false);
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log("Following", following);
+  }, []);
+
+  const onRefresh = React.useCallback(async () => {
+    await fetchData();
+  }, [refreshing]);
+
   return (
-    <Container>
-      <Content>
-        <Text>feed of {auth.googleID}</Text>
-      </Content>
-    </Container>
+    <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {following &&
+        <View>
+        { feed.map(function (post, i) {
+            return (
+                <View key={ i }>
+                    {posts && <PostCard post={ post }/>}
+                </View>
+            );
+        })}
+    </View>}
+      </ScrollView>
+    </LinearGradient>
   );
 };
 
