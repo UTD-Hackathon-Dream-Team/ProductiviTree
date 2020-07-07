@@ -28,9 +28,10 @@ const Feed = () => {
   }
 
   async function adjustData() {
-    console.log("Posts" , posts);
+    console.log("Following", following);
     await posts.forEach(post => {
       let author = post.Author;
+      console.log("Author", author);
       if (following.includes(author)){
         let newFeed = feed;
         newFeed.push(post);
@@ -43,11 +44,11 @@ const Feed = () => {
   useEffect(() => {
     fetchData();
     adjustData();
-    console.log("Following", following);
   }, []);
 
   const onRefresh = React.useCallback(async () => {
     await fetchData();
+    await adjustData();
   }, [refreshing]);
 
   return (
