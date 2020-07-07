@@ -8,12 +8,12 @@ import Post from "../components/PostList";
 
 const axios = require("axios").default;
 
-const FriendProfile = () => {
+const FriendProfile = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [refreshing, setRefreshing] = useState(false);
 
-  async function fetchData(props) {
+  async function fetchData() {
     setRefreshing(true);
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/${props.user}`
