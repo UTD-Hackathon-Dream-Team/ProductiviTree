@@ -16,7 +16,7 @@ exports.getPosts = async (req, res) => {
 
 exports.getPost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate("Activity");
     if (!post) {
       return res.status(404).json({
         success: false,
