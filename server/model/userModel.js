@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   googleID: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, "Add a googleID"],
   },
   Username: {
