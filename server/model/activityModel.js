@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 
 const ActivitySchema = new mongoose.Schema({
-  activity: {
+  Activity: {
     type: String,
     required: [true, "Add an activity"],
   },
-  category: {
+  Category: {
     type: String,
     required: [true, "Add a category"],
   },
-  points: {
+  Points: {
     type: Number,
     required: [true, "Add the number of points"],
   },
-  icon: {
+  Icon: {
     type: String,
     required: [true, "Add an icon"],
   },

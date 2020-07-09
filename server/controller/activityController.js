@@ -101,53 +101,53 @@ exports.updateActivity = async (req, res, next) => {
       });
     }
 
-    if (req.body.activity != null) {
+    if (req.body.Activity != null) {
       await Activity.find({})
         .where({ _id: req.params.id })
         .replaceOne(
           {},
           {
             $set: {
-              activity: req.body.activity,
+              Activity: req.body.Activity,
             },
           }
         );
     }
 
-    if (req.body.category != null) {
+    if (req.body.Category != null) {
       await Activity.find({})
         .where({ _id: req.params.id })
         .replaceOne(
           {},
           {
             $set: {
-              category: req.body.category,
+              Category: req.body.Category,
             },
           }
         );
     }
 
-    if (req.body.points != null) {
+    if (req.body.Points != null) {
       await Activity.find({})
         .where({ _id: req.params.id })
         .replaceOne(
           {},
           {
             $set: {
-              points: req.body.points,
+              Points: req.body.Points,
             },
           }
         );
     }
 
-    if (req.body.icon != null) {
+    if (req.body.Icon != null) {
       await Activity.find({})
         .where({ _id: req.params.id })
         .replaceOne(
           {},
           {
             $set: {
-              icon: req.body.icon,
+              Icon: req.body.Icon,
             },
           }
         );
@@ -168,7 +168,7 @@ exports.updateActivity = async (req, res, next) => {
 exports.getCategoryActivity = async (req, res, next) => {
   try {
     const activity = await Activity.find({}).where({
-      category: req.params.category,
+      Category: req.params.Category,
     });
 
     if (activity.length == 0) {
