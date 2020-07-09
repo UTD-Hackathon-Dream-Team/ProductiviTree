@@ -37,8 +37,8 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  Followers: [mongoose.Schema.Types.ObjectId],
-  Following: [mongoose.Schema.Types.ObjectId],
+  Followers: [String],
+  Following: [String],
 });
 
 module.exports = mongoose.model("User", UserSchema);
