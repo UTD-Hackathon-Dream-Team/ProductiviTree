@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  _id: {
-    type: Number,
-    required: [true, "Add an id"],
-  },
   googleID: {
-    type: Number,
+    type: String,
     required: [true, "Add a googleID"],
   },
   Username: {
@@ -27,8 +23,8 @@ const UserSchema = new mongoose.Schema({
   Bio: {
     type: String,
   },
-  Posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-  Challenges: [{ type: mongoose.Schema.Types.ObjectId, ref: "Challenge" }],
+  Posts: [mongoose.Schema.Types.ObjectId],
+  Challenges: [mongoose.Schema.Types.ObjectId],
   Trees: {
     type: Number,
     default: 0,
@@ -39,10 +35,10 @@ const UserSchema = new mongoose.Schema({
   },
   DailyGoal: {
     type: Number,
-    default: 0,
+    default: 100,
   },
-  Followers: [mongoose.Schema.Types.ObjectId],
-  Following: [mongoose.Schema.Types.ObjectId],
+  Followers: [String],
+  Following: [String],
 });
 
 module.exports = mongoose.model("User", UserSchema);
