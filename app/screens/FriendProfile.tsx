@@ -29,8 +29,6 @@ const FriendProfile = (props) => {
 
   useEffect(() => {
     fetchData();
-    console.log(user.googleID);
-    console.log(following);
   }, []);
 
   const onRefresh = React.useCallback(async () => {
