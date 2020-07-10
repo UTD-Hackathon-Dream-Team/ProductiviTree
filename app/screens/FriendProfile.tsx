@@ -19,7 +19,7 @@ const FriendProfile = (props) => {
   async function fetchData() {
     setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/112522383689004928445`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${props.user}`
     );
     setUser(result.data.payload);
     const response = await axios(
