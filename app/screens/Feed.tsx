@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { AuthContext } from "../AuthContext";
 import PostCard from "../components/PostCard";
+import FeedList from "../components/FeedList";
 
 const axios = require("axios").default;
 
@@ -18,7 +19,7 @@ const Feed = () => {
   async function fetchData() {
     //setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/112522383689004928445`
     );
     setFollowing(result.data.payload.Following);
     const response = await axios(
@@ -28,14 +29,14 @@ const Feed = () => {
   }
 
   async function adjustData() {
+    const newFeed = [];
     await posts.forEach(post => {
       let author = post.Author;
       if (following.includes(author)){
-        let newFeed = feed;
         newFeed.push(post);
-        setFeed(newFeed.reverse());
       }
     });
+    setFeed(newFeed.reverse());
     //setRefreshing(false);
   }
 
@@ -45,7 +46,7 @@ const Feed = () => {
       await adjustData();
     }
     loadData();
-  }, [feed]);
+  }, []);
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -62,15 +63,7 @@ const Feed = () => {
         }
       >
         {following &&
-            <View>
-              { feed.map(function (post, i) {
-                  return (
-                      <View key={ i }>
-                          {posts && <PostCard post={ post }/>}
-                      </View>
-                  );
-              })}
-          </View>
+            <FeedList posts={feed}/>
         }
       </ScrollView>
     </LinearGradient>
