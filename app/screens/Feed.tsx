@@ -42,8 +42,9 @@ const Feed = () => {
 
   useEffect(() => {
     async function loadData() {
-      await fetchData();
-      await adjustData();
+      // await fetchData();
+      // await adjustData();
+      await onRefresh();
     }
     loadData();
   }, []);
@@ -62,9 +63,7 @@ const Feed = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {following &&
-            <FeedList posts={feed}/>
-        }
+        {feed && <FeedList posts={feed}/>}
       </ScrollView>
     </LinearGradient>
   );
