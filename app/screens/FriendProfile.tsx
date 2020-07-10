@@ -101,7 +101,7 @@ const FriendProfile = (props) => {
             </Button>
           </View>
         }        
-        {user && <Post user={user} />}
+        {user && <Post user={user.googleID} />}
       </ScrollView>
     </LinearGradient>
   );
