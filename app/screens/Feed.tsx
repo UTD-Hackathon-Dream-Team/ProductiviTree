@@ -28,10 +28,8 @@ const Feed = () => {
   }
 
   async function adjustData() {
-    console.log("Following", following);
     await posts.forEach(post => {
       let author = post.Author;
-      console.log("Author", author);
       if (following.includes(author)){
         let newFeed = feed;
         newFeed.push(post);
@@ -59,15 +57,16 @@ const Feed = () => {
         }
       >
         {following &&
-        <View>
-        { feed.map(function (post, i) {
-            return (
-                <View key={ i }>
-                    {posts && <PostCard post={ post }/>}
-                </View>
-            );
-        })}
-    </View>}
+            <View>
+              { feed.map(function (post, i) {
+                  return (
+                      <View key={ i }>
+                          {posts && <PostCard post={ post }/>}
+                      </View>
+                  );
+              })}
+          </View>
+        }
       </ScrollView>
     </LinearGradient>
   );
