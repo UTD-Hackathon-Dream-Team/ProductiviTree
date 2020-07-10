@@ -14,7 +14,7 @@ const TabStack = () => {
     <Tab.Navigator>
       <Tab.Screen name="Feed" component={Feed} />
       <Tab.Screen name="Stats" component={FriendProfile} />
-      <Tab.Screen name="Challenges" component={Challenges} />
+      <Tab.Screen name="Challenges" component={Profile} />
     </Tab.Navigator>
   );
 };
