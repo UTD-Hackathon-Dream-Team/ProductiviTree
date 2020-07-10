@@ -35,14 +35,6 @@ const FriendProfile = (props) => {
   }, []);
 
   const onRefresh = React.useCallback(async () => {
-    const newFollowing = following;
-    var index = newFollowing.indexOf(user.googleID);
-    if (index !== -1) newFollowing.splice(index, 1);
-    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
-      {
-        Following: newFollowing,
-      }
-    );
     await fetchData();
   }, [refreshing]);
 
@@ -59,6 +51,14 @@ const FriendProfile = (props) => {
   }, [refreshing]);
 
   const unfollowUser = React.useCallback(async () => {
+    const newFollowing = following;
+    var index = newFollowing.indexOf(user.googleID);
+    if (index !== -1) newFollowing.splice(index, 1);
+    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
+      {
+        Following: newFollowing,
+      }
+    );
     console.log(`Unfollowing user ${user.googleID} now`);
     await fetchData();
   }, [refreshing]);
