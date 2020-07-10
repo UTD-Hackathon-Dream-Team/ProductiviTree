@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View, Button } from "native-base";
-import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+import { Text, View, Button } from "native-base";
+import { ScrollView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 import ProfileInfo from "../components/ProfileInfo";
@@ -11,7 +11,6 @@ const axios = require("axios").default;
 const FriendProfile = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
-  let [self, setSelf] = useState(null);
   let [following, setFollowing] = useState([]);
   let [followers, setFollowers] = useState([]);
   let [refreshing, setRefreshing] = useState(false);
