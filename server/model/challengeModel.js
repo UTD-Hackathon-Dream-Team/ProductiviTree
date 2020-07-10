@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
 
 const ChallengeSchema = new mongoose.Schema({
-  activities: {
+  Activities: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "Activity",
     required: [true, "Add a list of activities"],
   },
-  type: {
+  Type: {
     type: String,
     required: [true, "Add a type"],
   },
-  points: {
+  Points: {
     type: Number,
     required: [true, "Add the number of points"],
   },
