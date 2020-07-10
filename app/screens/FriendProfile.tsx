@@ -11,6 +11,7 @@ const axios = require("axios").default;
 const FriendProfile = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
+  let [self, setSelf] = useState(null);
   let [following, setFollowing] = useState([]);
   let [followers, setFollowers] = useState([]);
   let [refreshing, setRefreshing] = useState(false);
@@ -38,6 +39,13 @@ const FriendProfile = (props) => {
   }, [refreshing]);
 
   const followUser = React.useCallback(async () => {
+    const newFollowing = following;
+    await newFollowing.push(user.googleID);
+    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
+      {
+        Following: newFollowing,
+      }
+    );
     console.log(`Following user ${user.googleID} now`);
     await fetchData();
   }, [refreshing]);
