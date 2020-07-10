@@ -16,7 +16,7 @@ const Feed = () => {
   let [feed, setFeed] = useState([]);
 
   async function fetchData() {
-    setRefreshing(true);
+    //setRefreshing(true);
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
@@ -33,24 +33,29 @@ const Feed = () => {
       if (following.includes(author)){
         let newFeed = feed;
         newFeed.push(post);
-        setFeed(newFeed);
+        setFeed(newFeed.reverse());
       }
     });
-    setRefreshing(false);
+    //setRefreshing(false);
   }
 
   useEffect(() => {
-    fetchData();
-    adjustData();
-  }, []);
+    async function loadData() {
+      await fetchData();
+      await adjustData();
+    }
+    loadData();
+  }, [feed]);
 
   const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
     await fetchData();
     await adjustData();
+    setRefreshing(false);
   }, [refreshing]);
 
   return (
-    <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
