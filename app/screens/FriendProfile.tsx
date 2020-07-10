@@ -12,6 +12,7 @@ const FriendProfile = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [following, setFollowing] = useState([]);
+  let [followers, setFollowers] = useState([]);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -24,6 +25,7 @@ const FriendProfile = (props) => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
     setFollowing(response.data.payload.Following);
+    setFollowers(response.data.payload.Followers);
     setRefreshing(false);
   }
 
@@ -54,6 +56,15 @@ const FriendProfile = (props) => {
         }
       >
         {user && <ProfileInfo user={user} />}
+        {
+          user && followers.includes(user.googleID) ? 
+          <View>
+              <Text>Follows You</Text>
+          </View>
+          :
+          <View>
+          </View>
+        }
         {
           user && following.includes(user.googleID) ? 
           <View>
