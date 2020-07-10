@@ -13,8 +13,8 @@ const TabStack = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Stats" component={FriendProfile} />
-      <Tab.Screen name="Challenges" component={Profile} />
+      <Tab.Screen name="Stats" component={Profile} />
+      <Tab.Screen name="Challenges" component={FriendProfile} />
     </Tab.Navigator>
   );
 };
