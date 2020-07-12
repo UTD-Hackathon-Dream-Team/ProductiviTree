@@ -15,7 +15,11 @@ const PostSchema = new Schema({
     type: String,
     default: "",
   },
-  Activity: mongoose.Schema.Types.ObjectId, // make this required after we add the model
+  Activity: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Activity",
+    default: "5eff6d9d9e2e671284902e89",
+  },
   Likes: {
     type: [String],
     default: [],
