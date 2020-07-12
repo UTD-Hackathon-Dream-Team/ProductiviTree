@@ -36,6 +36,7 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
             Username: user.name,
             ProfilePic: user.photoUrl,
             Email: user.email,
+            Following: [user.id]
           };
           //console.log("New user", newUser);
 
@@ -45,12 +46,6 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
               newUser
             )
             .then(async function (response) {
-              await axios
-              .post(
-                `https://productivitree.wl.r.appspot.com/api/v1/users/${user.id}`,
-                {Following: [user.id]}
-              )
-
               console.log("User added");
               navigate.navigate("MainStack");
             })

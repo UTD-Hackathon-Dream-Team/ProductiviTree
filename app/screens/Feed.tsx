@@ -19,7 +19,7 @@ const Feed = () => {
   async function fetchData() {
     //setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/112522383689004928445`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
     setFollowing(result.data.payload.Following);
     const response = await axios(
@@ -54,6 +54,8 @@ const Feed = () => {
     await fetchData();
     await adjustData();
     setRefreshing(false);
+    console.log(following);
+    console.log(feed);
   }, [refreshing]);
 
   return (
