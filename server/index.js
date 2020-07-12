@@ -47,9 +47,15 @@ app.listen(
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
 );
 
+// * 5 * * 1      <-- actual
+// 15 * * * * *   <-- test
+
 var updateChallengesWeekly = schedule.scheduleJob('* 5 * * 1', function(){
   updateChallenge('weekly');
 });
+
+// * 5 * * *      <-- actual
+// 45 * * * * *   <-- test
 
 var updateChallengesDaily = schedule.scheduleJob('* 5 * * *', function(){
   updateChallenge('daily');

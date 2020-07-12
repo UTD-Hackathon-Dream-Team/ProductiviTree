@@ -10,7 +10,10 @@ const randomChallenge = async (type) => {
             do{
                 var data = challenge[Math.floor((Math.random() * challenge.length))]._id;
             }while(daily.indexOf(data) != -1);
-            daily[i] = data;
+            daily[i] = {
+                _id: data,
+                progress: 0
+            }
         }
         return daily;
     }
@@ -21,7 +24,10 @@ const randomChallenge = async (type) => {
             do{
                 var data = challenge[Math.floor((Math.random() * challenge.length))]._id;
             }while(weekly.indexOf(data) != -1);
-            weekly[i] = data;
+            weekly[i] = {
+                _id: data,
+                progress: 0
+            }
         }
         return weekly;
     }
@@ -29,6 +35,7 @@ const randomChallenge = async (type) => {
 
 exports.updateChallenge = async (type) => {
     const users = await User.find();
+    console.log(users);
     if(type == 'daily'){
         for(var i = 0; i < users.length; i++){
             const challenges = await randomChallenge(type);
@@ -49,4 +56,5 @@ exports.updateChallenge = async (type) => {
             });
         }
     }
+    console.log(users);
 };
