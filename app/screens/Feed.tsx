@@ -54,8 +54,6 @@ const Feed = () => {
     await fetchData();
     await adjustData();
     setRefreshing(false);
-    console.log(following);
-    console.log(feed);
   }, [refreshing]);
 
   return (
