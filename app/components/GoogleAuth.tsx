@@ -36,6 +36,7 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
             Username: user.name,
             ProfilePic: user.photoUrl,
             Email: user.email,
+            Following: [user.id]
           };
           //console.log("New user", newUser);
 
