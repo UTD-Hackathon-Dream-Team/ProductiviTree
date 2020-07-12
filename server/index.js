@@ -1,6 +1,7 @@
 const express = require("express");
 var cors = require("cors");
 var schedule = require('node-schedule');
+const { updateChallenge } = require('./updateChallenges');
 
 
 const connectDB = require("./config/db");
@@ -47,9 +48,9 @@ app.listen(
 );
 
 var updateChallengesWeekly = schedule.scheduleJob('* 5 * * 1', function(){
-  console.log('Weekly Challenge Update');
+  updateChallenge('weekly');
 });
 
 var updateChallengesDaily = schedule.scheduleJob('* 5 * * *', function(){
-  console.log('Daily Challenge Update');
+  updateChallenge('daily');
 });

@@ -154,10 +154,17 @@ exports.updateUser = async (req, res, next) => {
             });
         }
 
-        if(req.body.Challenges != null) {
+        if(req.body.dailyChallenges != null) {
             await User.find({}).where({ "googleID": req.params.googleId}).replaceOne({}, { 
                 $set: { 
-                    Challenges: req.body.Challenges
+                    dailyChallenges: req.body.dailyChallenges
+                } 
+            });
+        }
+        if(req.body.weeklyChallenges != null) {
+            await User.find({}).where({ "googleID": req.params.googleId}).replaceOne({}, { 
+                $set: { 
+                    weeklyChallenges: req.body.weeklyChallenges
                 } 
             });
         }

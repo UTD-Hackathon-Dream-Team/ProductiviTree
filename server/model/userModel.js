@@ -24,7 +24,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   Posts: [mongoose.Schema.Types.ObjectId],
-  Challenges: [mongoose.Schema.Types.ObjectId],
+  dailyChallenges: [mongoose.Schema.Types.ObjectId],
+  weeklyChallenges: [mongoose.Schema.Types.ObjectId],
   Trees: {
     type: Number,
     default: 0,
