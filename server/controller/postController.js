@@ -4,7 +4,7 @@ const User = require("../model/userModel");
 
 exports.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().populate("Activity");
 
     return res
       .status(200)
@@ -131,7 +131,9 @@ exports.updatePost = async (req, res) => {
 
 exports.getUserPost = async (req, res) => {
   try {
-    const posts = await Post.find({ Author: req.params.userid });
+    const posts = await Post.find({ Author: req.params.userid }).populate(
+      "Activity"
+    );
 
     return res
       .status(200)
