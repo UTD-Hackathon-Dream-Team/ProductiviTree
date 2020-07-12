@@ -11,7 +11,7 @@ const Post = (props) => {
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/posts/user/${props.user}`
     );
-    setPosts(result.data.payload);
+    setPosts(result.data.payload.reverse());
   }
 
   useEffect(() => {
