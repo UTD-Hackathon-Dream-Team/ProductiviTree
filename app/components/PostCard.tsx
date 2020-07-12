@@ -20,7 +20,6 @@ const PostCard = (props) => {
   const auth = useContext(AuthContext);
   const post = props.post;
   let [user, setUser] = useState({});
-  let [activity, setActivity] = useState({});
   
   useEffect(() => {
     async function fetchData() {
@@ -28,10 +27,6 @@ const PostCard = (props) => {
           `https://productivitree.wl.r.appspot.com/api/v1/users/${post.Author}`
         );
         setUser(result.data.payload);
-        const response = await axios(
-          `https://productivitree.wl.r.appspot.com/api/v1/activities/${post.Activity}`
-        );
-        setActivity(response.data.payload);
     }
     fetchData();
   }, []);
@@ -88,7 +83,7 @@ const PostCard = (props) => {
         <Text> {post.Caption} </Text>
       </CardItem>
       <CardItem>
-        <Text> Activity: {activity.activity} ( {activity.category} ) </Text>
+        <Text> Activity: {post.Activity.Activity} ( {post.Activity.Category} ) </Text>
       </CardItem>
     </Card>
   );

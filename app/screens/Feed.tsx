@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View } from "native-base";
-import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+import { ScrollView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { AuthContext } from "../AuthContext";
-import PostCard from "../components/PostCard";
 import FeedList from "../components/FeedList";
 
 const axios = require("axios").default;

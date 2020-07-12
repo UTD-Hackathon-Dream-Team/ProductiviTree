@@ -4,7 +4,7 @@ const User = require("../model/userModel");
 
 exports.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().populate("Activity");
 
     return res
       .status(200)
@@ -16,7 +16,7 @@ exports.getPosts = async (req, res) => {
 
 exports.getPost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate("Activity");
     if (!post) {
       return res.status(404).json({
         success: false,
@@ -131,7 +131,9 @@ exports.updatePost = async (req, res) => {
 
 exports.getUserPost = async (req, res) => {
   try {
-    const posts = await Post.find({ Author: req.params.userid });
+    const posts = await Post.find({ Author: req.params.userid }).populate(
+      "Activity"
+    );
 
     return res
       .status(200)
