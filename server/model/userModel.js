@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
   },
   DailyGoal: {
     type: Number,
-    default: 0,
+    default: 100,
   },
   Followers: [String],
   Following: [String],
