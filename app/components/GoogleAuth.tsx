@@ -27,7 +27,7 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
         console.log("User already exists");
         navigate.navigate("MainStack");
       })
-      .catch(function (error) {
+      .catch(async function (error) {
         //If user does not exist, add in database
         if (error.response.status === 404) {
           console.log("User does not exist");
@@ -40,12 +40,12 @@ const GoogleAuth = ({ navigate }: { navigate: any }) => {
           };
           //console.log("New user", newUser);
 
-          axios
+          await axios
             .post(
               "https://productivitree.wl.r.appspot.com/api/v1/users",
               newUser
             )
-            .then(function (response) {
+            .then(async function (response) {
               console.log("User added");
               navigate.navigate("MainStack");
             })
