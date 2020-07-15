@@ -41,9 +41,9 @@ const Stats = () => {
     >
         {user && 
             <View style={{alignItems: "center", paddingVertical: 20}}>
-                <Text>X / Y Daily Goal Points</Text>
+                <Text> {750} / {user.DailyGoal} Daily Goal Points</Text>
                 <Text>Graph</Text>
-                <Text>Z% of Daily Goal Achieved</Text>
+                <Text> {750 / user.DailyGoal * 100}% of Daily Goal Achieved</Text>
             </View>
         }
         
