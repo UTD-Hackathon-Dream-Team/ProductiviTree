@@ -106,6 +106,14 @@ exports.updateChallenge = async (req, res, next) => {
             });
         }
 
+        if(req.body.description != null) {
+            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
+                $set: { 
+                    description: req.body.description
+                } 
+            });
+        }
+
         if(req.body.activities != null) {
             await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
                 $set: { 
@@ -126,6 +134,13 @@ exports.updateChallenge = async (req, res, next) => {
             await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
                 $set: { 
                     points: req.body.points
+                } 
+            });
+        }
+        if(req.body.goal != null) {
+            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
+                $set: { 
+                    goal: req.body.goal
                 } 
             });
         }
