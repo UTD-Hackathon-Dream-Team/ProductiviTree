@@ -7,7 +7,7 @@ import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
 
-const Stats = () => {
+const StatsGroup = () => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [refreshing, setRefreshing] = useState(false);
@@ -58,4 +58,4 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default StatsGroup;
