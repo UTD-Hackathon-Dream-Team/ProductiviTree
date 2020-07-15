@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text } from "native-base";
-import { ScrollView, RefreshControl, Image, View} from "react-native";
+import { Text, View, Button } from "native-base";
+import { ScrollView, RefreshControl, Image, Linking} from "react-native";
 import { AuthContext } from "../AuthContext";
 import tree from "../assets/tree_icon.png";
 
@@ -50,8 +50,8 @@ const Stats = () => {
         {user && 
             <View style={{alignItems: "center", paddingVertical: 20}}>
                 <Image source={tree} style={{ height: 300, width: 300 }}/>
-                <Text>{user.Trees} Trees planted</Text>
-                <Text>{trees} Trees planted globally</Text>
+                <Text>{user.Trees} trees planted by you</Text>
+                <Text>{trees} trees planted globally</Text>
             </View>
         }
         
@@ -64,7 +64,9 @@ const Stats = () => {
         }
 
         <View style={{alignItems: "center", paddingVertical: 20}}>
-            <Text>Learn More About Tree Planting</Text>
+            <Button onPress={ ()=>{ Linking.openURL('https://google.com')}}>
+                <Text>Learn More About Tree Planting</Text>
+            </Button>
         </View>
     </ScrollView>
   );
