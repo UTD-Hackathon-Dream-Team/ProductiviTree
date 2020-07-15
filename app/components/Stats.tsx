@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Text } from "native-base";
-import { ScrollView, RefreshControl, Image } from "react-native";
+import { ScrollView, RefreshControl, Image, View} from "react-native";
 import { AuthContext } from "../AuthContext";
 import tree from "../assets/tree_icon.png";
 
@@ -35,18 +35,24 @@ const Stats = () => {
         }
         contentContainerStyle={{alignItems: "center", justifyContent: "space-around"}}
     >
-        <Text>X / Y Daily Goal Points</Text>
-        <Text>Graph</Text>
-        <Text>Z% of Daily Goal Achieved</Text>
+        <View style={{alignItems: "center", justifyContent: "space-around"}}>
+            <Text>X / Y Daily Goal Points</Text>
+            <Text>Graph</Text>
+            <Text>Z% of Daily Goal Achieved</Text>
+        </View>
         
-        <Image source={tree} style={{ height: 300, width: 300 }}/>
-
-        <Text>x Trees planted</Text>
-        <Text>x Trees planted globally</Text>
-        <Text>X / Y Points</Text>
-        <Text>Graph</Text>
-        <Text>Z Points until we plant a tree for your efforts</Text>
-        <Text>Learn More About Tree Planting</Text>
+        <View style={{alignItems: "center", justifyContent: "space-around"}}>
+            <Image source={tree} style={{ height: 300, width: 300 }}/>
+            <Text>x Trees planted</Text>
+            <Text>x Trees planted globally</Text>
+        </View>
+        
+        <View style={{alignItems: "center", justifyContent: "space-around"}}>
+            <Text>{user.Points} / 1000 Points</Text>
+            <Text>Graph</Text>
+            <Text>Z Points until we plant a tree for your efforts</Text>
+            <Text>Learn More About Tree Planting</Text>
+        </View>
     </ScrollView>
   );
 };

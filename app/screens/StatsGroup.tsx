@@ -3,8 +3,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import Swiper from "react-native-swiper";
 import Stats from "../components/Stats"; 
 
-const axios = require("axios").default;
-
 const StatsGroup = () => {
 
   return (
