@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Text, View, Button } from "native-base";
 import { ScrollView, RefreshControl, Image, Linking} from "react-native";
 import { AuthContext } from "../AuthContext";
+import * as Progress from 'react-native-progress';
 import tree from "../assets/tree_icon.png";
 
 const axios = require("axios").default;
@@ -42,7 +43,7 @@ const Stats = () => {
         {user && 
             <View style={{alignItems: "center", paddingVertical: 20}}>
                 <Text> {750} / {user.DailyGoal} Daily Goal Points</Text>
-                <Text>Graph</Text>
+                <Progress.Bar progress={750 / user.DailyGoal} width={200}/>
                 <Text> {750 / user.DailyGoal * 100}% of Daily Goal Achieved</Text>
             </View>
         }
@@ -58,7 +59,7 @@ const Stats = () => {
         {user &&
             <View style={{alignItems: "center", paddingVertical: 20}}>
                 <Text>{user.Points} / 1000 Points</Text>
-                <Text>Graph</Text>
+                <Progress.Bar progress={user.Points / 1000} width={200}/>
                 <Text> {1000 - user.Points} Points until we plant a tree for your efforts</Text>
             </View>
         }
