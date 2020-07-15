@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Text } from "native-base";
 import { ScrollView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Swiper from "react-native-swiper";
 import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
@@ -30,13 +31,29 @@ const Stats = () => {
 
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      <Text>Stats</Text>
-    </ScrollView>
+      <Swiper>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <Text>Personal Stats</Text>
+        </ScrollView>
+        {/* <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <Text>Global Leaderboard</Text>
+        </ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <Text>Friend Leaderboard</Text>
+        </ScrollView> */}
+      </Swiper>
   </LinearGradient>
   );
 };
