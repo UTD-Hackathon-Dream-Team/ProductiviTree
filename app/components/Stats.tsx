@@ -33,24 +33,27 @@ const Stats = () => {
         refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        contentContainerStyle={{alignItems: "center", justifyContent: "space-around"}}
+        contentContainerStyle={{alignItems: "center"}}
     >
-        <View style={{alignItems: "center", justifyContent: "space-around"}}>
+        <View style={{alignItems: "center", paddingVertical: 20}}>
             <Text>X / Y Daily Goal Points</Text>
             <Text>Graph</Text>
             <Text>Z% of Daily Goal Achieved</Text>
         </View>
         
-        <View style={{alignItems: "center", justifyContent: "space-around"}}>
+        <View style={{alignItems: "center", paddingVertical: 20}}>
             <Image source={tree} style={{ height: 300, width: 300 }}/>
-            <Text>x Trees planted</Text>
+            <Text>{user.Trees} Trees planted</Text>
             <Text>x Trees planted globally</Text>
         </View>
         
-        <View style={{alignItems: "center", justifyContent: "space-around"}}>
+        <View style={{alignItems: "center", paddingVertical: 20}}>
             <Text>{user.Points} / 1000 Points</Text>
             <Text>Graph</Text>
             <Text>Z Points until we plant a tree for your efforts</Text>
+        </View>
+
+        <View style={{alignItems: "center", paddingVertical: 20}}>
             <Text>Learn More About Tree Planting</Text>
         </View>
     </ScrollView>
