@@ -101,45 +101,45 @@ exports.updateChallenge = async (req, res, next) => {
       });
     }
 
-    if(req.body.description != null) {
-        await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-            $set: { 
-                description: req.body.description
-            } 
-        });
+    if (req.body.Activities != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              Activities: req.body.Activities,
+            },
+          }
+        );
     }
 
-    if(req.body.activities != null) {
-        await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-            $set: { 
-                activities: req.body.activities
-            } 
-        });
+    if (req.body.Type != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              Type: req.body.Type,
+            },
+          }
+        );
     }
 
-    if(req.body.type != null) {
-        await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-            $set: { 
-                type: req.body.type
-            } 
-        });
+    if (req.body.Points != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              Points: req.body.Points,
+            },
+          }
+        );
     }
-    
-    if(req.body.points != null) {
-        await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-            $set: { 
-                points: req.body.points
-            } 
-        });
-    }
-    if(req.body.goal != null) {
-        await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-            $set: { 
-                goal: req.body.goal
-            } 
-        });
-    }
-    
+
     return res.status(200).json({
       success: true,
       payload: challenge[0],
