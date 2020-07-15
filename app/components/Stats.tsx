@@ -35,7 +35,16 @@ const Stats = () => {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
     >
-        <Text>Personal Stats</Text>
+        <Text>X / Y Daily Goal Points</Text>
+        <Text>Graph</Text>
+        <Text>Z% of Daily Goal Achieved</Text>
+        <Text>Tree Icon</Text>
+        <Text>x Trees planted</Text>
+        <Text>x Trees planted globally</Text>
+        <Text>X / Y Points</Text>
+        <Text>Graph</Text>
+        <Text>Z Points until we plant a tree for your efforts</Text>
+        <Text>Learn More About Tree Planting</Text>
     </ScrollView>
   );
 };
