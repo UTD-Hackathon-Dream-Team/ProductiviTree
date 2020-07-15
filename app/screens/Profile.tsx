@@ -48,7 +48,7 @@ const Profile = () => {
         >
           <Text>Settings</Text>
         </Button>
-        {user && <Post user={auth.googleID} />}
+        {user && <Post user={user.googleID} />}
       </ScrollView>
     </LinearGradient>
   );

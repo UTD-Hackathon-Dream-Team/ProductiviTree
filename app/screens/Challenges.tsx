@@ -1,5 +1,11 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Content, Text, Header } from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../AuthContext";
+import ChallengeList from "../components/ChallengeList";
+import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+
+const axios = require("axios").default;
 
 var styles = {
   listBox: {
@@ -16,20 +22,50 @@ var styles = {
 };
 
 const Challenges = () => {
+  const auth = useContext(AuthContext);
+  let [user, setUser] = useState(null);
+  let [refreshing, setRefreshing] = useState(false);
+
+  async function fetchData() {
+    setRefreshing(true);
+    const result = await axios(
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+    );
+    setUser(result.data.payload);
+    setRefreshing(false);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const onRefresh = React.useCallback(async () => {
+    await fetchData();
+  }, [refreshing]);
+
   return (
-    <Container>
-      <Content>
+    <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Content>
         <Text style={styles.header}>Challenges</Text>
         <Text style={styles.header}>Weekly</Text>
         <Container style={styles.listBox}>
-          <Text>Challenge 1</Text>
+        {user && <ChallengeList type="weekly" user={user} />}
         </Container>
         <Text style={styles.header}>Daily</Text>
         <Container style={styles.listBox}>
-          <Text>Challenge 2</Text>
+        {user && <ChallengeList type="daily" user={user} />}
         </Container>
       </Content>
-    </Container>
+      </ScrollView>
+      
+    
+    </LinearGradient>
+    
   );
 };
 

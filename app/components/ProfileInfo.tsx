@@ -64,7 +64,7 @@ const ProfileInfo = (props) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={goToFollowing}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              {following.length} Following
+              {following.length - 1} Following
             </Text>
           </TouchableOpacity>
         </Body>

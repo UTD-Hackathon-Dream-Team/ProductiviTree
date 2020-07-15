@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ChallengeSchema = new mongoose.Schema({
     description: {
@@ -23,4 +23,4 @@ const ChallengeSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Challenge', ChallengeSchema);
+module.exports = mongoose.model("Challenge", ChallengeSchema);

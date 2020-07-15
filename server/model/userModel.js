@@ -56,10 +56,10 @@ const UserSchema = new mongoose.Schema({
   },
   DailyGoal: {
     type: Number,
-    default: 0,
+    default: 100,
   },
-  Followers: [mongoose.Schema.Types.ObjectId],
-  Following: [mongoose.Schema.Types.ObjectId],
+  Followers: [String],
+  Following: [String],
 });
 
 module.exports = mongoose.model("User", UserSchema);
