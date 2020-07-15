@@ -1,5 +1,8 @@
 const express = require("express");
 var cors = require("cors");
+var schedule = require('node-schedule');
+const { updateChallenge } = require('./updateChallenges');
+
 
 const connectDB = require("./config/db");
 
@@ -43,3 +46,17 @@ app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
 );
+
+// * 5 * * 1      <-- actual
+// 15 * * * * *   <-- test
+
+var updateChallengesWeekly = schedule.scheduleJob('* 5 * * 1', function(){
+  updateChallenge('weekly');
+});
+
+// * 5 * * *      <-- actual
+// 45 * * * * *   <-- test
+
+var updateChallengesDaily = schedule.scheduleJob('* 5 * * *', function(){
+  updateChallenge('daily');
+});
