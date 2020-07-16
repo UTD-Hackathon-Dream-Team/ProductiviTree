@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
 const ProfileInfo = (props) => {
   //console.log(props);
   const user = props.user;
-  const type = props.type;
+  const challenges = props.challenges;
 
   return (
     <Content padder>
-      <Text>{type}</Text>
+      <Text>hello</Text>
     </Content>
   );
 };

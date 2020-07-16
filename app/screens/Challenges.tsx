@@ -24,6 +24,7 @@ var styles = {
 const Challenges = () => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
+  let [dailyChallenges, setDailyChallenges] = useState([null]);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -31,7 +32,9 @@ const Challenges = () => {
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
+    console.log(result.data.payload);
     setUser(result.data.payload);
+    setDailyChallenges(dailyChallenges);
     setRefreshing(false);
   }
 
@@ -54,11 +57,11 @@ const Challenges = () => {
         <Text style={styles.header}>Challenges</Text>
         <Text style={styles.header}>Weekly</Text>
         <Container style={styles.listBox}>
-        {user && <ChallengeList type="weekly" user={user} />}
+        {user && <ChallengeList challenges={dailyChallenges} user={user} />}
         </Container>
         <Text style={styles.header}>Daily</Text>
         <Container style={styles.listBox}>
-        {user && <ChallengeList type="daily" user={user} />}
+        {user && <ChallengeList challenges={dailyChallenges} user={user} />}
         </Container>
       </Content>
       </ScrollView>
