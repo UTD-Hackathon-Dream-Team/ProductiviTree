@@ -3,10 +3,10 @@ import { Icon } from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Feed from "../screens/Feed";
-import Profile from "../screens/Profile";
-import FriendProfile from "../screens/FriendProfile";
-import Stats from "../screens/Stats";
 import Challenges from "../screens/Challenges";
+import FriendProfile from "../screens/FriendProfile";
+import StatsGroup from "../screens/StatsGroup";
+import AddPost from "../screens/AddPost";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +24,7 @@ const TabStack = () => {
       />
       <Tab.Screen
         name="Stats"
-        component={Stats}
+        component={StatsGroup}
         options={{
           tabBarIcon: ({ focused }) => (
             <Icon active={focused} name="md-stats" />
