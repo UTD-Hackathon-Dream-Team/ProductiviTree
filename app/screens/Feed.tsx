@@ -58,7 +58,14 @@ const Feed = (props) => {
             />
           }
         >
-          {feed && feed!.map((post: {}) => <PostCard post={post} />)}
+          {feed &&
+            feed!.map((post: {}) => (
+              <PostCard
+                key={post._id}
+                post={post}
+                navigation={props.navigation}
+              />
+            ))}
         </ScrollView>
         <View style={{ flex: 1 }}>
           <Fab
