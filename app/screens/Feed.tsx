@@ -46,7 +46,7 @@ const Feed = (props) => {
       colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
       style={{ flex: 1 }}
     >
-      <Header navigate={props.navigation.navigate} />
+      <Header navigation={props.navigation} />
       <ScrollView
         refreshControl={
           <RefreshControl

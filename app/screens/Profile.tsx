@@ -37,14 +37,7 @@ const Profile = (props) => {
 
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
-      <Header
-        navigate={props.navigation.navigate}
-        left={
-          <Button transparent onPress={() => props.navigation.goBack()}>
-            <Icon name="arrow-back" />
-          </Button>
-        }
-      />
+      <Header navigation={props.navigation} backButton={true} settings={true} />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

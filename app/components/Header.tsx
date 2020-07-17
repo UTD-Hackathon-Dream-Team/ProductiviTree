@@ -4,6 +4,7 @@ import {
   Left,
   Right,
   Body,
+  Icon,
   Text,
   Thumbnail,
   Button,
@@ -28,14 +29,32 @@ const CustomHeader = (props) => {
 
   return (
     <Header>
-      <Left>{props.left && props.left}</Left>
+      <Left>
+        {props.backButton && (
+          <Button transparent onPress={() => props.navigation.goBack()}>
+            <Icon name="arrow-back" />
+          </Button>
+        )}
+      </Left>
       <Body>
         <Text>Productivitree</Text>
       </Body>
       <Right>
-        {user && (
-          <Button transparent onPress={() => props.navigate("Profile")}>
-            <Thumbnail small source={{ uri: user!.ProfilePic }} />
+        {!props.settings ? (
+          user && (
+            <Button
+              transparent
+              onPress={() => props.navigation.navigate("Profile")}
+            >
+              <Thumbnail small source={{ uri: user!.ProfilePic }} />
+            </Button>
+          )
+        ) : (
+          <Button
+            transparent
+            onPress={() => props.navigation.navigate("Settings")}
+          >
+            <Icon name="md-stats" />
           </Button>
         )}
       </Right>
