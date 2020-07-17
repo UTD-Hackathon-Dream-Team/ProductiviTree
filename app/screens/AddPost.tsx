@@ -36,6 +36,7 @@ const AddPost = (props) => {
     const newPoints = activityResponse.data.payload.Points;
     const userResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
     const oldPoints = userResponse.data.payload.Points;
+    const oldTrees = userResponse.data.payload.Trees;
     axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
       {
         Points: oldPoints + newPoints,
@@ -47,8 +48,23 @@ const AddPost = (props) => {
         buttonText: "Okay",
         position: "bottom",
       });
+
+      if ((oldPoints + newPoints) > 1000){
+        axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
+          {
+            Points: oldPoints + newPoints - 1000,
+            Trees: oldTrees + 1
+          }
+        )
+        Toast.show({
+          text: "You've planted one more tree!",
+          buttonText: "Okay",
+          position: "bottom",
+        });
+      }
+
       setTimeout(() => {
-        
+        console.log("Go to feed / previous page here");
       }, 2000);
     })
   }
