@@ -11,7 +11,7 @@ const axios = require("axios").default;
 
 const AddPost = (props) => {
     const auth = useContext(AuthContext);
-    const activity = "5f087e4ec318a70007c375f3";
+    const activity = props.activity;
     let [enteredText, setEnteredText] = useState("");
     let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
     let [img64, setImg64] = useState(null);
@@ -30,12 +30,16 @@ const AddPost = (props) => {
         console.log("Submit post");
         getImageURL();
         console.log("Image", imageURL);
-        await axios.post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
-            Author: auth.googleID,
-            Picture: imageURL,
-            Caption: enteredText,
-            Activity: activity
-        });
+        await axios
+            .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/5f087e4ec318a70007c375f3`)
+            .then((response) => {
+                axios.post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
+                    Author: auth.googleID,
+                    Picture: imageURL,
+                    Caption: enteredText,
+                    Activity: response.data.payload
+                });
+            })
     };
 
     const getImageURL = async () => {
