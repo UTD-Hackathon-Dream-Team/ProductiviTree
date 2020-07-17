@@ -28,6 +28,29 @@ const AddPost = (props) => {
 
   const handleSubmit = async () => {
     await submitPost();
+    await updatePoints();
+  }
+
+  const updatePoints = async () => {
+    const activityResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`);
+    const newPoints = activityResponse.data.payload.Points;
+    const userResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
+    const oldPoints = userResponse.data.payload.Points;
+    axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
+      {
+        Points: oldPoints + newPoints,
+      }
+    )
+    .then(function (response) {
+      Toast.show({
+        text: "You've earned " + newPoints + " points!",
+        buttonText: "Okay",
+        position: "bottom",
+      });
+      setTimeout(() => {
+        
+      }, 2000);
+    })
   }
 
   const submitPost = async () => {
