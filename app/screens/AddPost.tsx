@@ -9,13 +9,21 @@ import * as Permissions from 'expo-permissions';
 const axios = require("axios").default;
 
 const AddPost = (props) => {
-  const [category, setCategory] = useState(0);
-  const [enteredText, setEnteredText] = useState("");
-  const [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
+  let [category, setCategory] = useState(0);
+  let [enteredText, setEnteredText] = useState("");
+  let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
+  let [img64, setImg64] = useState(null);
+  let [imageURL, setImageURL] = useState(null);
+  let [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getPermissionAsync();
-  }, []);
+  const getPickerPermission = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
+  };
 
   const submitPost = () => {
     console.log("Submit post");
@@ -64,31 +72,26 @@ const AddPost = (props) => {
 //       });
 //   };
 
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
-    }
-  };
 
-  _pickImage = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        setImage(result.uri);
-      }
-      console.log(result);
-    } catch (E) {
-      console.log(E);
-    }
-  };
+
+    const pickImage = async () => {
+        try {
+        await getPickerPermission();
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            base64: true,
+            quality: 1,
+            //TODO: FInd aspect
+            aspect: [4, 3]
+        });
+        if (!result.cancelled) {
+            setImage(result.uri);
+            setImg64(result.base64);
+        }
+        } catch (E) {
+        console.log(E);
+        }
+    };
 
   return (
     <Root>
@@ -100,7 +103,7 @@ const AddPost = (props) => {
           <Content padder>
             <Card>
               <Form style={{ padding: 20 }}>
-              <Button  onPress={_pickImage}>
+              <Button  onPress={pickImage}>
                 <Text>Add Image</Text>
               </Button>
                 <Image
