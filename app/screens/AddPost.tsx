@@ -1,17 +1,20 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useContext } from "react";
 import { Container, Body, Content, Header, Title, Button, Card, Icon, Right, Textarea, Item, Text, Segment, Form,Toast, Root, Left, } from "native-base";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
 
 const AddPost = (props) => {
-    let [category, setCategory] = useState(0);
+    const auth = useContext(AuthContext);
+    const activity = "5f087e4ec318a70007c375f3";
     let [enteredText, setEnteredText] = useState("");
     let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
+    let [img64, setImg64] = useState(null);
     let [imageURL, setImageURL] = useState(null);
 
     const getPickerPermission = async () => {
@@ -23,23 +26,31 @@ const AddPost = (props) => {
         }
     };
 
-    const submitPost = () => {
+    const submitPost = async () => {
         console.log("Submit post");
         getImageURL();
-        console.log(imageURL);
+        console.log("Image", imageURL);
+        await axios.post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
+            Author: auth.googleID,
+            Picture: imageURL,
+            Caption: enteredText,
+            Activity: activity
+        });
     };
 
-    const getImageURL = () => {
+    const getImageURL = async () => {
         const data = new FormData();
-        data.append("file", image);
+        data.append("file", "data:image/jpeg;base64," + img64);
         data.append("upload_preset", "productivitree");
         data.append("cloud_name", "utd-hdt");
-        fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+        await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
           method: "post",
           body: data,
         })
         .then((res) => res.json())
-        .then((data) =>  setImageURL(data.secure_url));
+        .then((data) =>  {
+            setImageURL(data.secure_url);
+        });
       };
 
     const pickImage = async () => {
@@ -54,6 +65,7 @@ const AddPost = (props) => {
         });
         if (!result.cancelled) {
             setImage(result.uri);
+            setImg64(result.base64);
         }
         } catch (E) {
         console.log(E);
