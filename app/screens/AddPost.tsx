@@ -31,7 +31,7 @@ const AddPost = (props) => {
         getImageURL();
         console.log("Image", imageURL);
         await axios
-            .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/5f087e4ec318a70007c375f3`)
+            .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
             .then((response) => {
                 axios.post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
                     Author: auth.googleID,
