@@ -11,7 +11,7 @@ const axios = require("axios").default;
 
 const AddPost = (props) => {
     const auth = useContext(AuthContext);
-    const activity = props.activity;
+    const activity = "5f087e4ec318a70007c375f3";
     let [enteredText, setEnteredText] = useState("");
     let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
     let [img64, setImg64] = useState(null);
@@ -25,6 +25,10 @@ const AddPost = (props) => {
         }
         }
     };
+
+    const handleSubmit = async () => {
+      await submitPost();
+    }
 
     const submitPost = async () => {
         console.log("Submit post");
@@ -88,7 +92,7 @@ const AddPost = (props) => {
                 <Image source={{ uri: image }} style={{ height: 200, width: null, flex: 1 }} />
                 <Textarea rowSpan={4} rounded bordered placeholder="Caption" onChangeText={(message) => setEnteredText(message)} />
               </Form>
-              <Button onPress={() => submitPost()}>
+              <Button onPress={() => handleSubmit()}>
                 <Text>Post!</Text>
               </Button>
             </Card>
