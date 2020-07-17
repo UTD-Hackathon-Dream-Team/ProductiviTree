@@ -10,70 +10,69 @@ import { AuthContext } from "../AuthContext";
 const axios = require("axios").default;
 
 const AddPost = (props) => {
-    const auth = useContext(AuthContext);
-    const activity = props.activity;
-    let [enteredText, setEnteredText] = useState("");
-    let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
-    let [img64, setImg64] = useState(null);
-    let [imageURL, setImageURL] = useState(null);
+  const auth = useContext(AuthContext);
+  const activity = "5f11d7cf92fe3e0007b685e8";
+  let [enteredText, setEnteredText] = useState("");
+  let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
+  let [img64, setImg64] = useState(null);
+  let [imageURL, setImageURL] = useState(null);
 
-    const getPickerPermission = async () => {
-        if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== "granted") {
-            alert("Sorry, we need camera roll permissions to make this work!");
-        }
-        }
-    };
+  const getPickerPermission = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
+  };
 
-    const submitPost = async () => {
-        console.log("Submit post");
-        getImageURL();
-        console.log("Image", imageURL);
-        await axios
-            .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
-            .then((response) => {
-                axios.post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
-                    Author: auth.googleID,
-                    Picture: imageURL,
-                    Caption: enteredText,
-                    Activity: response.data.payload
-                });
-            })
-    };
+  const submitPost = async () => {
+    console.log("Submit post");
+    getImageURL();
+    console.log("Image", imageURL);
+    await axios .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
+    .then((response) => {
+      axios.post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
+        Author: auth.googleID,
+        Picture: imageURL,
+        Caption: enteredText,
+        Activity: response.data.payload
+      });
+    })
+  };
 
-    const getImageURL = async () => {
-        const data = new FormData();
-        data.append("file", "data:image/jpeg;base64," + img64);
-        data.append("upload_preset", "productivitree");
-        data.append("cloud_name", "utd-hdt");
-        await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
-          method: "post",
-          body: data,
-        })
-        .then((res) => res.json())
-        .then((data) =>  {
-            setImageURL(data.secure_url);
-        });
-      };
+  const getImageURL = async () => {
+    const data = new FormData();
+    data.append("file", "data:image/jpeg;base64," + img64);
+    data.append("upload_preset", "productivitree");
+    data.append("cloud_name", "utd-hdt");
+    await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+      method: "post",
+      body: data,
+    })
+    .then((res) => res.json())
+    .then((data) =>  {
+      setImageURL(data.secure_url);
+    });
+  };
 
-    const pickImage = async () => {
-        try {
-        await getPickerPermission();
-        let result = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            base64: true,
-            quality: 1,
-            aspect: [4, 3]
-        });
-        if (!result.cancelled) {
-            setImage(result.uri);
-            setImg64(result.base64);
-        }
-        } catch (E) {
-        console.log(E);
-        }
-    };
+  const pickImage = async () => {
+    try {
+      await getPickerPermission();
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        base64: true,
+        quality: 1,
+        aspect: [4, 3]
+      });
+      if (!result.cancelled) {
+        setImage(result.uri);
+        setImg64(result.base64);
+      }
+    } catch (E) {
+      console.log(E);
+    }
+  };
 
   return (
     <Root>
