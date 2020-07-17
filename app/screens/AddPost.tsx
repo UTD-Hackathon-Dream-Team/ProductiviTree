@@ -60,7 +60,6 @@ const AddPost = (props) => {
             allowsEditing: true,
             base64: true,
             quality: 1,
-            //TODO: FInd aspect
             aspect: [4, 3]
         });
         if (!result.cancelled) {
