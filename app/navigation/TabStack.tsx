@@ -6,6 +6,7 @@ import Profile from '../screens/Profile';
 import FriendProfile from '../screens/FriendProfile';
 import Stats from '../screens/Stats';
 import Challenges from '../screens/Challenges';
+import AddPost from '../screens/AddPost';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,7 @@ const TabStack = () => {
     <Tab.Navigator>
       <Tab.Screen name="Feed" component={Feed} />
       <Tab.Screen name="Stats" component={Profile} />
-      <Tab.Screen name="Challenges" component={FriendProfile} />
+      <Tab.Screen name="Challenges" component={AddPost} />
     </Tab.Navigator>
   );
 };
