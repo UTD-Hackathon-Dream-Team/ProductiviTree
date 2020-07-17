@@ -1,5 +1,5 @@
-import React, { useState , useEffect, useContext } from "react";
-import { Container, Body, Content, Header, Title, Button, Card, Icon, Right, Textarea, Item, Text, Segment, Form,Toast, Root, Left, } from "native-base";
+import React, { useState , useContext } from "react";
+import { Container,Content, Button, Card, Textarea, Text, Form, Toast, Root } from "native-base";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from 'expo-image-picker';
@@ -28,7 +28,6 @@ const AddPost = (props) => {
 
   const handleSubmit = async () => {
     await submitPost();
-    await updatePoints();
   }
 
   const updatePoints = async () => {
@@ -44,7 +43,7 @@ const AddPost = (props) => {
     )
     .then(function (response) {
       Toast.show({
-        text: "You've earned " + newPoints + " points!",
+        text: `You've earned ${newPoints} points!`,
         buttonText: "Okay",
         position: "bottom",
       });
@@ -57,15 +56,14 @@ const AddPost = (props) => {
           }
         )
         Toast.show({
-          text: "You've planted one more tree!",
+          text: `You've planted one more tree and earned ${newPoints} points!`,
           buttonText: "Okay",
           position: "bottom",
         });
       }
-
       setTimeout(() => {
         console.log("Go to feed / previous page here");
-      }, 2000);
+      }, 5000);
     })
   }
 
@@ -80,6 +78,17 @@ const AddPost = (props) => {
         Picture: imageURL,
         Caption: enteredText,
         Activity: response.data.payload
+      })
+      .then(function (response) {
+        updatePoints();
+      })
+      .catch(function (error) {
+        console.log(error);
+        Toast.show({
+          text: `There was an error. Please try again later.`,
+          buttonText: "Okay",
+          position: "bottom",
+        });
       });
     })
   };
