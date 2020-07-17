@@ -84,27 +84,27 @@ const AddPost = (props) => {
         >
           <Content padder>
             <Card>
-              <Form style={{ padding: 20 }}>
-              <Button  onPress={pickImage}>
-                <Text>Add Image</Text>
-              </Button>
-                <Image
-                  source={{
-                    uri: image,
-                  }}
-                  style={{ height: 200, width: null, flex: 1 }}
-                />
-                <Textarea
-                  rowSpan={4}
-                  rounded
-                  bordered
-                  placeholder="Caption"
-                  onChangeText={(message) => setEnteredText(message)}
-                />
-              </Form>
-              <Button onPress={() => submitPost()}>
-                <Text>Post!</Text>
-              </Button>
+                <Form style={{ padding: 20 }}>
+                    <Button  onPress={pickImage}>
+                        <Text>Add Image</Text>
+                    </Button>
+                    <Image
+                    source={{
+                        uri: image,
+                    }}
+                    style={{ height: 200, width: null, flex: 1 }}
+                    />
+                    <Textarea
+                    rowSpan={4}
+                    rounded
+                    bordered
+                    placeholder="Caption"
+                    onChangeText={(message) => setEnteredText(message)}
+                    />
+                </Form>
+                <Button onPress={() => submitPost()}>
+                    <Text>Post!</Text>
+                </Button>
             </Card>
           </Content>
         </LinearGradient>
