@@ -79,7 +79,6 @@ const PostCard = (props) => {
       </CardItem>
       <CardItem>
         <Text>
-          {" "}
           Activity: {post.Activity.Activity} ( {post.Activity.Category} ){" "}
         </Text>
       </CardItem>
