@@ -12,9 +12,7 @@ const AddPost = (props) => {
     let [category, setCategory] = useState(0);
     let [enteredText, setEnteredText] = useState("");
     let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
-    let [img64, setImg64] = useState(null);
     let [imageURL, setImageURL] = useState(null);
-    let [loading, setLoading] = useState(false);
 
     const getPickerPermission = async () => {
         if (Constants.platform.ios) {
@@ -27,7 +25,22 @@ const AddPost = (props) => {
 
     const submitPost = () => {
         console.log("Submit post");
+        getImageURL();
+        console.log(imageURL);
     };
+
+    const getImageURL = () => {
+        const data = new FormData();
+        data.append("file", image);
+        data.append("upload_preset", "productivitree");
+        data.append("cloud_name", "utd-hdt");
+        fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+          method: "post",
+          body: data,
+        })
+        .then((res) => res.json())
+        .then((data) =>  setImageURL(data.secure_url));
+      };
 
     const pickImage = async () => {
         try {
@@ -41,7 +54,6 @@ const AddPost = (props) => {
         });
         if (!result.cancelled) {
             setImage(result.uri);
-            setImg64(result.base64);
         }
         } catch (E) {
         console.log(E);
