@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feed from '../screens/Feed';
 import Profile from '../screens/Profile';
 import FriendProfile from '../screens/FriendProfile';
-import Stats from '../screens/Stats';
+import StatsGroup from '../screens/StatsGroup';
 import Challenges from '../screens/Challenges';
 import AddPost from '../screens/AddPost';
 

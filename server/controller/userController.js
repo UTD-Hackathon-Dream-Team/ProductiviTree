@@ -44,9 +44,8 @@ exports.getUser = async (req, res, next) => {
 
 exports.addUser = async (req, res, next) => {
   try {
-    const user = await User.create({ ...req.body, _id: req.body.googleID });
-    user._id = req.body.googleID;
-    user.save();
+    const user = await User.create({ ...req.body });
+
 
     return res.status(201).json({
       success: true,

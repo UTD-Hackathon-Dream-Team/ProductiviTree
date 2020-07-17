@@ -14,11 +14,8 @@ A clear and concise description of what the feature is.
 A clear and concise description of what you expected to happen.
 
 **Feature Checklist**
-- [ ] Documentation included
-- [ ] Comments included
-- [ ] Feature follows contributing guide
-- [ ] Functionality done
-- [ ] UI / UX done
+A list of features if applicable
+- [ ] Feature 1
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
