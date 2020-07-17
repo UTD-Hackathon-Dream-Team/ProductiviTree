@@ -9,70 +9,25 @@ import * as Permissions from 'expo-permissions';
 const axios = require("axios").default;
 
 const AddPost = (props) => {
-  let [category, setCategory] = useState(0);
-  let [enteredText, setEnteredText] = useState("");
-  let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
-  let [img64, setImg64] = useState(null);
-  let [imageURL, setImageURL] = useState(null);
-  let [loading, setLoading] = useState(false);
+    let [category, setCategory] = useState(0);
+    let [enteredText, setEnteredText] = useState("");
+    let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
+    let [img64, setImg64] = useState(null);
+    let [imageURL, setImageURL] = useState(null);
+    let [loading, setLoading] = useState(false);
 
-  const getPickerPermission = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== "granted") {
-        alert("Sorry, we need camera roll permissions to make this work!");
-      }
-    }
-  };
+    const getPickerPermission = async () => {
+        if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== "granted") {
+            alert("Sorry, we need camera roll permissions to make this work!");
+        }
+        }
+    };
 
-  const submitPost = () => {
-    console.log("Submit post");
-  };
-
-//   const submitPost = () => {
-//     let prevPoints;
-//     axios
-//       .get(`https://earthxhacks2020.wl.r.appspot.com/users/${GLOBAL.id}`)
-//       .then((response) => {
-//         prevPoints = response.data.data[0].points;
-//         axios.post("https://earthxhacks2020.wl.r.appspot.com/posts", {
-//           user_id: GLOBAL.userID,
-//           image: image,
-//           description: enteredText,
-//           category: categoryList[category],
-//           profilePic: response.data.data[0].profilePic,
-//           userName: response.data.data[0].userName,
-//         });
-//       })
-//       .then(() =>
-//         axios.patch(
-//           `https://earthxhacks2020.wl.r.appspot.com/users/${GLOBAL.id}`,
-//           {
-//             points: prevPoints + 10,
-//           }
-//         )
-//       )
-//       .then(function (response) {
-//         Toast.show({
-//           text: "You've earned 10 points!",
-//           buttonText: "Okay",
-//           position: "bottom",
-//         });
-//         setTimeout(() => {
-//           props.navigation.goBack();
-//         }, 1000);
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//         Toast.show({
-//           text: `There was an error: ${error}. Please try again later.`,
-//           buttonText: "Okay",
-//           position: "bottom",
-//         });
-//       });
-//   };
-
-
+    const submitPost = () => {
+        console.log("Submit post");
+    };
 
     const pickImage = async () => {
         try {
