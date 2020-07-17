@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, Header } from "native-base";
+import { Container, Content, Text } from "native-base";
+import Header from "../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 import ChallengeList from "../components/ChallengeList";
@@ -14,14 +15,13 @@ var styles = {
     height: 250,
   },
   header: {
-
     textAlign: "center",
     fontSize: 32,
     padding: 20,
-  }
+  },
 };
 
-const Challenges = () => {
+const Challenges = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [dailyChallenges, setDailyChallenges] = useState([null]);
@@ -48,27 +48,25 @@ const Challenges = () => {
 
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <Header navigation={props.navigation} />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
         <Content>
-        <Text style={styles.header}>Challenges</Text>
-        <Text style={styles.header}>Weekly</Text>
-        <Container style={styles.listBox}>
-        {user && <ChallengeList challenges={dailyChallenges} user={user} />}
-        </Container>
-        <Text style={styles.header}>Daily</Text>
-        <Container style={styles.listBox}>
-        {user && <ChallengeList challenges={dailyChallenges} user={user} />}
-        </Container>
-      </Content>
+          <Text style={styles.header}>Challenges</Text>
+          <Text style={styles.header}>Weekly</Text>
+          <Container style={styles.listBox}>
+            {user && <ChallengeList challenges={dailyChallenges} user={user} />}
+          </Container>
+          <Text style={styles.header}>Daily</Text>
+          <Container style={styles.listBox}>
+            {user && <ChallengeList challenges={dailyChallenges} user={user} />}
+          </Container>
+        </Content>
       </ScrollView>
-      
-    
     </LinearGradient>
-    
   );
 };
 

@@ -4,9 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Feed from "../screens/Feed";
 import Challenges from "../screens/Challenges";
-import FriendProfile from "../screens/FriendProfile";
 import StatsGroup from "../screens/StatsGroup";
-import AddPost from "../screens/AddPost";
 
 const Tab = createBottomTabNavigator();
 
