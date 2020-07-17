@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { View } from "native-base";
+import React from "react";
+import { Container, Content } from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
+import Header from "../components/Header";
 import PostCard from "./PostCard";
 
-
-const FeedList = (props) => {
+const FeedList = (props: { posts: [] }) => {
   const posts = props.posts;
 
   return (
-    <View>
-        { posts && posts.map(function (post, i) {
-            return (
-                <View key={ i }>
-                    {post && <PostCard post={ post }/>}
-                </View>
-            );
-        })}
-    </View>
+    <Container>
+      <LinearGradient
+        colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
+        style={{ flex: 1 }}
+      >
+        <Header />
+        <Content padder>
+          {posts && posts.map((post) => <PostCard post={post} />)}
+        </Content>
+      </LinearGradient>
+    </Container>
   );
 };
 
