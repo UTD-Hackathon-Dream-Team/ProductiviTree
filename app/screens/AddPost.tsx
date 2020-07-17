@@ -11,7 +11,7 @@ const axios = require("axios").default;
 
 const AddPost = (props) => {
   const auth = useContext(AuthContext);
-  const activity = "5f087e4ec318a70007c375f3";
+  const activity = props.activity;
   let [enteredText, setEnteredText] = useState("");
   let [image, setImage] = useState("https://wp-rocket.me/wp-content/uploads/1/placeholder-feature-image.png");
   let [img64, setImg64] = useState(null);
