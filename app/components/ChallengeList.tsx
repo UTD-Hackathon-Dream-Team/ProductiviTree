@@ -1,6 +1,6 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import { Content, Body, ListItem, Left, Icon, Right, Title  } from "native-base";
+import { Text, FlatList } from "react-native";
+import { Content, ListItem, Left, Right } from "native-base";
 
 const listCard = ({ item }) => {
     
@@ -30,6 +30,7 @@ const Challenge = (props) => {
 
   return (
     <Content padder>
+       
       <FlatList
         data={challenges}
         renderItem={listCard}

@@ -24,8 +24,8 @@ var styles = {
 const Challenges = () => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
-  let [dailyChallenges, setDailyChallenges] = useState([null]);
-  let [weeklyChallenges, setWeeklyChallenges] = useState([null]);
+  let [dailyChallenges, setDailyChallenges] = useState([]);
+  let [weeklyChallenges, setWeeklyChallenges] = useState([]);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -65,19 +65,21 @@ const Challenges = () => {
     /* console.log(dayChallenges);
     console.log(weekChallenges); */
     setUser(result.data.payload);
-    await setDailyChallenges(dayChallenges);
-    await setWeeklyChallenges(weekChallenges);
+    setDailyChallenges(dayChallenges);
+    setWeeklyChallenges(weekChallenges);
     setRefreshing(false);
   }
 
   useEffect(() => {
     fetchData();
+    /* console.log(dailyChallenges);
+    console.log(weeklyChallenges);  */
   }, []);
 
   const onRefresh = React.useCallback(async () => {
     await fetchData();
   }, [refreshing]);
-
+  
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
       <ScrollView
@@ -89,11 +91,11 @@ const Challenges = () => {
         <Text style={styles.header}>Challenges</Text>
         <Text style={styles.header}>Weekly</Text>
         <Container style={styles.listBox}>
-        {user && <Challenge challenges={weeklyChallenges} /> }
+        {user && <Challenge challenges={weeklyChallenges} />}
         </Container>
         <Text style={styles.header}>Daily</Text>
         <Container style={styles.listBox}>
-        {user && <Challenge challenges={dailyChallenges} /> }
+        {user && <Challenge challenges={dailyChallenges} />}
         </Container>
       </Content>
       </ScrollView>
