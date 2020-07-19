@@ -65,7 +65,7 @@ const PostCard = (props) => {
       <CardItem cardBody >
         <Image
           source={{ uri: post.Picture }}
-          style={{height: 200, width: null, flex: 1}}
+          style={{height: 300, width: null, flex: 1}}
         />
       </CardItem>
       <CardItem>
