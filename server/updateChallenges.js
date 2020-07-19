@@ -6,36 +6,46 @@ const randomChallenge = async (type) => {
     if(type == 'daily'){
         const challenge = await Challenge.find({}).where({ "type": type});
         const daily = new Array(3);
+        const challenges = new Array(3);
         for(var i = 0; i < daily.length; i++){
             do{
                 var data = challenge[Math.floor((Math.random() * challenge.length))]._id;
+                //console.log(daily.indexOf(data));
             }while(daily.indexOf(data) != -1);
-            daily[i] = {
-                _id: data,
+            daily[i] = data;
+        }
+        for(var i = 0; i < daily.length; i++){
+            challenges[i] = {
+                _id: daily[i],
                 progress: 0
             }
         }
-        return daily;
+        return challenges;
     }
     if(type == 'weekly'){
         const challenge = await Challenge.find({}).where({ "type": type});
         const weekly = new Array(2);
+        const challenges = new Array(2);
         for(var i = 0; i < weekly.length; i++){
             do{
                 var data = challenge[Math.floor((Math.random() * challenge.length))]._id;
+                //console.log(weekly.indexOf(data));
             }while(weekly.indexOf(data) != -1);
-            weekly[i] = {
-                _id: data,
+            weekly[i] = data;
+        }
+        for(var i = 0; i < weekly.length; i++){
+            challenges[i] = {
+                _id: weekly[i],
                 progress: 0
             }
         }
-        return weekly;
+        return challenges;
     }
 };
 
 exports.updateChallenge = async (type) => {
     const users = await User.find();
-    console.log(users);
+    //console.log(users);
     if(type == 'daily'){
         for(var i = 0; i < users.length; i++){
             const challenges = await randomChallenge(type);
@@ -56,5 +66,5 @@ exports.updateChallenge = async (type) => {
             });
         }
     }
-    console.log(users);
+    //console.log(users);
 };
