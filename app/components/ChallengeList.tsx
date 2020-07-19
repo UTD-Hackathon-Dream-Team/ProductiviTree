@@ -1,30 +1,42 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Content, Body } from "native-base";
+import { Image, Text, View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { Content, Body, ListItem, Left, Icon, Right, Title  } from "native-base";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: 100,
-    margin: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 10,
-    borderRadius: 6,
-    color: "#ffffff",
-  },
-});
+const listCard = ({ item }) => {
+    
+    return (
+      <ListItem>
+        <Left style={{ flexDirection: "column"}}>
+            <Text style={{ fontWeight: "bold" }}>
+            {item.description}
+          </Text>
+          
+          <Text style={{ fontWeight: "bold" }}>
+            {item.points} pts
+          </Text>
+        </Left>
+        <Right>
+            <Text style={{ fontWeight: "bold" }}>
+            {item.progress}/{item.goal}
+          </Text>
+        </Right>
+      </ListItem>
+    );
+}
 
-const ProfileInfo = (props) => {
-  //console.log(props);
-  const user = props.user;
+const ChallengeInfo = (props) => {
+  console.log(props);
   const challenges = props.challenges;
 
   return (
     <Content padder>
-      <Text>hello</Text>
+      <FlatList
+        data={challenges}
+        renderItem={listCard}
+        keyExtractor={item => item._id}
+      />
     </Content>
   );
 };
 
-export default ProfileInfo;
+export default ChallengeInfo;
