@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Container, Content, Text, Header } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
-import ChallengeInfo from "../components/ChallengeList";
+import Challenge from "../components/ChallengeList";
 import { ScrollView, RefreshControl, StyleSheet } from "react-native";
 
 const axios = require("axios").default;
@@ -65,15 +65,13 @@ const Challenges = () => {
     /* console.log(dayChallenges);
     console.log(weekChallenges); */
     setUser(result.data.payload);
-    setDailyChallenges(dayChallenges);
-    setWeeklyChallenges(weekChallenges);
+    await setDailyChallenges(dayChallenges);
+    await setWeeklyChallenges(weekChallenges);
     setRefreshing(false);
   }
 
   useEffect(() => {
     fetchData();
-    console.log(dailyChallenges);
-    console.log(weeklyChallenges);
   }, []);
 
   const onRefresh = React.useCallback(async () => {
@@ -91,11 +89,11 @@ const Challenges = () => {
         <Text style={styles.header}>Challenges</Text>
         <Text style={styles.header}>Weekly</Text>
         <Container style={styles.listBox}>
-        {user && <ChallengeInfo challenges={weeklyChallenges} />}
+        {user && <Challenge challenges={weeklyChallenges} /> }
         </Container>
         <Text style={styles.header}>Daily</Text>
         <Container style={styles.listBox}>
-        {user && <ChallengeInfo challenges={dailyChallenges} />}
+        {user && <Challenge challenges={dailyChallenges} /> }
         </Container>
       </Content>
       </ScrollView>

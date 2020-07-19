@@ -24,8 +24,8 @@ const listCard = ({ item }) => {
     );
 }
 
-const ChallengeInfo = (props) => {
-  console.log(props);
+const Challenge = (props) => {
+  //console.log(props);
   const challenges = props.challenges;
 
   return (
@@ -39,4 +39,4 @@ const ChallengeInfo = (props) => {
   );
 };
 
-export default ChallengeInfo;
+export default Challenge;
