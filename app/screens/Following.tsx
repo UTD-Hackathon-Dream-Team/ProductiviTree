@@ -29,28 +29,38 @@ const Following = () => {
     await fetchData();
   }, [refreshing]);
 
+  function goToSearch() {
+    console.log("Search Page Here");
+  }
+
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <Text style={{fontSize: 20, padding: 20}}>Your Following:</Text>
-        { following.map(function (user, i) {
-            return (
-                <View>
-                    { ( (user.googleID) == ((auth.googleID).toString()) ) ? 
-                        <View></View> : 
-                        <View key={ i }>
-                            {user && <UserList user={ user }/>}
-                        </View>
-                    }
-                </View>
-                
-            );
-        })}
-      </ScrollView>
+        <ScrollView
+            refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+        >
+            <Text style={{fontSize: 20, padding: 20}}>Your Following:</Text>
+            { following.map(function (user, i) {
+                return (
+                    <View>
+                        { ( (user.googleID) == ((auth.googleID).toString()) ) ? 
+                            <View></View> : 
+                            <View key={ i }>
+                                {user && <UserList user={ user }/>}
+                            </View>
+                        }
+                    </View>
+                    
+                );
+            })}
+
+        </ScrollView>
+        <View style={{ padding: 30}}>
+            <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={goToSearch} >
+                <Text>Follow More Users</Text>
+            </Button>    
+        </View>
     </LinearGradient>
   );
 };
