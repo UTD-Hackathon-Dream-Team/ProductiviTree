@@ -5,25 +5,14 @@ import { FlatList, RefreshControl } from "react-native";
 const axios = require("axios").default;
 
 const Challenges = () => {
-    let [data, setData] = useState([]);
-    var [newData, setNewData] = useState([]);
+    let [users, setUsers] = useState([]);
+    var [filtered, setFiltered] = useState([]);
 
   async function fetchData() {
-    const keys = [
-        {
-            name: "one",
-            key: 1
-        },
-        {
-            name: "two",
-            key: 2
-        },
-        {
-            name: "three",
-            key: 3
-        }
-    ]
-    setData(keys);
+    const data = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/`
+      );
+    setUsers(data.data.payload);
   }
 
   useEffect(() => {
@@ -31,20 +20,20 @@ const Challenges = () => {
   }, []);
 
   const searchFilterFunction = text => {    
-    const filteredData = data.filter(item => {      
-        const itemData = item.name.toUpperCase();
+    const filteredData = users.filter(item => {      
+        const itemData = item.Username.toUpperCase();
         
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;    
     });
-    setNewData(filteredData); 
+    setFiltered(filteredData); 
   };
 
   const userCard = ({ item }) => {
     
     return (
       <ListItem>
-        <Text>{item.name}</Text>
+        <Text>{item.Username}</Text>
       </ListItem>
     );
 }
@@ -61,9 +50,9 @@ const Challenges = () => {
       </Header>
     <List>
       <FlatList          
-        data={newData}          
+        data={filtered}          
         renderItem={userCard}
-        keyExtractor={item => item.key}
+        keyExtractor={item => item.googleID}
          
       />            
     </List>
