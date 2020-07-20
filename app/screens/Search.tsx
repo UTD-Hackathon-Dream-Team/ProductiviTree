@@ -20,13 +20,18 @@ const Challenges = () => {
   }, []);
 
   const searchFilterFunction = text => {    
-    const filteredData = users.filter(item => {      
-        const itemData = item.Username.toUpperCase();
-        
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;    
-    });
-    setFiltered(filteredData); 
+    if(text != ""){
+        const filteredData = users.filter(item => {      
+            const itemData = item.Username.toUpperCase();
+            
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;    
+        });
+        setFiltered(filteredData); 
+    }
+    else{
+        setFiltered([]);
+    }
   };
 
   const userCard = ({ item }) => {
