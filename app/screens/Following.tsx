@@ -44,8 +44,7 @@ const Following = () => {
             { following.map(function (user, i) {
                 return (
                     <View>
-                        {/* TODO: Just need to fix this conditional */}
-                        { ( (user.googleID) == ((auth.googleID).toString()) ) ? 
+                        { ( user == ((auth.googleID).toString()) ) ? 
                             <View></View> : 
                             <View key={ i }>
                                 {user && <UserList user={ user }/>}
