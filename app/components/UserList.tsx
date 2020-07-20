@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Content, Text, View, Button, Image } from "native-base";
-import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+import { ScrollView, RefreshControl, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 
@@ -21,10 +21,19 @@ const UserList = (props) => {
         console.log(user);
     }, []);
 
+    function goToUser() {
+        console.log("User Page Here");
+        console.log("User", user.googleID);
+        //props.navigation.navigate( {FriendProfile(user.googleID)} )
+    }
+
     return (
         <View>
             {
-                user && <Text>{user.Username}</Text>
+                user && 
+                <TouchableOpacity onPress={goToUser}>
+                    <Text>{user.Username}</Text>
+                </TouchableOpacity>
             }
         </View>
     );

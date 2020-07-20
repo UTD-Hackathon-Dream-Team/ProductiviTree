@@ -9,7 +9,7 @@ const axios = require("axios").default;
 
 const Following = () => {
   const auth = useContext(AuthContext);
-  let [user, setUser] = useState(null);
+  let [following, setFollowing] = useState([]);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -17,7 +17,7 @@ const Following = () => {
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
-    setUser(result.data.payload);
+    setFollowing(result.data.payload.Following);
     setRefreshing(false);
   }
 
@@ -37,7 +37,13 @@ const Following = () => {
         }
       >
         <Text style={{fontSize: 20, padding: 20}}>Your Following:</Text>
-        <UserList user={auth.googleID}/>
+        { following.map(function (user, i) {
+            return (
+                <View key={ i }>
+                    {user && <UserList user={ user }/>}
+                </View>
+            );
+        })}
       </ScrollView>
     </LinearGradient>
   );
