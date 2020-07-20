@@ -19,7 +19,6 @@ const UserList = (props) => {
 
     useEffect(() => {
         fetchData();
-        console.log(user);
     }, []);
 
     function goToUser() {
@@ -31,27 +30,31 @@ const UserList = (props) => {
     }
 
     return (
-        <Card style={{ borderRadius: 1000}}>
-            <TouchableOpacity onPress={goToUser}>
-                <CardItem>
-                <Left>
-                    <Thumbnail
-                        source={{
-                        uri: user.ProfilePic,
-                        }}
-                        style={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: 30,
-                        }}
-                    />
-                    <Body>
-                        <Text>{user.Username}</Text>
-                    </Body>
-                </Left>
-                </CardItem>
-            </TouchableOpacity>
-        </Card>
+        <View>
+            { user && 
+                <Card style={{ borderRadius: 1000}}>
+                    <TouchableOpacity onPress={goToUser}>
+                        <CardItem>
+                            <Left>
+                                <Thumbnail
+                                    source={{
+                                    uri: user.ProfilePic,
+                                    }}
+                                    style={{
+                                        height: 30,
+                                        width: 30,
+                                        borderRadius: 30,
+                                    }}
+                                />
+                                <Body>
+                                    <Text>{user.Username}</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                    </TouchableOpacity>
+                </Card>
+            }
+        </View>
     );
 };
 
