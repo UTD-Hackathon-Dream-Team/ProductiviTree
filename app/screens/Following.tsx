@@ -43,12 +43,10 @@ const Following = () => {
         >
             { following.map(function (user, i) {
                 return (
-                    <View>
+                    <View key={ i }>
                         { ( user == ((auth.googleID).toString()) ) ? 
                             <View></View> : 
-                            <View key={ i }>
-                                {user && <UserList user={ user }/>}
-                            </View>
+                            <UserList user={ user }/>
                         }
                     </View>
                     

@@ -29,31 +29,22 @@ const UserList = (props) => {
     }
 
     return (
-        <View>
-            { user && 
-                <Card style={{ borderRadius: 1000}}>
-                    <TouchableOpacity onPress={goToUser}>
-                        <CardItem>
-                            <Left>
-                                <Thumbnail
-                                    source={{
-                                    uri: user.ProfilePic,
-                                    }}
-                                    style={{
-                                        height: 30,
-                                        width: 30,
-                                        borderRadius: 30,
-                                    }}
-                                />
-                                <Body>
-                                    <Text>{user.Username}</Text>
-                                </Body>
-                            </Left>
-                        </CardItem>
-                    </TouchableOpacity>
-                </Card>
+        <Card style={{ borderRadius: 1000}}>
+            {
+                user &&
+                <TouchableOpacity onPress={goToUser}>
+                    <CardItem>
+                        <Left>
+                            <Thumbnail
+                                source={{ uri: user.ProfilePic}}
+                                style={{ height: 30, width: 30, borderRadius: 30}}
+                            />
+                            <Text>{user.Username}</Text>
+                        </Left>
+                    </CardItem>
+                </TouchableOpacity>
             }
-        </View>
+        </Card>
     );
 };
 
