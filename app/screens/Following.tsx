@@ -3,6 +3,7 @@ import { Container, Content, Text, View, Button } from "native-base";
 import { ScrollView, RefreshControl, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
+import UserList from "../components/UserList";
 
 const axios = require("axios").default;
 
@@ -36,6 +37,7 @@ const Following = () => {
         }
       >
         <Text style={{fontSize: 20, padding: 20}}>Your Following:</Text>
+        <UserList user={auth.googleID}/>
       </ScrollView>
     </LinearGradient>
   );
