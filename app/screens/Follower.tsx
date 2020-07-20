@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View, Button } from "native-base";
-import { ScrollView, RefreshControl, StyleSheet } from "react-native";
+import { Text, View} from "native-base";
+import { ScrollView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 import UserList from "../components/UserList";

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View, Button, Image , Card, CardItem, Left, Body, Thumbnail} from "native-base";
-import { ScrollView, RefreshControl, StyleSheet, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { Text, View, Card, CardItem, Left, Body, Thumbnail} from "native-base";
+import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
