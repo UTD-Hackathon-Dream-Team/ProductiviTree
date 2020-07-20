@@ -31,12 +31,12 @@ const Follower = () => {
 
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
+      <Text style={{fontSize: 20, padding: 20}}>Your Followers:</Text>
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Text style={{fontSize: 20, padding: 20}}>Your Followers:</Text>
         { following.map(function (user, i) {
             return (
                 <View key={ i }>
