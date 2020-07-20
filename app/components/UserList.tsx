@@ -7,6 +7,7 @@ import { AuthContext } from "../AuthContext";
 const axios = require("axios").default;
 
 const UserList = (props) => {
+    const auth = useContext(AuthContext);
     let [user, setUser] = useState(null);
 
     async function fetchData() {
@@ -24,6 +25,8 @@ const UserList = (props) => {
     function goToUser() {
         console.log("User Page Here");
         console.log("User", user.googleID);
+        console.log("You", auth.googleID);
+        console.log( (user.googleID) == ((auth.googleID).toString()) );
         //props.navigation.navigate( {FriendProfile(user.googleID)} )
     }
 

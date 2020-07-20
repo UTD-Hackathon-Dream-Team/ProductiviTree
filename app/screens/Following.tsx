@@ -39,9 +39,15 @@ const Following = () => {
         <Text style={{fontSize: 20, padding: 20}}>Your Following:</Text>
         { following.map(function (user, i) {
             return (
-                <View key={ i }>
-                    {user && <UserList user={ user }/>}
+                <View>
+                    { ( (user.googleID) == ((auth.googleID).toString()) ) ? 
+                        <View></View> : 
+                        <View key={ i }>
+                            {user && <UserList user={ user }/>}
+                        </View>
+                    }
                 </View>
+                
             );
         })}
       </ScrollView>
