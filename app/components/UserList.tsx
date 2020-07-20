@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View, Button, Image } from "native-base";
+import { Container, Content, Text, View, Button, Image , Card, CardItem, Left, Body, Thumbnail} from "native-base";
 import { ScrollView, RefreshControl, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
@@ -31,14 +31,27 @@ const UserList = (props) => {
     }
 
     return (
-        <View>
-            {
-                user && 
-                <TouchableOpacity onPress={goToUser}>
-                    <Text>{user.Username}</Text>
-                </TouchableOpacity>
-            }
-        </View>
+        <Card style={{ borderRadius: 1000}}>
+            <TouchableOpacity onPress={goToUser}>
+                <CardItem>
+                <Left>
+                    <Thumbnail
+                        source={{
+                        uri: user.ProfilePic,
+                        }}
+                        style={{
+                            height: 30,
+                            width: 30,
+                            borderRadius: 30,
+                        }}
+                    />
+                    <Body>
+                        <Text>{user.Username}</Text>
+                    </Body>
+                </Left>
+                </CardItem>
+            </TouchableOpacity>
+        </Card>
     );
 };
 
