@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Text, View, Button } from "native-base";
 import { ScrollView, RefreshControl } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Header from "../components/Header";
 import { AuthContext } from "../AuthContext";
 import ProfileInfo from "../components/ProfileInfo";
 import Post from "../components/PostList";
@@ -18,7 +19,7 @@ const FriendProfile = (props) => {
   async function fetchData() {
     setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${props.user}`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${props.route.params.user}`
     );
     setUser(result.data.payload);
     const response = await axios(
@@ -40,7 +41,8 @@ const FriendProfile = (props) => {
   const followUser = React.useCallback(async () => {
     const newFollowing = following;
     await newFollowing.push(user.googleID);
-    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
+    await axios.patch(
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
       {
         Following: newFollowing,
       }
@@ -53,7 +55,8 @@ const FriendProfile = (props) => {
     const newFollowing = following;
     var index = newFollowing.indexOf(user.googleID);
     if (index !== -1) newFollowing.splice(index, 1);
-    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
+    await axios.patch(
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
       {
         Following: newFollowing,
       }
@@ -62,26 +65,26 @@ const FriendProfile = (props) => {
     await fetchData();
   }, [refreshing]);
 
-
   return (
-    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
+    <LinearGradient
+      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
+      style={{ flex: 1 }}
+    >
+      <Header navigation={props.navigation} backButton={true} />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
         {user && <ProfileInfo user={user} />}
-        {
-          user && followers.includes(user.googleID) ? 
+        {user && followers.includes(user.googleID) ? (
           <View>
-              <Text>Follows You</Text>
+            <Text>Follows You</Text>
           </View>
-          :
-          <View>
-          </View>
-        }
-        {
-          user && following.includes(user.googleID) ? 
+        ) : (
+          <View></View>
+        )}
+        {user && following.includes(user.googleID) ? (
           <View>
             <Button
               style={{ justifyContent: "center", alignItems: "center" }}
@@ -90,7 +93,7 @@ const FriendProfile = (props) => {
               <Text>Unfollow</Text>
             </Button>
           </View>
-          :
+        ) : (
           <View>
             <Button
               style={{ justifyContent: "center", alignItems: "center" }}
@@ -99,7 +102,7 @@ const FriendProfile = (props) => {
               <Text>Follow</Text>
             </Button>
           </View>
-        }        
+        )}
         {user && <Post user={user.googleID} />}
       </ScrollView>
     </LinearGradient>

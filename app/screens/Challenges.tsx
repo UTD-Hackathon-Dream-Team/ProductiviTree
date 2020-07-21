@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, Header } from "native-base";
+import { Container, Content, Text, Fab, View, Icon } from "native-base";
+import Header from "../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 import Challenge from "../components/ChallengeList";
@@ -14,14 +15,13 @@ var styles = {
     height: 250,
   },
   header: {
-
     textAlign: "center",
     fontSize: 32,
     padding: 20,
-  }
+  },
 };
 
-const Challenges = () => {
+const Challenges = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [dailyChallenges, setDailyChallenges] = useState([]);
@@ -82,6 +82,7 @@ const Challenges = () => {
   
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <Header navigation={props.navigation} />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -98,10 +99,17 @@ const Challenges = () => {
         </Container>
       </Content>
       </ScrollView>
-      
-    
+      <View style={{ flex: 1 , paddingTop: 20}}>
+          <Fab
+            active={true}
+            style={{ backgroundColor: "#5067FF"}}
+            position="bottomRight"
+            onPress={() => props.navigation.navigate("AddPost")}
+          >
+            <Icon name="ios-add" />
+          </Fab>
+        </View>
     </LinearGradient>
-    
   );
 };
 
