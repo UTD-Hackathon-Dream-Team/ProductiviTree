@@ -10,6 +10,7 @@ import Following from '../screens/Following';
 import Follower from '../screens/Follower';
 import AddPost from '../screens/AddPost';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabStack = () => {

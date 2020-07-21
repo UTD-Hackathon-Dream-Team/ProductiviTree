@@ -8,7 +8,7 @@ import Post from "../components/PostList";
 
 const axios = require("axios").default;
 
-const Profile = () => {
+const Profile = (props: any) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [refreshing, setRefreshing] = useState(false);
@@ -32,8 +32,8 @@ const Profile = () => {
 
   function goToSettings() {
     console.log("Settings Page Here");
-  }
-
+    props.navigation.navigate("Settings")
+  };
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <ScrollView
@@ -41,7 +41,7 @@ const Profile = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {user && <ProfileInfo user={user} />}        
+        {user && <ProfileInfo user={user} />}
         <Button
           style={{ justifyContent: "center", alignItems: "center" }}
           onPress={goToSettings}
