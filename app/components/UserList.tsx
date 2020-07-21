@@ -22,10 +22,16 @@ const UserList = (props) => {
 
     function goToUser() {
         console.log("User Page Here");
-        console.log("User", user.googleID);
-        console.log("You", auth.googleID);
-        console.log( (user.googleID) == ((auth.googleID).toString()) );
-        //props.navigation.navigate( {FriendProfile(user.googleID)} )
+        const userID = (user.googleID).toString();
+        console.log(userID);
+        if (userID == auth.googleID){
+            console.log("Your profile here");
+            //props.navigation.navigate("Profile");
+        }
+        else{
+            console.log("Friend's profile here", user.googleID);
+            //props.navigation.navigate("FriendProfile", { user: user.googleID });
+        }
     }
 
     return (
