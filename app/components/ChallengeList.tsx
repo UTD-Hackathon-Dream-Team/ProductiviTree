@@ -28,24 +28,24 @@ const Challenge = (props) => {
             Points: oldPoints + newPoints,
           }
         )
-        // Toast.show({
-        //   text: `You've earned ${newPoints} points!`,
-        //   buttonText: "Okay",
-        //   position: "bottom",
-        // });
-        // if ((oldPoints + newPoints) > 1000){
-        //   axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
-        //     {
-        //       Points: oldPoints + newPoints - 1000,
-        //       Trees: oldTrees + 1
-        //     }
-        //   )
-        //   Toast.show({
-        //     text: `You've planted one more tree and earned ${newPoints} points!`,
-        //     buttonText: "Okay",
-        //     position: "bottom",
-        //   });
-        // }
+        Toast.show({
+          text: `You've earned ${newPoints} points!`,
+          buttonText: "Okay",
+          position: "bottom",
+        });
+        if ((oldPoints + newPoints) > 1000){
+          axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
+            {
+              Points: oldPoints + newPoints - 1000,
+              Trees: oldTrees + 1
+            }
+          )
+          Toast.show({
+            text: `You've planted one more tree and earned ${newPoints} points!`,
+            buttonText: "Okay",
+            position: "bottom",
+          });
+        }
       }
       else{
         console.log("No points");
