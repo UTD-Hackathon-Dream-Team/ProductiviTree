@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 var moment = require("moment");
 import { Image, TouchableOpacity } from "react-native";
 import {
@@ -16,25 +16,27 @@ import { AuthContext } from "../AuthContext";
 const axios = require("axios").default;
 
 const PostCard = (props) => {
-
   const auth = useContext(AuthContext);
   const post = props.post;
   let [user, setUser] = useState({});
-  
+
   useEffect(() => {
     async function fetchData() {
-        const result = await axios(
-          `https://productivitree.wl.r.appspot.com/api/v1/users/${post.Author}`
-        );
-        setUser(result.data.payload);
+      const result = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${post.Author}`
+      );
+      setUser(result.data.payload);
     }
     fetchData();
   }, []);
 
   function goToUser() {
-    console.log("User Page Here");
-    console.log("User", user.googleID);
-    //props.navigation.navigate( {FriendProfile(user.googleID)} )
+    const userID = (user.googleID).toString();
+    console.log(userID);
+    if (userID == auth.googleID)
+      props.navigation.navigate("Profile");
+    else
+      props.navigation.navigate("FriendProfile", { user: user.googleID });
   }
 
   function likePost() {
@@ -42,30 +44,28 @@ const PostCard = (props) => {
   }
 
   return (
-    <Card style={{ borderRadius: 1000}}>
-      <TouchableOpacity onPress={goToUser}>
-        <CardItem>
-          <Left>
-              <Thumbnail
-                source={{
-                  uri: user.ProfilePic,
-                }}
-                style={{
-                    height: 30,
-                    width: 30,
-                    borderRadius: 30,
-                }}
-              />
-              <Body>
-                <Text>{user.Username}</Text>
-              </Body>
-          </Left>
-        </CardItem>
-      </TouchableOpacity>
-      <CardItem cardBody >
+    <Card>
+      <CardItem button onPress={goToUser}>
+        <Left>
+          <Thumbnail
+            source={{
+              uri: user.ProfilePic,
+            }}
+            style={{
+              height: 30,
+              width: 30,
+              borderRadius: 30,
+            }}
+          />
+          <Body>
+            <Text>{user.Username}</Text>
+          </Body>
+        </Left>
+      </CardItem>
+      <CardItem cardBody>
         <Image
           source={{ uri: post.Picture }}
-          style={{height: 300, width: null, flex: 1}}
+          style={{ height: 300, width: null, flex: 1 }}
         />
       </CardItem>
       <CardItem>
@@ -83,7 +83,9 @@ const PostCard = (props) => {
         <Text> {post.Caption} </Text>
       </CardItem>
       <CardItem>
-        <Text> Activity: {post.Activity.Activity} ( {post.Activity.Category} ) </Text>
+        <Text>
+          Activity: {post.Activity.Activity} ( {post.Activity.Category} ){" "}
+        </Text>
       </CardItem>
     </Card>
   );
