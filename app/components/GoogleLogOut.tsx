@@ -3,7 +3,7 @@
 
 import React, { useContext } from "react";
 import { TouchableOpacity, Image } from "react-native";
-import { Content } from "native-base";
+import { Content, Button, Text } from "native-base";
 import * as Google from "expo-google-app-auth";
 import { AuthContext } from "../AuthContext";
 
@@ -14,12 +14,14 @@ import {
   IOS_APP_CLIENT_ID,
 } from "../config";
 
-const GoogleLogOut = ({ navigate }: { navigate: any }) => {
+const GoogleLogOut = () => {
+  const auth = useContext(AuthContext);
+  
   const signOutWithGoogle = async () => {
-    const auth = useContext(AuthContext);
     //reset context
-    auth.logout();
+    console.log("Logging out");
     try {
+      console.log(auth.accesstoken);
       const { type, accessToken, user } = await Google.logOutAsync({
         accessToken: auth.accesstoken,
         iosClientId: IOS_CLIENT_ID,
@@ -29,9 +31,10 @@ const GoogleLogOut = ({ navigate }: { navigate: any }) => {
         scopes: ["profile", "email"],
       });
 
-      if (type === "success") {
+      if (type === "success" || type === "default" ) {
         console.log("Logged out", user);
-        navigate.navigate("Login");
+        auth.logout();
+        //navigate.navigate("Login");
         return accessToken;
       } else {
         return { cancelled: true };
@@ -44,13 +47,12 @@ const GoogleLogOut = ({ navigate }: { navigate: any }) => {
 
   return (
     <Content>
-      <TouchableOpacity onPress={signOutWithGoogle}>
-        <Image
-          source={require("../assets/google_sign_in.png")}
-          //Image from Google's branding guidlines
-          //https://developers.google.com/identity/branding-guidelines
-        />
-      </TouchableOpacity>
+      <Button
+        style={{ justifyContent: "center", alignItems: "center" }}
+        onPress={signOutWithGoogle}
+      >
+        <Text>Sign Out</Text>
+      </Button>
     </Content>
   );
 };
