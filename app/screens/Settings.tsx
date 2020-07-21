@@ -3,6 +3,7 @@ import { Container, Content, Text, View, Body,  Title , Button, ListItem } from 
 import { LinearGradient } from "expo-linear-gradient";
 import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
+import GoogleLogOut from "../components/GoogleLogOut";
 
 const axios = require("axios").default;
 
@@ -85,12 +86,7 @@ const Settings = (props) => {
             </Button>
           </View>
           <View style={{ padding: 10 }}>
-            <Button
-              style={{ justifyContent: "center", alignItems: "center" }}
-              //onPress={goToSettings}
-            >
-              <Text>Sign Out</Text>
-            </Button>
+            <GoogleLogOut/>
           </View>
       
           {/* <View>
