@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Header, Item, Input, Icon, Button, Text, List, ListItem, Left, Right } from 'native-base';
 import { FlatList, RefreshControl } from "react-native";
+import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
 
-const Challenges = () => {
+const Search = () => {
+    const auth = useContext(AuthContext);
+    let [user, setUser] = useState(null);
     let [users, setUsers] = useState([]);
     var [filtered, setFiltered] = useState([]);
 
   async function fetchData() {
-    const data = await axios(
+    var data = await axios(
         `https://productivitree.wl.r.appspot.com/api/v1/users/`
       );
     setUsers(data.data.payload);
+    data = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+    );
+    setUser(data.data.payload);
   }
 
   useEffect(() => {
@@ -23,10 +30,17 @@ const Challenges = () => {
     if(text != ""){
         const filteredData = users.filter(item => {      
             const itemData = item.Username.toUpperCase();
-            
             const textData = text.toUpperCase();
             return itemData.indexOf(textData) > -1;    
         });
+        for(var i = 0; i < filteredData.length; i++){
+            if(filteredData[i].googleID == user.googleID){
+                let temp = filteredData[i];
+                filteredData[i] = filteredData[filteredData.length - 1];
+                filteredData[filteredData.length - 1] = temp;
+                filteredData.pop();
+            }
+        }
         setFiltered(filteredData); 
     }
     else{
@@ -35,7 +49,6 @@ const Challenges = () => {
   };
 
   const userCard = ({ item }) => {
-    
     return (
       <ListItem>
         <Text>{item.Username}</Text>
@@ -66,4 +79,4 @@ const Challenges = () => {
   );
 };
 
-export default Challenges;
+export default Search;
