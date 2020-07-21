@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Header, Item, Input, Icon, Button, Text, List, ListItem, Left, Right } from 'native-base';
 import { FlatList, RefreshControl } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
@@ -57,25 +58,26 @@ const Search = () => {
 }
 
   return (
-    <Container>
+      <LinearGradient
+      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
+      style={{ flex: 1 }}
+      >
         <Header searchBar rounded >
-        <Item>
-          <Icon name="ios-search" />
-          <Input placeholder="Search" onChangeText={text => {searchFilterFunction(text)}} autoCorrect={false} />
-          <Icon name="ios-people" />
-        </Item>
-        
-      </Header>
-    <List>
-      <FlatList          
-        data={filtered}          
-        renderItem={userCard}
-        keyExtractor={item => item.googleID}
-         
-      />            
-    </List>
-    </Container>
-      
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Search" onChangeText={text => {searchFilterFunction(text)}} autoCorrect={false} />
+            <Icon name="ios-people" />
+          </Item>
+        </Header>
+        <List>
+          <FlatList          
+            data={filtered}          
+            renderItem={userCard}
+            keyExtractor={item => item.googleID}
+            
+          />            
+        </List>
+      </LinearGradient>      
   );
 };
 

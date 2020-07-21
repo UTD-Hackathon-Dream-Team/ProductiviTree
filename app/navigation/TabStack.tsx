@@ -35,7 +35,7 @@ const TabStack = () => {
       />
       <Tab.Screen
         name="Challenges"
-        component={Challenges}
+        component={Search}
         options={{
           tabBarIcon: ({ focused }) => (
             <Icon active={focused} name="logo-game-controller-b" />
