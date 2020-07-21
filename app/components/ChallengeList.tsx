@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Text, FlatList } from "react-native";
 import { Content, ListItem, Left, Right, Toast, View , Card, CardItem} from "native-base";
 import { TouchableOpacity } from "react-native";
@@ -8,6 +8,7 @@ const axios = require("axios").default;
 
 const listCard = ({ item }) => {
 
+  const auth = useContext(AuthContext);
 
   const updatePoints = async () => {
     const newPoints = item.points;
