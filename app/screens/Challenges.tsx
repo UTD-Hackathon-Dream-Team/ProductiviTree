@@ -89,7 +89,7 @@ const Challenges = () => {
       >
         <Content>
         <Text style={styles.header}>Challenges</Text>
-        <Text style={styles.header}>Weekly</Text>
+        <Text style={styles.header}>Weekly Challenges</Text>
         <Container style={styles.listBox}>
         {user && <Challenge challenges={weeklyChallenges} />}
         </Container>
