@@ -10,6 +10,7 @@ import FriendProfile from "../screens/FriendProfile";
 import Follower from "../screens/Follower";
 import Following from "../screens/Following";
 import Search from "../screens/Search";
+import ChooseActivity from "../screens/ChooseActivity";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const TopStack = () => {
       <Stack.Screen name="MainStack" component={TabStack} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="ChooseActivity" component={ChooseActivity} />
       <Stack.Screen name="AddPost" component={AddPost} />
       <Stack.Screen name="FriendProfile" component={FriendProfile} />
       <Stack.Screen name="Follower" component={Follower} />
