@@ -6,6 +6,7 @@ import Feed from "../screens/Feed";
 import Challenges from "../screens/Challenges";
 import StatsGroup from "../screens/StatsGroup";
 
+
 const Tab = createBottomTabNavigator();
 
 const TabStack = () => {

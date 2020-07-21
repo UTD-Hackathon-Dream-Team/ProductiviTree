@@ -9,7 +9,7 @@ import Post from "../components/PostList";
 
 const axios = require("axios").default;
 
-const Profile = (props) => {
+const Profile = (props: any) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [refreshing, setRefreshing] = useState(false);
@@ -33,8 +33,8 @@ const Profile = (props) => {
 
   function goToSettings() {
     console.log("Settings Page Here");
-  }
-
+    props.navigation.navigate("Settings")
+  };
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} backButton={true} settings={true} />
