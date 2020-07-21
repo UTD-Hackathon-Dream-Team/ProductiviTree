@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Container, Content, Text, View, Body,  Title , Button, ListItem } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Switch, StyleSheet, Image } from "react-native";
+import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
@@ -26,82 +25,104 @@ const Settings = (props) => {
   
   return (
   
-<LinearGradient
+    <LinearGradient
         colors={["#C8F0EE", "#A1C6F1"]}
         style={{ flex: 1 }}
       >    
       {
         user &&
         <Content padder>        
-        <Title>
-          <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "left"}}>Settings</Text>
-        </Title>      
-        <Image
-          source={{
-            uri: user.ProfilePic
-          }}
-          style={{
-            height: 100,
-            width: 100,
-            borderRadius: 100,
-          }}
-        />
-    <Body
-      style={{
-        flexDirection: "column",
-        alignItems: "flex-start",
-        paddingLeft: 30,
-      }}
-    ></Body>
-    <Button>
-    <Text>
-      Change Profile Picture
-    </Text>
-  </Button>
-  <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-      Bio:  
-    </Text>
-    <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-      Current Bio:  
-    </Text>
-    <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-      Daily Points:  200
-    </Text>
-    <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-      Current Points:  30
-    </Text>
+          <Title>
+            <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "left"}}>Settings</Text>
+          </Title>
+
+          <TouchableOpacity style={{alignItems:"center"}}>
+            <Image
+              source={{
+                uri: user.ProfilePic
+              }}
+              style={{
+                height: 150,
+                width: 150,
+                borderRadius: 100,
+              }}
+            />
+          </TouchableOpacity>      
       
-    <View>
-      <ListItem>
-        <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-          Push Notifications  
-        </Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />          
-      </ListItem>
-      <ListItem>
-        <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-          Email Notifications  
-        </Text>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />    
-      </ListItem>
-    </View>  
+          <Text style={{ fontSize: 25, padding: 20}}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+              Username: 
+            </Text>
+            {user.Username}
+          </Text>
+          <Text style={{ fontSize: 25, padding: 20}}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+              Bio: 
+            </Text>
+            {user.Bio}
+          </Text>
+          <Text style={{ fontSize: 25, padding: 20}}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+              Daily Points: 
+            </Text>
+            {user.DailyGoal}
+          </Text>
+
+          <View style={{ padding: 10 }}>
+            <Button
+              style={{ justifyContent: "center", alignItems: "center" }}
+              //onPress={goToSettings}
+            >
+              <Text>Save Changes</Text>
+            </Button>
+          </View>
+          <View style={{ padding: 10 }}>
+            <Button
+              style={{ justifyContent: "center", alignItems: "center" }}
+              //onPress={goToSettings}
+            >
+              <Text>Cancel</Text>
+            </Button>
+          </View>
+          <View style={{ padding: 10 }}>
+            <Button
+              style={{ justifyContent: "center", alignItems: "center" }}
+              //onPress={goToSettings}
+            >
+              <Text>Sign Out</Text>
+            </Button>
+          </View>
+      
+          {/* <View>
+            <ListItem>
+              <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
+                Push Notifications  
+              </Text>
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />          
+            </ListItem>
+            <ListItem>
+              <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
+                Email Notifications  
+              </Text>
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />    
+            </ListItem>
+          </View>   */}
     
-    </Content>
-  
+        </Content>
       }
-       </LinearGradient>   
+    </LinearGradient>   
   );
 }
 const styles = StyleSheet.create({
