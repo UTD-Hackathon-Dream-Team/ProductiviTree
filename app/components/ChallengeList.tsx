@@ -8,9 +8,44 @@ const axios = require("axios").default;
 
 const listCard = ({ item }) => {
 
+  async function updatePoints() {
+    //await console.log("updating points");
+    const auth = useContext(AuthContext);
+    const newPoints = item.points;
+    const userResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
+    const oldPoints = userResponse.data.payload.Points;
+    const oldTrees = userResponse.data.payload.Trees;
+    axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
+      {
+        Points: oldPoints + newPoints,
+      }
+    )
+    .then(function (response) {
+      // Toast.show({
+      //   text: `You've earned ${newPoints} points!`,
+      //   buttonText: "Okay",
+      //   position: "bottom",
+      // });
+      if ((oldPoints + newPoints) > 1000){
+        axios.patch( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, 
+          {
+            Points: oldPoints + newPoints - 1000,
+            Trees: oldTrees + 1
+          }
+        )
+        // Toast.show({
+        //   text: `You've planted one more tree and earned ${newPoints} points!`,
+        //   buttonText: "Okay",
+        //   position: "bottom",
+        // });
+      }
+    })
+  }
+
     function challengeHandler() {
       if (item.progress == item.goal){
-        console.log("Points given")
+        console.log("Points given");
+        updatePoints();
       }
       else{
         console.log("No points");
