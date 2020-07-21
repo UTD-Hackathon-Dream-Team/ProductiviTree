@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ScrollView, RefreshControl } from "react-native";
-import { Fab, View, Icon} from "native-base";
+import { Fab, View, Icon } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { AuthContext } from "../AuthContext";
@@ -48,34 +48,32 @@ const Feed = (props) => {
       style={{ flex: 1 }}
     >
       <Header navigation={props.navigation} />
-        <ScrollView
-          style={{ padding: 15 }}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={async () => await fetchData()}
+      <ScrollView
+        style={{ padding: 15 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={async () => await fetchData()}
+          />
+        }
+      >
+        {feed &&
+          feed!.map((post: {}) => (
+            <PostCard
+              key={post._id}
+              post={post}
+              navigation={props.navigation}
             />
-          }
-        >
-          {feed &&
-            feed!.map((post: {}) => (
-              <PostCard
-                key={post._id}
-                post={post}
-                navigation={props.navigation}
-              />
-            ))}
-        </ScrollView>
-        <View style={{ flex: 1 , paddingTop: 20}}>
-          <Fab
-            active={true}
-            style={{ backgroundColor: "#5067FF"}}
-            position="bottomRight"
-            onPress={() => props.navigation.navigate("AddPost")}
-          >
-            <Icon name="ios-add" />
-          </Fab>
-        </View>
+          ))}
+      </ScrollView>
+      <Fab
+        active={true}
+        style={{ backgroundColor: "#5067FF" }}
+        position="bottomRight"
+        onPress={() => props.navigation.navigate("AddPost")}
+      >
+        <Icon name="ios-add" />
+      </Fab>
     </LinearGradient>
   );
 };
