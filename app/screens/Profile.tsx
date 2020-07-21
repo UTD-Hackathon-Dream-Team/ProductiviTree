@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text, View, Button } from "native-base";
+import { Container, Content, Text, Icon, Button } from "native-base";
 import { ScrollView, RefreshControl, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
+import Header from "../components/Header";
 import ProfileInfo from "../components/ProfileInfo";
 import Post from "../components/PostList";
 
 const axios = require("axios").default;
 
-const Profile = () => {
+const Profile = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [refreshing, setRefreshing] = useState(false);
@@ -35,13 +36,14 @@ const Profile = () => {
   }
 
   return (
-    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
+    <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <Header navigation={props.navigation} backButton={true} settings={true} />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {user && <ProfileInfo user={user} />}        
+        {user && <ProfileInfo user={user} />}
         <Button
           style={{ justifyContent: "center", alignItems: "center" }}
           onPress={goToSettings}
