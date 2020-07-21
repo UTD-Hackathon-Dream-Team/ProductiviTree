@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Content, Text } from "native-base";
+import { Container, Content, Text, Fab, View, Icon } from "native-base";
 import Header from "../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
@@ -66,6 +66,16 @@ const Challenges = (props) => {
           </Container>
         </Content>
       </ScrollView>
+      <View style={{ flex: 1 , paddingTop: 20}}>
+          <Fab
+            active={true}
+            style={{ backgroundColor: "#5067FF"}}
+            position="bottomRight"
+            onPress={() => props.navigation.navigate("AddPost")}
+          >
+            <Icon name="ios-add" />
+          </Fab>
+        </View>
     </LinearGradient>
   );
 };

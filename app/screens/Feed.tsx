@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ScrollView, RefreshControl } from "react-native";
-import { Fab, View, Content, Icon, Container } from "native-base";
+import { Fab, View, Icon} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { AuthContext } from "../AuthContext";
@@ -48,7 +48,6 @@ const Feed = (props) => {
       style={{ flex: 1 }}
     >
       <Header navigation={props.navigation} />
-      <View>
         <ScrollView
           style={{ padding: 15 }}
           refreshControl={
@@ -67,17 +66,16 @@ const Feed = (props) => {
               />
             ))}
         </ScrollView>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 , paddingTop: 20}}>
           <Fab
             active={true}
-            style={{ backgroundColor: "#5067FF" }}
+            style={{ backgroundColor: "#5067FF"}}
             position="bottomRight"
             onPress={() => props.navigation.navigate("AddPost")}
           >
             <Icon name="ios-add" />
           </Fab>
         </View>
-      </View>
     </LinearGradient>
   );
 };
