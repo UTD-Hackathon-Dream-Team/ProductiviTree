@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {
-  Spinner,
-  Content,
-  Text,
-  List,
-  ListItem,
-  Card,
-  CardItem,View
-} from "native-base";
+import { Spinner, Content, Text, List, ListItem, Card, CardItem,View, Button } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
-import { result } from "lodash";
 var _ = require("lodash");
 const axios = require("axios").default;
 
 const ChooseActivity = (props) => {
   const [activities, setActivities] = useState(null);
   const [mentalActivities, setMentalActivities] = useState(null);
+  const [educationalActivities, setEducationalActivities] = useState(null);
+  const [physicalActivities, setPhysicalActivities] = useState(null);
+  const [environmentalActivities, setEnvironmentalActivities] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,9 +20,37 @@ const ChooseActivity = (props) => {
       setActivities(activities.data.payload);
       const groups = _.groupBy(activities.data.payload, "Category");
       setMentalActivities(groups.Mental);
+      setEducationalActivities(groups.Educational);
+      setPhysicalActivities(groups.Physical);
+      setEnvironmentalActivities(groups.Environmental);
     };
     fetchData();
   }, []);
+
+  function goToAddPost(item) {
+    console.log("Posting item" , item._id);
+    //go to add post here, pass item._id as props "activity"
+  }
+
+  const ActivityList = (props) => {
+    return (
+      <>
+        <List
+          dataArray={props.category}
+          horizontal={true}
+          renderRow={(item) => (
+            <ListItem>
+              <Card>
+                <Button onPress={() => goToAddPost(item)}>
+                  <Text>{item.Activity}</Text>
+                </Button>
+              </Card>
+            </ListItem>
+          )}
+        ></List>
+      </>
+    );
+  }
 
   return (
     <LinearGradient
@@ -39,23 +61,17 @@ const ChooseActivity = (props) => {
       <Content padder>
         {activities && 
           <View>
-            <Text>Mental Health</Text>
-            <List
-              dataArray={mentalActivities}
-              horizontal={true}
-              renderRow={(item) => (
-                <ListItem>
-                  <Card>
-                    <CardItem>
-                      <Text>{item.Activity}</Text>
-                    </CardItem>
-                  </Card>
-                </ListItem>
-              )}
-            ></List>
-            <Text>Educational / Professional</Text>
-            <Text>Physical Health</Text>
-            <Text>Environmental</Text>
+            <Text style={{textAlign: "center", fontSize: 32, padding: 10}}>Mental Health</Text>
+            <ActivityList category={mentalActivities}/>
+
+            <Text style={{textAlign: "center", fontSize: 30, padding: 10}}>Educational / Professional</Text>
+            <ActivityList category={educationalActivities}/>
+
+            <Text style={{textAlign: "center", fontSize: 32, padding: 10}}>Physical Health</Text>
+            <ActivityList category={physicalActivities}/>
+
+            <Text style={{textAlign: "center", fontSize: 32, padding: 10}}>Environmental</Text>
+            <ActivityList category={environmentalActivities}/>
           </View>
         }
         {!activities && <Spinner />}
