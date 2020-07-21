@@ -23,6 +23,10 @@ const Settings = (props) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  function goToProfile() {
+    console.log("Profile Page Here");
+  }
   
   return (
   
@@ -72,7 +76,7 @@ const Settings = (props) => {
           <View style={{ padding: 10 }}>
             <Button
               style={{ justifyContent: "center", alignItems: "center" }}
-              //onPress={goToSettings}
+              onPress={goToProfile}
             >
               <Text>Save Changes</Text>
             </Button>
@@ -80,7 +84,7 @@ const Settings = (props) => {
           <View style={{ padding: 10 }}>
             <Button
               style={{ justifyContent: "center", alignItems: "center" }}
-              //onPress={goToSettings}
+              onPress={goToProfile}
             >
               <Text>Cancel</Text>
             </Button>
