@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Header, Item, Input, Icon, Button, Text, List, ListItem, Left, Right } from 'native-base';
-import { FlatList, RefreshControl } from "react-native";
+import { Container, Header, Item, Input, Icon, Button, Text, List, ListItem, Left, Right, Card, CardItem, Thumbnail } from 'native-base';
+import { FlatList, RefreshControl, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../AuthContext";
 
@@ -49,11 +49,30 @@ const Search = () => {
     }
   };
 
+  function goToUser() {
+    console.log("User Page Here");
+    console.log("User", user.googleID);
+    //props.navigation.navigate( {FriendProfile(user.googleID)} )
+  }
+
   const userCard = ({ item }) => {
     return (
-      <ListItem>
-        <Text>{item.Username}</Text>
-      </ListItem>
+      <Card>
+            {
+              item &&
+              <TouchableOpacity onPress={goToUser}>
+                  <CardItem>
+                      <Left>
+                          <Thumbnail
+                              source={{ uri: item.ProfilePic}}
+                              style={{ height: 30, width: 30, borderRadius: 30}}
+                          />
+                          <Text>{item.Username}</Text>
+                      </Left>
+                  </CardItem>
+              </TouchableOpacity>
+            }
+        </Card>
     );
 }
 
