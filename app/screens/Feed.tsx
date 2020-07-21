@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ScrollView, RefreshControl } from "react-native";
+import { Fab, View, Icon} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { AuthContext } from "../AuthContext";
-import FeedList from "../components/FeedList";
+import PostCard from "../components/PostCard";
+import Header from "../components/Header";
 
 const axios = require("axios").default;
 
-const Feed = () => {
+const Feed = (props) => {
   const auth = useContext(AuthContext);
   let [refreshing, setRefreshing] = useState(false);
   let [feed, setFeed] = useState(null);
@@ -45,16 +47,35 @@ const Feed = () => {
       colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
       style={{ flex: 1 }}
     >
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={async () => await fetchData()}
-          />
-        }
-      >
-        {feed && <FeedList posts={feed} />}
-      </ScrollView>
+      <Header navigation={props.navigation} />
+        <ScrollView
+          style={{ padding: 15 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={async () => await fetchData()}
+            />
+          }
+        >
+          {feed &&
+            feed!.map((post: {}) => (
+              <PostCard
+                key={post._id}
+                post={post}
+                navigation={props.navigation}
+              />
+            ))}
+        </ScrollView>
+        <View style={{ flex: 1 , paddingTop: 20}}>
+          <Fab
+            active={true}
+            style={{ backgroundColor: "#5067FF"}}
+            position="bottomRight"
+            onPress={() => props.navigation.navigate("AddPost")}
+          >
+            <Icon name="ios-add" />
+          </Fab>
+        </View>
     </LinearGradient>
   );
 };
