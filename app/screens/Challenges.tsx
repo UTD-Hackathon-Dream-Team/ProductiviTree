@@ -89,15 +89,15 @@ const Challenges = (props) => {
         }
       >
         <Content>
-        <Text style={styles.header}>Weekly Challenges</Text>
-        <Container style={styles.listBox}>
-        {user && <Challenge challenges={weeklyChallenges} />}
-        </Container>
-        <Text style={styles.header}>Daily Challenges</Text>
-        <Container style={styles.listBox}>
-        {user && <Challenge challenges={dailyChallenges} />}
-        </Container>
-      </Content>
+          <Text style={styles.header}>Weekly Challenges</Text>
+          <Container style={styles.listBox}>
+            {user && <Challenge challenges={weeklyChallenges} />}
+          </Container>
+          <Text style={styles.header}>Daily Challenges</Text>
+          <Container style={styles.listBox}>
+            {user && <Challenge challenges={dailyChallenges} />}
+          </Container>
+        </Content>
       </ScrollView>
       <View style={{ flex: 1 , paddingTop: 20}}>
           <Fab
