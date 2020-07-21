@@ -54,7 +54,7 @@ const CustomHeader = (props) => {
             transparent
             onPress={() => props.navigation.navigate("Settings")}
           >
-            <Icon name="md-stats" />
+            <Icon name="md-settings" />
           </Button>
         )}
       </Right>

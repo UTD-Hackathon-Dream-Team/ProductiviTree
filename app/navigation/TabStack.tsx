@@ -39,7 +39,7 @@ const TabStack = () => {
         component={Challenges}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Icon active={focused} name="logo-game-controller-b" />
+            <Icon active={focused} name="md-trophy" />
           ),
         }}
       />
