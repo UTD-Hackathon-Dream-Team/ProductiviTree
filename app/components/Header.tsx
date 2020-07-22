@@ -37,7 +37,7 @@ const CustomHeader = (props) => {
         )}
       </Left>
       <Body>
-        <Text>Productivitree</Text>
+        <Text style={{ color: "#fff" }}>{"Productivitree".toUpperCase()}</Text>
       </Body>
       <Right>
         {!props.settings ? (
