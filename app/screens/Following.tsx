@@ -54,7 +54,7 @@ const Following = (props) => {
               {user == auth.googleID.toString() ? (
                 <View></View>
               ) : (
-                <UserList user={user} />
+                <UserList user={user} navigation={navigation}/>
               )}
             </View>
           );

@@ -46,7 +46,7 @@ const Follower = (props) => {
         }
       >
         {following.map(function (user, i) {
-          return <View key={i}>{user && <UserList user={user} />}</View>;
+          return <View key={i}>{user && <UserList user={user} navigation={navigation}/>}</View>;
         })}
       </ScrollView>
     </LinearGradient>
