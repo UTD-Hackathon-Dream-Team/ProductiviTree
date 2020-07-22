@@ -43,7 +43,7 @@ const ChooseActivity = (props) => {
             <ListItem>
               <Card>
                 <TouchableOpacity onPress={() => goToAddPost(item)} style={{alignItems: "center", padding: 10, backgroundColor: "#303ca6"}}>
-                  <Image source={{ uri: "https://storage.googleapis.com/therapy-tunes/DSC_1725.JPG" }} style={{ height: 65, width: 65, padding: 10}} />
+                  <Image source={{ uri: item.Icon }} style={{ height: 65, width: 65, padding: 10}} />
                   <Text style={{ color:"#fff" }}>{(item.Activity).toUpperCase()}</Text>
                 </TouchableOpacity>
               </Card>
