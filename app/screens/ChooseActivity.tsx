@@ -30,6 +30,8 @@ const ChooseActivity = (props) => {
 
   function goToAddPost(item) {
     console.log("Posting item" , item._id);
+    //console.log(props);
+    props.navigation.navigate("AddPost", { activity: item._id })
     //go to add post here, pass item._id as props "activity"
   }
 
