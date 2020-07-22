@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Spinner, Content, Text, List, ListItem, Card, CardItem,View, Button } from "native-base";
+import { Spinner, Content, Text, List, ListItem, Card, View, Button } from "native-base";
+import { Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
 var _ = require("lodash");
@@ -41,9 +42,10 @@ const ChooseActivity = (props) => {
           renderRow={(item) => (
             <ListItem>
               <Card>
-                <Button onPress={() => goToAddPost(item)}>
-                  <Text>{item.Activity}</Text>
-                </Button>
+                <TouchableOpacity onPress={() => goToAddPost(item)} style={{alignItems: "center", padding: 10, backgroundColor: "#303ca6"}}>
+                  <Image source={{ uri: "https://storage.googleapis.com/therapy-tunes/DSC_1725.JPG" }} style={{ height: 65, width: 65, padding: 10}} />
+                  <Text style={{ color:"#fff" }}>{(item.Activity).toUpperCase()}</Text>
+                </TouchableOpacity>
               </Card>
             </ListItem>
           )}
