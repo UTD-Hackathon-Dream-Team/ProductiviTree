@@ -9,6 +9,8 @@ import TopStack from "./navigation/TopStack";
 import { AuthContext } from "./AuthContext";
 
 const App = () => {
+  console.disableYellowBox = true; 
+  
   const [ready, setReady] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);

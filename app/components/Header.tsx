@@ -37,7 +37,7 @@ const CustomHeader = (props) => {
         )}
       </Left>
       <Body>
-        <Text>Productivitree</Text>
+        <Text style={{ color: "#fff" }}>{"Productivitree".toUpperCase()}</Text>
       </Body>
       <Right>
         {!props.settings ? (
@@ -54,7 +54,7 @@ const CustomHeader = (props) => {
             transparent
             onPress={() => props.navigation.navigate("Settings")}
           >
-            <Icon name="md-stats" />
+            <Icon name="md-settings" />
           </Button>
         )}
       </Right>

@@ -22,13 +22,11 @@ const ProfileInfo = (props) => {
   const following = props.user.Following;
 
   function goToFollowers() {
-    console.log("Followers Page Here");
-    console.log("Followers", followers);
+    props.navigate("Follower", { user: user.googleID });
   }
 
   function goToFollowing() {
-    console.log("Following Page Here");
-    console.log("Following", following);
+    props.navigate("Following", { user: user.googleID });
   }
 
   return (
@@ -70,7 +68,7 @@ const ProfileInfo = (props) => {
         </Body>
       </View>
       <View>
-        <Text style={{ fontSize: 18 }}> Bio: {user.Bio} </Text>
+        <Text style={{ fontSize: 18 }}> {user.Bio} </Text>
       </View>
     </Content>
   );

@@ -1,8 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Container, Content, Text, View, Body,  Title , Button, ListItem } from "native-base";
+import {
+  Container,
+  Content,
+  Text,
+  View,
+  Body,
+  Title,
+  Button,
+  ListItem,
+} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
+import Header from "../components/Header";
 import GoogleLogOut from "../components/GoogleLogOut";
 
 const axios = require("axios").default;
@@ -11,7 +21,7 @@ const Settings = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   async function fetchData() {
     const result = await axios(
@@ -25,26 +35,18 @@ const Settings = (props) => {
   }, []);
 
   function goToProfile() {
-    console.log("Profile Page Here");
+    props.navigation.navigate("Profile");
   }
-  
-  return (
-  
-    <LinearGradient
-        colors={["#C8F0EE", "#A1C6F1"]}
-        style={{ flex: 1 }}
-      >    
-      {
-        user &&
-        <Content padder>        
-          <Title>
-            <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "left"}}>Settings</Text>
-          </Title>
 
-          <TouchableOpacity style={{alignItems:"center"}}>
+  return (
+    <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
+      <Header navigation={props.navigation} backButton={true} />
+      {user && (
+        <Content padder>
+          <TouchableOpacity style={{ alignItems: "center" }}>
             <Image
               source={{
-                uri: user.ProfilePic
+                uri: user.ProfilePic,
               }}
               style={{
                 height: 150,
@@ -52,23 +54,19 @@ const Settings = (props) => {
                 borderRadius: 100,
               }}
             />
-          </TouchableOpacity>      
-      
-          <Text style={{ fontSize: 25, padding: 20}}>
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              Username: 
-            </Text>
+          </TouchableOpacity>
+
+          <Text style={{ fontSize: 25, padding: 20 }}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>Username:</Text>
             {user.Username}
           </Text>
-          <Text style={{ fontSize: 25, padding: 20}}>
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              Bio: 
-            </Text>
+          <Text style={{ fontSize: 25, padding: 20 }}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>Bio:</Text>
             {user.Bio}
           </Text>
-          <Text style={{ fontSize: 25, padding: 20}}>
+          <Text style={{ fontSize: 25, padding: 20 }}>
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              Daily Points: 
+              Daily Points Goal:
             </Text>
             {user.DailyGoal}
           </Text>
@@ -82,17 +80,9 @@ const Settings = (props) => {
             </Button>
           </View>
           <View style={{ padding: 10 }}>
-            <Button
-              style={{ justifyContent: "center", alignItems: "center" }}
-              onPress={goToProfile}
-            >
-              <Text>Cancel</Text>
-            </Button>
+            <GoogleLogOut navigate={props.navigation.navigate}/>
           </View>
-          <View style={{ padding: 10 }}>
-            <GoogleLogOut/>
-          </View>
-      
+
           {/* <View>
             <ListItem>
               <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
@@ -119,18 +109,17 @@ const Settings = (props) => {
               />    
             </ListItem>
           </View>   */}
-    
         </Content>
-      }
-    </LinearGradient>   
+      )}
+    </LinearGradient>
   );
-}
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "baseline",
-    justifyContent: "flex-start"
-  }
+    justifyContent: "flex-start",
+  },
 });
 
 export default Settings;
