@@ -76,7 +76,7 @@ const FriendProfile = (props) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {user && <ProfileInfo user={user} />}
+        {user && <ProfileInfo user={user} navigate={props.navigation.navigate}/>}
         {user && followers.includes(user.googleID) ? (
           <View>
             <Text>Follows You</Text>
