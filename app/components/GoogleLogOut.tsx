@@ -14,7 +14,7 @@ import {
   IOS_APP_CLIENT_ID,
 } from "../config";
 
-const GoogleLogOut = () => {
+const GoogleLogOut = (props) => {
   const auth = useContext(AuthContext);
   
   const signOutWithGoogle = async () => {
@@ -34,7 +34,7 @@ const GoogleLogOut = () => {
       if (type === "success" || type === "default" ) {
         console.log("Logged out", user);
         auth.logout();
-        //navigate.navigate("Login");
+        props.navigate("LogIn");
         return accessToken;
       } else {
         return { cancelled: true };

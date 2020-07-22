@@ -80,7 +80,7 @@ const Settings = (props) => {
             </Button>
           </View>
           <View style={{ padding: 10 }}>
-            <GoogleLogOut />
+            <GoogleLogOut navigate={props.navigation.navigate}/>
           </View>
 
           {/* <View>
