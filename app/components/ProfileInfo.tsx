@@ -68,7 +68,7 @@ const ProfileInfo = (props) => {
         </Body>
       </View>
       <View>
-        <Text style={{ fontSize: 18 }}> Bio: {user.Bio} </Text>
+        <Text style={{ fontSize: 18 }}> {user.Bio} </Text>
       </View>
     </Content>
   );
