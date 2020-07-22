@@ -66,7 +66,7 @@ const Settings = (props) => {
           </Text>
           <Text style={{ fontSize: 25, padding: 20 }}>
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              Daily Points:
+              Daily Points Goal:
             </Text>
             {user.DailyGoal}
           </Text>
