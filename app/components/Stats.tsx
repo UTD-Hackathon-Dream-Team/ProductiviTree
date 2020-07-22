@@ -43,12 +43,12 @@ const Stats = () => {
         {user && 
             <View style={{alignItems: "center", paddingVertical: 20}}>
                 <Text style={{fontSize: 20 }}> 
-                  <Text style={{fontWeight: "bold" }}> {10} / {user.DailyGoal} </Text> 
+                  <Text style={{fontWeight: "bold" }}> {100} / {user.DailyGoal} </Text> 
                   Daily Goal Points
                 </Text>
-                <Progress.Bar progress={10 / user.DailyGoal} width={250}/>
+                <Progress.Bar progress={100 / user.DailyGoal} width={250}/>
                 <Text style={{fontSize: 20 }}> 
-                  <Text style={{fontWeight: "bold" }}> {10 / user.DailyGoal * 100}% </Text> 
+                  <Text style={{fontWeight: "bold" }}> {100 / user.DailyGoal * 100}% </Text> 
                   of Daily Goal Achieved
                 </Text>
             </View>
