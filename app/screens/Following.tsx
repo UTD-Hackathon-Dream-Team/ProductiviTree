@@ -52,7 +52,7 @@ const Following = (props) => {
           return (
             <View key={i}>
               {user == auth.googleID.toString() ? (
-                <View></View>
+                <></>
               ) : (
                 <UserList user={user} navigation={navigation}/>
               )}
@@ -60,14 +60,21 @@ const Following = (props) => {
           );
         })}
       </ScrollView>
-      <View style={{ padding: 30 }}>
-        <Button
-          style={{ justifyContent: "center", alignItems: "center" }}
-          onPress={goToSearch}
-        >
-          <Text>Follow More Users</Text>
-        </Button>
-      </View>
+      
+      
+      {props.route.params.user == auth.googleID.toString() ? (
+        <View style={{ padding: 30 }}>
+          <Button
+            style={{ justifyContent: "center", alignItems: "center" }}
+            onPress={goToSearch}
+          >
+            <Text>Follow More Users</Text>
+          </Button>
+        </View>
+        ) : (
+        <></>
+      )}
+
     </LinearGradient>
   );
 };
