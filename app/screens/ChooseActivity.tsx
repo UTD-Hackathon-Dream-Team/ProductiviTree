@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Spinner, Content, Text, List, ListItem, Card, View, Button } from "native-base";
+import {
+  Spinner,
+  Content,
+  Text,
+  List,
+  ListItem,
+  Card,
+  View,
+  Button,
+} from "native-base";
 import { Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
@@ -29,8 +38,7 @@ const ChooseActivity = (props) => {
   }, []);
 
   function goToAddPost(item) {
-    console.log("Posting item" , item._id);
-    //go to add post here, pass item._id as props "activity"
+    props.navigation.navigate("AddPost", { activity: item._id });
   }
 
   const ActivityList = (props) => {
@@ -42,9 +50,21 @@ const ChooseActivity = (props) => {
           renderRow={(item) => (
             <ListItem>
               <Card>
-                <TouchableOpacity onPress={() => goToAddPost(item)} style={{alignItems: "center", padding: 10, backgroundColor: "#303ca6"}}>
-                  <Image source={{ uri: item.Icon }} style={{ height: 65, width: 65, padding: 10}} />
-                  <Text style={{ color:"#fff" }}>{(item.Activity).toUpperCase()}</Text>
+                <TouchableOpacity
+                  onPress={() => goToAddPost(item)}
+                  style={{
+                    alignItems: "center",
+                    padding: 10,
+                    backgroundColor: "#303ca6",
+                  }}
+                >
+                  <Image
+                    source={{ uri: item.Icon }}
+                    style={{ height: 65, width: 65, padding: 10 }}
+                  />
+                  <Text style={{ color: "#fff" }}>
+                    {item.Activity.toUpperCase()}
+                  </Text>
                 </TouchableOpacity>
               </Card>
             </ListItem>
@@ -52,7 +72,7 @@ const ChooseActivity = (props) => {
         ></List>
       </>
     );
-  }
+  };
 
   return (
     <LinearGradient
@@ -61,21 +81,29 @@ const ChooseActivity = (props) => {
     >
       <Header backButton={true} navigation={props.navigation} />
       <Content padder>
-        {activities && 
+        {activities && (
           <View>
-            <Text style={{textAlign: "center", fontSize: 32, padding: 10}}>Mental Health</Text>
-            <ActivityList category={mentalActivities}/>
+            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>
+              Mental Health
+            </Text>
+            <ActivityList category={mentalActivities} />
 
-            <Text style={{textAlign: "center", fontSize: 30, padding: 10}}>Educational / Professional</Text>
-            <ActivityList category={educationalActivities}/>
+            <Text style={{ textAlign: "center", fontSize: 30, padding: 10 }}>
+              Educational / Professional
+            </Text>
+            <ActivityList category={educationalActivities} />
 
-            <Text style={{textAlign: "center", fontSize: 32, padding: 10}}>Physical Health</Text>
-            <ActivityList category={physicalActivities}/>
+            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>
+              Physical Health
+            </Text>
+            <ActivityList category={physicalActivities} />
 
-            <Text style={{textAlign: "center", fontSize: 32, padding: 10}}>Environmental</Text>
-            <ActivityList category={environmentalActivities}/>
+            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>
+              Environmental
+            </Text>
+            <ActivityList category={environmentalActivities} />
           </View>
-        }
+        )}
         {!activities && <Spinner />}
       </Content>
     </LinearGradient>
