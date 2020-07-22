@@ -9,16 +9,17 @@ import Header from "../components/Header";
 
 const axios = require("axios").default;
 
-const Follower = () => {
+const Follower = (props) => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   let [following, setFollowing] = useState([]);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
+    console.log(props.user);
     setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${props.route.params.user}`
     );
     setFollowing(result.data.payload.Followers);
     setRefreshing(false);

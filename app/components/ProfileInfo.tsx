@@ -22,11 +22,11 @@ const ProfileInfo = (props) => {
   const following = props.user.Following;
 
   function goToFollowers() {
-    props.navigate("Follower");
+    props.navigate("Follower", { user: user.googleID });
   }
 
   function goToFollowing() {
-    props.navigate("Following");
+    props.navigate("Following", { user: user.googleID });
   }
 
   return (
