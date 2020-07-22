@@ -39,9 +39,6 @@ const AddPost = (props) => {
     }
   };
 
-  const handleSubmit = async () => {
-    await submitPost();
-  };
 
   const updatePoints = async () => {
     const activityResponse = await axios(
@@ -83,13 +80,14 @@ const AddPost = (props) => {
         }
         setTimeout(() => {
           console.log("Go to feed / previous page here");
-        }, 5000);
+          props.navigation.navigate("Feed");
+        }, 1000);
       });
   };
 
   const submitPost = async () => {
     console.log("Submit post");
-    getImageURL();
+    await getImageURL();
     console.log("Image", imageURL);
     await axios
       .get(
@@ -176,7 +174,7 @@ const AddPost = (props) => {
                   onChangeText={(message) => setEnteredText(message)}
                 />
               </Form>
-              <Button onPress={() => handleSubmit()}>
+              <Button onPress={() => submitPost()}>
                 <Text>Post!</Text>
               </Button>
             </Card>
