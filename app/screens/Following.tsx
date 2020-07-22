@@ -42,7 +42,7 @@ const Following = (props) => {
       style={{ flex: 1 }}
     >
       <Header navigation={navigation} backButton={true} />
-      <Text style={{ fontSize: 20, padding: 20 }}>Your Following:</Text>
+      <Text style={{ fontSize: 20, padding: 20 }}>Following:</Text>
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
