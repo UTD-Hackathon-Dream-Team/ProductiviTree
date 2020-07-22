@@ -104,7 +104,7 @@ const Challenges = (props) => {
             active={true}
             style={{ backgroundColor: "#5067FF"}}
             position="bottomRight"
-            onPress={() => props.navigation.navigate("AddPost")}
+            onPress={() => props.navigation.navigate("ChooseActivity")}
           >
             <Icon name="ios-add" />
           </Fab>
