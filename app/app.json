@@ -34,7 +34,16 @@
       }
     },
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.productivitree.app",
+      "buildNumber": "1.0.0",
+      "icon": "./assets/images/ios_icon.png",
+      "supportsTablet": true,
+      "usesIcloudStorage": true,
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.775766522335-pmhs0a6b6ejm5epf56akcefs5gm9u5q3"
+        }
+      }
     }
   }
 }
