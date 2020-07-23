@@ -12,6 +12,8 @@ Planting happiness in our community
 
 [Demo Video](https://www.youtube.com/watch?v=gtERz-YO9ps)  
 [Android App](https://storage.googleapis.com/productivitree/ProductiviTreeV1.apk)
+[Pitch Presentation](https://storage.googleapis.com/productivitree/InternHacks%20Pitch%20Presentation.pdf)
+[Final Presentation](https://storage.googleapis.com/productivitree/IntenHacks%20Final%20Presentation.pdf)
 
 ## Submission
 Submitted for InternHacks 2020
