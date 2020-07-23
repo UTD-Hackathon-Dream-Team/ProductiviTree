@@ -2,25 +2,37 @@
   "expo": {
     "name": "ProductiviTree",
     "slug": "ProductiviTree",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo_icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo_icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#A1C6F1"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.productivitree.app",
+      "icon": "./assets/logo_icon.png",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.productivitree.app",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "MANAGE_DOCUMENTS",
+        "READ_EXTERNAL_STORAGE",
+        "READ_PHONE_STATE"
+      ],
+      "config": {
+        "googleSignIn": {
+          "apiKey": "775766522335-sj38kehcktqqndjet1o056ajpsnuhnmd.apps.googleusercontent.com",
+          "certificateHash": "64:57:0E:63:F7:61:27:EF:F0:A1:6B:29:2A:37:11:F6:FE:BC:D3:A2"
+        }
+      }
+    },
     "ios": {
       "supportsTablet": true
     }
