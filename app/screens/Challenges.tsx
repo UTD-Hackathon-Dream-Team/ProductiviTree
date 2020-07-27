@@ -36,7 +36,7 @@ const Challenges = (props) => {
     //console.log(result.data.payload.dailyChallenges[0]._id);
     var dayChallenges = new Array();
     var weekChallenges = new Array();
-    for(var i = 0; i < result.data.payload.dailyChallenges.length; i++){
+    for (var i = 0; i < result.data.payload.dailyChallenges.length; i++) {
       const dailyChallenge = await axios(
         `https://productivitree.wl.r.appspot.com/api/v1/challenges/${result.data.payload.dailyChallenges[i]._id}`
       );
@@ -46,10 +46,10 @@ const Challenges = (props) => {
         description: dailyChallenge.data.payload.description,
         goal: dailyChallenge.data.payload.goal,
         points: dailyChallenge.data.payload.points,
-        progress: result.data.payload.dailyChallenges[i].progress
+        progress: result.data.payload.dailyChallenges[i].progress,
       };
     }
-    for(var i = 0; i < result.data.payload.weeklyChallenges.length; i++){
+    for (var i = 0; i < result.data.payload.weeklyChallenges.length; i++) {
       const weeklyChallenge = await axios(
         `https://productivitree.wl.r.appspot.com/api/v1/challenges/${result.data.payload.weeklyChallenges[i]._id}`
       );
@@ -59,7 +59,7 @@ const Challenges = (props) => {
         description: weeklyChallenge.data.payload.description,
         goal: weeklyChallenge.data.payload.goal,
         points: weeklyChallenge.data.payload.points,
-        progress: result.data.payload.weeklyChallenges[i].progress
+        progress: result.data.payload.weeklyChallenges[i].progress,
       };
     }
     /* console.log(dayChallenges);
@@ -79,15 +79,11 @@ const Challenges = (props) => {
   const onRefresh = React.useCallback(async () => {
     await fetchData();
   }, [refreshing]);
-  
+
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} />
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <Content>
           <Text style={styles.header}>Weekly Challenges</Text>
           <Container style={styles.listBox}>
@@ -99,16 +95,16 @@ const Challenges = (props) => {
           </Container>
         </Content>
       </ScrollView>
-      <View style={{ flex: 1 , paddingTop: 20}}>
-          <Fab
-            active={true}
-            style={{ backgroundColor: "#5067FF"}}
-            position="bottomRight"
-            onPress={() => props.navigation.navigate("ChooseActivity")}
-          >
-            <Icon name="ios-add" />
-          </Fab>
-        </View>
+      <View style={{ flex: 1, paddingTop: 20 }}>
+        <Fab
+          active={true}
+          style={{ backgroundColor: "#5067FF" }}
+          position="bottomRight"
+          onPress={() => props.navigation.navigate("ChooseActivity")}
+        >
+          <Icon name="ios-add" />
+        </Fab>
+      </View>
     </LinearGradient>
   );
 };

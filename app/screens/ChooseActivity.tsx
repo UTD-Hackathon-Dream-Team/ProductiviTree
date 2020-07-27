@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Spinner,
-  Content,
-  Text,
-  List,
-  ListItem,
-  Card,
-  View,
-  Button,
-} from "native-base";
+import { Spinner, Content, Text, List, ListItem, Card, View, Button } from "native-base";
 import { Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
@@ -24,9 +15,7 @@ const ChooseActivity = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const activities = await axios(
-        `https://productivitree.wl.r.appspot.com/api/v1/activities/`
-      );
+      const activities = await axios(`https://productivitree.wl.r.appspot.com/api/v1/activities/`);
       setActivities(activities.data.payload);
       const groups = _.groupBy(activities.data.payload, "Category");
       setMentalActivities(groups.Mental);
@@ -62,9 +51,7 @@ const ChooseActivity = (props) => {
                     source={{ uri: item.Icon }}
                     style={{ height: 65, width: 65, padding: 10 }}
                   />
-                  <Text style={{ color: "#fff" }}>
-                    {item.Activity.toUpperCase()}
-                  </Text>
+                  <Text style={{ color: "#fff" }}>{item.Activity.toUpperCase()}</Text>
                 </TouchableOpacity>
               </Card>
             </ListItem>
@@ -75,17 +62,12 @@ const ChooseActivity = (props) => {
   };
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header backButton={true} navigation={props.navigation} />
       <Content padder>
         {activities && (
           <View>
-            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>
-              Mental Health
-            </Text>
+            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>Mental Health</Text>
             <ActivityList category={mentalActivities} />
 
             <Text style={{ textAlign: "center", fontSize: 30, padding: 10 }}>
@@ -93,14 +75,10 @@ const ChooseActivity = (props) => {
             </Text>
             <ActivityList category={educationalActivities} />
 
-            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>
-              Physical Health
-            </Text>
+            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>Physical Health</Text>
             <ActivityList category={physicalActivities} />
 
-            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>
-              Environmental
-            </Text>
+            <Text style={{ textAlign: "center", fontSize: 32, padding: 10 }}>Environmental</Text>
             <ActivityList category={environmentalActivities} />
           </View>
         )}

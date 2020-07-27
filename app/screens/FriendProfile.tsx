@@ -41,12 +41,9 @@ const FriendProfile = (props) => {
   const followUser = React.useCallback(async () => {
     const newFollowing = following;
     await newFollowing.push(user.googleID);
-    await axios.patch(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
-      {
-        Following: newFollowing,
-      }
-    );
+    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+      Following: newFollowing,
+    });
     console.log(`Following user ${user.googleID} now`);
     await fetchData();
   }, [refreshing]);
@@ -55,28 +52,18 @@ const FriendProfile = (props) => {
     const newFollowing = following;
     var index = newFollowing.indexOf(user.googleID);
     if (index !== -1) newFollowing.splice(index, 1);
-    await axios.patch(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
-      {
-        Following: newFollowing,
-      }
-    );
+    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+      Following: newFollowing,
+    });
     console.log(`Unfollowing user ${user.googleID} now`);
     await fetchData();
   }, [refreshing]);
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} backButton={true} />
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {user && <ProfileInfo user={user} navigate={props.navigation.navigate}/>}
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        {user && <ProfileInfo user={user} navigate={props.navigation.navigate} />}
         {user && followers.includes(user.googleID) ? (
           <View>
             <Text>Follows You</Text>
@@ -95,10 +82,7 @@ const FriendProfile = (props) => {
           </View>
         ) : (
           <View>
-            <Button
-              style={{ justifyContent: "center", alignItems: "center" }}
-              onPress={followUser}
-            >
+            <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={followUser}>
               <Text>Follow</Text>
             </Button>
           </View>

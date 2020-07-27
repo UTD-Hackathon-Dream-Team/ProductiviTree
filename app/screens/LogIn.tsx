@@ -39,10 +39,7 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
   const auth = useContext(AuthContext);
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Swiper showsButtons={false} loop={false}>
         <View style={styles.slides}>
           <Image source={logo} style={styles.icon}></Image>
@@ -52,8 +49,7 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
         <View style={styles.slides}>
           <Image source={study} style={styles.icon}></Image>
           <Text style={styles.tagline}>
-            Stay happy, healthy, and productive by keeping track of your
-            activites!
+            Stay happy, healthy, and productive by keeping track of your activites!
           </Text>
           <GoogleAuth navigate={navigation} />
         </View>
@@ -66,9 +62,7 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
         </View>
         <View style={styles.slides}>
           <Image source={tree} style={styles.icon}></Image>
-          <Text style={styles.tagline}>
-            Gain points to plant trees and help the environment!
-          </Text>
+          <Text style={styles.tagline}>Gain points to plant trees and help the environment!</Text>
           <GoogleAuth navigate={navigation} />
         </View>
       </Swiper>

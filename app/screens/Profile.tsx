@@ -37,18 +37,9 @@ const Profile = (props: any) => {
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} backButton={true} settings={true} />
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {user && (
-          <ProfileInfo user={user} navigate={props.navigation.navigate} />
-        )}
-        <Button
-          style={{ justifyContent: "center", alignItems: "center" }}
-          onPress={goToSettings}
-        >
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        {user && <ProfileInfo user={user} navigate={props.navigation.navigate} />}
+        <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={goToSettings}>
           <Text>Settings</Text>
         </Button>
         {user && <Post user={user.googleID} />}

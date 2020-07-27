@@ -20,13 +20,9 @@ const Post = (props) => {
 
   return (
     <View>
-        { posts.map(function (post, i) {
-            return (
-                <View key={ i }>
-                    {posts && <PostCard post={ post }/>}
-                </View>
-            );
-        })}
+      {posts.map(function (post, i) {
+        return <View key={i}>{posts && <PostCard post={post} />}</View>;
+      })}
     </View>
   );
 };
