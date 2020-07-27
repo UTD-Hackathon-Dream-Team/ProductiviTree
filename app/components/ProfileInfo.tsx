@@ -49,16 +49,10 @@ const ProfileInfo = (props) => {
             paddingLeft: 30,
           }}
         >
-          <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-            {user.Username}
-          </Text>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {user.Trees} Trees Planted
-          </Text>
+          <Text style={{ fontSize: 25, fontWeight: "bold" }}>{user.Username}</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{user.Trees} Trees Planted</Text>
           <TouchableOpacity onPress={goToFollowers}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              {followers.length} Followers
-            </Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>{followers.length} Followers</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={goToFollowing}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>

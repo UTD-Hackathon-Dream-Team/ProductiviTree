@@ -1,14 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import {
-  Container,
-  Content,
-  Text,
-  View,
-  Body,
-  Title,
-  Button,
-  ListItem,
-} from "native-base";
+import { Container, Content, Text, View, Body, Title, Button, ListItem } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
@@ -65,9 +56,7 @@ const Settings = (props) => {
             {user.Bio}
           </Text>
           <Text style={{ fontSize: 25, padding: 20 }}>
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              Daily Points Goal:
-            </Text>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>Daily Points Goal:</Text>
             {user.DailyGoal}
           </Text>
 
@@ -80,7 +69,7 @@ const Settings = (props) => {
             </Button>
           </View>
           <View style={{ padding: 10 }}>
-            <GoogleLogOut navigate={props.navigation.navigate}/>
+            <GoogleLogOut navigate={props.navigation.navigate} />
           </View>
 
           {/* <View>

@@ -6,10 +6,7 @@ import Stats from "../components/Stats";
 
 const StatsGroup = (props) => {
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} />
       <Swiper>
         <Stats />

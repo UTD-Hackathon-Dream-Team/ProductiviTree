@@ -1,8 +1,7 @@
 const express = require("express");
 var cors = require("cors");
-var schedule = require('node-schedule');
-const { updateChallenge } = require('./updateChallenges');
-
+var schedule = require("node-schedule");
+const { updateChallenge } = require("./updateChallenges");
 
 const connectDB = require("./config/db");
 
@@ -42,21 +41,18 @@ app.use("/api/v1/challenges", challenges);
 //Set up and start app connection
 const PORT = process.env.PORT || 8000;
 
-app.listen(
-  PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-);
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
 
 // * 5 * * 1      <-- actual
 // 15 * * * * *   <-- test
 
-var updateChallengesWeekly = schedule.scheduleJob('* 5 * * 1', function(){
-  updateChallenge('weekly');
+var updateChallengesWeekly = schedule.scheduleJob("* 5 * * 1", function () {
+  updateChallenge("weekly");
 });
 
 // * 5 * * *      <-- actual
 // 45 * * * * *   <-- test
 
-var updateChallengesDaily = schedule.scheduleJob('* 5 * * *', function(){
-  updateChallenge('daily');
+var updateChallengesDaily = schedule.scheduleJob("* 5 * * *", function () {
+  updateChallenge("daily");
 });

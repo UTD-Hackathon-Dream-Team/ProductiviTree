@@ -91,71 +91,90 @@ exports.deleteChallenge = async (req, res, next) => {
 };
 
 exports.updateChallenge = async (req, res, next) => {
-    try {
+  try {
+    const challenge = await Challenge.find({}).where({ _id: req.params.id });
 
-        const challenge = await Challenge.find({}).where({ "_id": req.params.id});
-
-        if(challenge.length == 0){
-            return res.status(404).json({
-                success: false,
-                error: 'No challenge found'
-            });
-        }
-
-        if(req.body.description != null) {
-            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-                $set: { 
-                    description: req.body.description
-                } 
-            });
-        }
-
-        if(req.body.activities != null) {
-            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-                $set: { 
-                    activities: req.body.activities
-                } 
-            });
-        }
-
-        if(req.body.type != null) {
-            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-                $set: { 
-                    type: req.body.type
-                } 
-            });
-        }
-        
-        if(req.body.points != null) {
-            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-                $set: { 
-                    points: req.body.points
-                } 
-            });
-        }
-        if(req.body.goal != null) {
-            await Challenge.find({}).where({ "_id": req.params.id}).replaceOne({}, { 
-                $set: { 
-                    goal: req.body.goal
-                } 
-            });
-        }
-
-        
-        return res.status(200).json({
-            success: true,
-            payload: challenge[0]
-        });
-
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            error: 'Server Error'
-        });
+    if (challenge.length == 0) {
+      return res.status(404).json({
+        success: false,
+        error: "No challenge found",
+      });
     }
 
-    
-  
+    if (req.body.description != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              description: req.body.description,
+            },
+          }
+        );
+    }
+
+    if (req.body.activities != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              activities: req.body.activities,
+            },
+          }
+        );
+    }
+
+    if (req.body.type != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              type: req.body.type,
+            },
+          }
+        );
+    }
+
+    if (req.body.points != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              points: req.body.points,
+            },
+          }
+        );
+    }
+    if (req.body.goal != null) {
+      await Challenge.find({})
+        .where({ _id: req.params.id })
+        .replaceOne(
+          {},
+          {
+            $set: {
+              goal: req.body.goal,
+            },
+          }
+        );
+    }
+
+    return res.status(200).json({
+      success: true,
+      payload: challenge[0],
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
 };
 
 exports.getTypeChallenge = async (req, res, next) => {

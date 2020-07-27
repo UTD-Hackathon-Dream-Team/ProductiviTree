@@ -34,19 +34,12 @@ const Follower = (props) => {
   }, [refreshing]);
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={navigation} backButton={true} />
       <Text style={{ fontSize: 20, padding: 20 }}>Followers:</Text>
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {following.map(function (user, i) {
-          return <View key={i}>{user && <UserList user={user} navigation={navigation}/>}</View>;
+          return <View key={i}>{user && <UserList user={user} navigation={navigation} />}</View>;
         })}
       </ScrollView>
     </LinearGradient>

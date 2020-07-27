@@ -28,13 +28,9 @@ const Search = (props) => {
   var [filtered, setFiltered] = useState([]);
 
   async function fetchData() {
-    var data = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/`
-    );
+    var data = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/`);
     setUsers(data.data.payload);
-    data = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
-    );
+    data = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
     setUser(data.data.payload);
   }
 
@@ -88,10 +84,7 @@ const Search = (props) => {
   };
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header searchBar rounded>
         <Item>
           <Icon name="ios-search" />
@@ -106,11 +99,7 @@ const Search = (props) => {
         </Item>
       </Header>
       <List>
-        <FlatList
-          data={filtered}
-          renderItem={userCard}
-          keyExtractor={(item) => item.googleID}
-        />
+        <FlatList data={filtered} renderItem={userCard} keyExtractor={(item) => item.googleID} />
       </List>
     </LinearGradient>
   );
