@@ -41,19 +41,21 @@ const GlobalBoard = (props) => {
 
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
-      <Text style={{ fontSize: 20, padding: 20 }}>Global Leaderboard:</Text>
-      <View style={{ padding: 20 }}>
-        <BoardList position={pos+1} user={auth.googleID} navigation={navigation}/>
-      </View>
-      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {users.map(function (user, i) {
-            return (
-                <View key={i}>
-                    <BoardList position={i+1} user={user.googleID} navigation={navigation} />
-                </View>
-            );
-        })}
-      </ScrollView>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+            <Text style={{ fontSize: 20, padding: 20 }}>Global Leaderboard:</Text>
+            <View style={{ padding: 20 }}>
+                <BoardList position={pos+1} user={auth.googleID} navigation={navigation}/>
+            </View>
+            <ScrollView>
+                {users.map(function (user, i) {
+                    return (
+                        <View key={i}>
+                            <BoardList position={i+1} user={user.googleID} navigation={navigation} />
+                        </View>
+                    );
+                })}
+            </ScrollView>
+        </ScrollView>
     </LinearGradient>
   );
 };
