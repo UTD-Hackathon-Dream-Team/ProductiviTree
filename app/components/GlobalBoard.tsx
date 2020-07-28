@@ -20,6 +20,11 @@ const GlobalBoard = (props) => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/`
     );
     setUsers(result.data.payload);
+    // const allUsers = result.data.payload;
+    // var index = (result.data.payload).indexOf(auth.googleID);
+    // if (index !== -1) allUsers.splice(index, 1);
+    // console.log(allUsers.length);
+    // setUsers(allUsers);
     setRefreshing(false);
   }
 
@@ -41,12 +46,15 @@ const GlobalBoard = (props) => {
         {users.map(function (user, i) {
             return (
                 <View key={i}>
-                    {user.googleID == auth.googleID.toString() ? (
-                        <></>
-                    ) : (
-                        <BoardList position={i+1} user={user.googleID} navigation={navigation} />
-                    )}
+                    <BoardList position={i+1} user={user.googleID} navigation={navigation} />
                 </View>
+                // <View key={i}>
+                //     {user.googleID == auth.googleID.toString() ? (
+                //         <></>
+                //     ) : (
+                //         <BoardList position={i+1} user={user.googleID} navigation={navigation} />
+                //     )}
+                // </View>
             );
         })}
       </ScrollView>

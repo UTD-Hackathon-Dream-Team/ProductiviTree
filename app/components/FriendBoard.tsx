@@ -12,6 +12,7 @@ const GlobalBoard = (props) => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   let [users, setUsers] = useState([]);
+  let [pos, setPos] = useState(0);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -19,7 +20,10 @@ const GlobalBoard = (props) => {
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
-    setUsers(result.data.payload.Following);
+    const allUsers = result.data.payload.Following;
+    var index = (result.data.payload.Following).indexOf(auth.googleID);
+    if (index !== -1) setPos(index);
+    setUsers(allUsers);
     setRefreshing(false);
   }
 
@@ -35,17 +39,17 @@ const GlobalBoard = (props) => {
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
         <Text style={{ fontSize: 20, padding: 20 }}>Friends Leaderboard:</Text>
         <View style={{ padding: 20 }}>
-            <BoardList user={auth.googleID} navigation={navigation}/>
+            <BoardList position={pos+1} user={auth.googleID} navigation={navigation}/>
         </View>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             {users.map(function (user, i) {
-            return (
+                return (
                     <View key={i}>
-                    {user == auth.googleID.toString() ? (
-                        <></>
-                    ) : (
-                        <BoardList position={i+1} user={user} navigation={navigation} />
-                    )}
+                        {user == auth.googleID.toString() ? (
+                            <></>
+                        ) : (
+                            <BoardList position={i+1} user={user} navigation={navigation} />
+                        )}
                     </View>
                 );
             })}
