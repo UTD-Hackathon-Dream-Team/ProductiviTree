@@ -12,6 +12,7 @@ const GlobalBoard = (props) => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   let [users, setUsers] = useState([]);
+  let [pos, setPos] = useState(0);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -24,9 +25,8 @@ const GlobalBoard = (props) => {
     allUsers.sort(function(a, b) {
         return (1000*b.Trees + b.Points) - (1000*a.Trees + a.Points);
     });
-    // var index = (result.data.payload).indexOf(auth.googleID);
-    // if (index !== -1) allUsers.splice(index, 1);
-    // console.log(allUsers.length);
+    var index = allUsers.findIndex(user => user.googleID === auth.googleID);
+    setPos(index);
     setUsers(allUsers);
     setRefreshing(false);
   }
@@ -43,7 +43,7 @@ const GlobalBoard = (props) => {
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Text style={{ fontSize: 20, padding: 20 }}>Global Leaderboard:</Text>
       <View style={{ padding: 20 }}>
-        <BoardList user={auth.googleID} navigation={navigation}/>
+        <BoardList position={pos+1} user={auth.googleID} navigation={navigation}/>
       </View>
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {users.map(function (user, i) {
@@ -51,13 +51,6 @@ const GlobalBoard = (props) => {
                 <View key={i}>
                     <BoardList position={i+1} user={user.googleID} navigation={navigation} />
                 </View>
-                // <View key={i}>
-                //     {user.googleID == auth.googleID.toString() ? (
-                //         <></>
-                //     ) : (
-                //         <BoardList position={i+1} user={user.googleID} navigation={navigation} />
-                //     )}
-                // </View>
             );
         })}
       </ScrollView>
