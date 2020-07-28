@@ -44,7 +44,7 @@ const GlobalBoard = (props) => {
                     {user.googleID == auth.googleID.toString() ? (
                         <></>
                     ) : (
-                        <BoardList user={user.googleID} navigation={navigation} />
+                        <BoardList position={i+1} user={user.googleID} navigation={navigation} />
                     )}
                 </View>
             );
