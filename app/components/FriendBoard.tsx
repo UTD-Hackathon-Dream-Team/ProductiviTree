@@ -18,12 +18,23 @@ const GlobalBoard = (props) => {
   async function fetchData() {
     setRefreshing(true);
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+      `https://productivitree.wl.r.appspot.com/api/v1/users/`
     );
-    const allUsers = result.data.payload.Following;
-    var index = (result.data.payload.Following).indexOf(auth.googleID);
-    if (index !== -1) setPos(index);
-    setUsers(allUsers);
+    const allUsers = result.data.payload;
+    const response = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
+    const following = response.data.payload.Following;
+    let friends: [] = [];
+    allUsers.forEach((user: { googleID: String }) => {
+        if (following.includes(user.googleID)) {
+            friends.push(user);
+        }
+    });
+    friends.sort(function(a, b) {
+        return (1000*b.Trees + b.Points) - (1000*a.Trees + a.Points);
+    });
+    var index = friends.findIndex(user => user.googleID === auth.googleID);
+    setPos(index);
+    setUsers(friends);
     setRefreshing(false);
   }
 
@@ -48,7 +59,7 @@ const GlobalBoard = (props) => {
                         {user == auth.googleID.toString() ? (
                             <></>
                         ) : (
-                            <BoardList position={i+1} user={user} navigation={navigation} />
+                            <BoardList position={i+1} user={user.googleID} navigation={navigation} />
                         )}
                     </View>
                 );
