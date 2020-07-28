@@ -19,12 +19,15 @@ const GlobalBoard = (props) => {
     const result = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/users/`
     );
-    setUsers(result.data.payload);
-    // const allUsers = result.data.payload;
+    //setUsers(result.data.payload);
+    const allUsers = result.data.payload;
+    allUsers.sort(function(a, b) {
+        return (1000*b.Trees + b.Points) - (1000*a.Trees + a.Points);
+    });
     // var index = (result.data.payload).indexOf(auth.googleID);
     // if (index !== -1) allUsers.splice(index, 1);
     // console.log(allUsers.length);
-    // setUsers(allUsers);
+    setUsers(allUsers);
     setRefreshing(false);
   }
 
