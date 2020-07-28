@@ -3,6 +3,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
 import Swiper from "react-native-swiper";
 import Stats from "../components/Stats";
+import GlobalBoard from "../components/GlobalBoard";
+import FriendBoard from "../components/FriendBoard";
 
 const StatsGroup = (props) => {
   return (
@@ -10,20 +12,8 @@ const StatsGroup = (props) => {
       <Header navigation={props.navigation} />
       <Swiper>
         <Stats />
-        {/* <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
-          <Text>Global Leaderboard</Text>
-        </ScrollView>
-        <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
-          <Text>Friend Leaderboard</Text>
-        </ScrollView> */}
+        <GlobalBoard />
+        <FriendBoard />
       </Swiper>
     </LinearGradient>
   );
