@@ -34,6 +34,9 @@ const GlobalBoard = (props) => {
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Text style={{ fontSize: 20, padding: 20 }}>Global Leaderboard:</Text>
+      <View style={{ padding: 20 }}>
+        <BoardList user={auth.googleID} navigation={navigation}/>
+      </View>
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {users.map(function (user, i) {
             return (
