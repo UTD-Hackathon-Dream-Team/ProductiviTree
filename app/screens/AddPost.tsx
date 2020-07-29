@@ -73,27 +73,30 @@ const AddPost = (props) => {
     await axios
       .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
       .then( async (response) => {
-        await axios
+        let activity = await response.data.payload ;
+        console.log(activity);
+        let result = await axios
           .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
             Author: auth.googleID,
             Picture: imageURL,
             Caption: enteredText,
-            Activity: response.data.payload,
+            Activity: activity,
           })
+          console.log(result);
           // This below does not work
-          .then(async (response) => {
-            await console.log("Calling updatePoints");
-            await updatePoints();
-            await console.log("Finished calling updatePoints");
-          })
-          .catch(function (error) {
-            console.log("Error in patching", error);
-            Toast.show({
-              text: `There was an error. Please try again later.`,
-              buttonText: "Okay",
-              position: "bottom",
-            });
-          });
+          // .then( (response) => {
+          //   console.log("Calling updatePoints");
+          //   //await updatePoints();
+          //   //console.log("Finished calling updatePoints");
+          // })
+          // .catch(function (error) {
+          //   console.log(error);
+          //   Toast.show({
+          //     text: `There was an error. Please try again later.`,
+          //     buttonText: "Okay",
+          //     position: "bottom",
+          //   });
+          // });
       });
   };
 
@@ -108,7 +111,7 @@ const AddPost = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data.secure_url);
+        console.log( "Inside getImageURL", data.secure_url);
         setImageURL(data.secure_url);
       });
   };
