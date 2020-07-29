@@ -118,7 +118,7 @@ const Settings = (props) => {
             <TouchableOpacity style={{ alignItems: "center" }} onPress={pickImage}>
               <Image
                 source={{
-                  uri: user.ProfilePic,
+                  uri: image,
                 }}
                 style={{
                   height: 150,
