@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Container, Content, Text, View, Body, Title, Button, ListItem, Textarea, Form} from "native-base";
+import { Container, Content, Text, View, Body, Title, Button, ListItem, Textarea, Form, Toast, Root} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
@@ -49,6 +49,7 @@ const Settings = (props) => {
   }, []);
 
   const updateUser = async () => {
+    await getImageURL();
     await axios
       .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
         ProfilePic: image,
@@ -57,12 +58,20 @@ const Settings = (props) => {
         DailyGoal: dailyGoal
       })
       .then(function (response) {
-        // Toast.show({
-        //   text: `You've earned ${newPoints} points!`,
-        //   buttonText: "Okay",
-        //   position: "bottom",
-        // });
+        Toast.show({
+          text: `You've updated your profile!`,
+          buttonText: "Okay",
+          position: "bottom",
+        });
         props.navigation.navigate("Profile");
+      })
+      .catch(function (error) {
+        console.log(error);
+        Toast.show({
+          text: `There was an error. Please try again later.`,
+          buttonText: "Okay",
+          position: "bottom",
+        });
       });
   }
 
@@ -108,7 +117,7 @@ const Settings = (props) => {
             <TouchableOpacity style={{ alignItems: "center" }} onPress={pickImage}>
               <Image
                 source={{
-                  uri: image,
+                  uri: user.ProfilePic,
                 }}
                 style={{
                   height: 150,
@@ -129,12 +138,14 @@ const Settings = (props) => {
           </Form>
 
           <View style={{ padding: 10 }}>
-            <Button
-              style={{ justifyContent: "center", alignItems: "center" }}
-              onPress={() => updateUser()}
-            >
-              <Text>Save Changes</Text>
-            </Button>
+            <Root>
+              <Button
+                style={{ justifyContent: "center", alignItems: "center" }}
+                onPress={() => updateUser()}
+              >
+                <Text>Save Changes</Text>
+              </Button>
+            </Root>
           </View>
 
           <View style={{ padding: 10 }}>
