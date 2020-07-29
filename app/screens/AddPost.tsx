@@ -80,6 +80,7 @@ const AddPost = (props) => {
             Caption: enteredText,
             Activity: response.data.payload,
           })
+          // This below does not work
           .then(async (response) => {
             await console.log("Calling updatePoints");
             await updatePoints();
