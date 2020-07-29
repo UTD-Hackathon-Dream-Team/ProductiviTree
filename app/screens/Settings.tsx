@@ -5,6 +5,9 @@ import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
 import Header from "../components/Header";
 import GoogleLogOut from "../components/GoogleLogOut";
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 
 const axios = require("axios").default;
 
@@ -14,7 +17,20 @@ const Settings = (props) => {
   let [userName, setUserName] = useState("");
   let [bio, setBio] = useState("");
   let [dailyGoal, setDailyGoal] = useState("");
+  let [image, setImage] = useState( "" );
   const [isEnabled, setIsEnabled] = useState(false);
+  let [img64, setImg64] = useState(null);
+  let [imageURL, setImageURL] = useState(null);
+
+  const getPickerPermission = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
+  };
+
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   async function fetchData() {
@@ -22,6 +38,10 @@ const Settings = (props) => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
     setUser(result.data.payload);
+    setUserName(result.data.payload.Username);
+    setBio(result.data.payload.Bio);
+    setDailyGoal(result.data.payload.DailyGoal);
+    setImage(result.data.payload.ProfilePic);
   }
 
   useEffect(() => {
@@ -31,6 +51,7 @@ const Settings = (props) => {
   const updateUser = async () => {
     await axios
       .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+        ProfilePic: image,
         Username: userName,
         Bio: bio,
         DailyGoal: dailyGoal
@@ -45,16 +66,49 @@ const Settings = (props) => {
       });
   }
 
+  const getImageURL = async () => {
+    const data = new FormData();
+    data.append("file", "data:image/jpeg;base64," + img64);
+    data.append("upload_preset", "productivitree");
+    data.append("cloud_name", "utd-hdt");
+    await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImageURL(data.secure_url);
+      });
+  };
+
+  const pickImage = async () => {
+    try {
+      await getPickerPermission();
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        base64: true,
+        quality: 1,
+        aspect: [4, 3],
+      });
+      if (!result.cancelled) {
+        setImage(result.uri);
+        setImg64(result.base64);
+      }
+    } catch (E) {
+      console.log(E);
+    }
+  };
+
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} backButton={true} />
       {user && (
         <Content padder>
           <Form>
-            <TouchableOpacity style={{ alignItems: "center" }}>
+            <TouchableOpacity style={{ alignItems: "center" }} onPress={pickImage}>
               <Image
                 source={{
-                  uri: user.ProfilePic,
+                  uri: image,
                 }}
                 style={{
                   height: 150,
