@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Container, Content, Text, View, Body, Title, Button, ListItem } from "native-base";
+import { Container, Content, Text, View, Body, Title, Button, ListItem, Textarea, Form} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
@@ -11,6 +11,9 @@ const axios = require("axios").default;
 const Settings = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
+  let [userName, setUserName] = useState("");
+  let [bio, setBio] = useState("");
+  let [dailyGoal, setDailyGoal] = useState("");
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
@@ -25,8 +28,21 @@ const Settings = (props) => {
     fetchData();
   }, []);
 
-  function goToProfile() {
-    props.navigation.navigate("Profile");
+  const updateUser = async () => {
+    await axios
+      .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+        Username: userName,
+        Bio: bio,
+        DailyGoal: dailyGoal
+      })
+      .then(function (response) {
+        // Toast.show({
+        //   text: `You've earned ${newPoints} points!`,
+        //   buttonText: "Okay",
+        //   position: "bottom",
+        // });
+        props.navigation.navigate("Profile");
+      });
   }
 
   return (
@@ -34,40 +50,39 @@ const Settings = (props) => {
       <Header navigation={props.navigation} backButton={true} />
       {user && (
         <Content padder>
-          <TouchableOpacity style={{ alignItems: "center" }}>
-            <Image
-              source={{
-                uri: user.ProfilePic,
-              }}
-              style={{
-                height: 150,
-                width: 150,
-                borderRadius: 100,
-              }}
-            />
-          </TouchableOpacity>
+          <Form>
+            <TouchableOpacity style={{ alignItems: "center" }}>
+              <Image
+                source={{
+                  uri: user.ProfilePic,
+                }}
+                style={{
+                  height: 150,
+                  width: 150,
+                  borderRadius: 100,
+                }}
+              />
+            </TouchableOpacity>
 
-          <Text style={{ fontSize: 25, padding: 20 }}>
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>Username:</Text>
-            {user.Username}
-          </Text>
-          <Text style={{ fontSize: 25, padding: 20 }}>
+            <Textarea style={{ fontSize: 25 }} placeholder={user.Username} onChangeText={(newUserName) => setUserName(newUserName)} />
+
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>Bio:</Text>
-            {user.Bio}
-          </Text>
-          <Text style={{ fontSize: 25, padding: 20 }}>
+            <Textarea style={{ fontSize: 25 }} placeholder={user.Bio} onChangeText={(newBio) => setBio(newBio)} />
+
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>Daily Points Goal:</Text>
-            {user.DailyGoal}
-          </Text>
+            <Textarea style={{ fontSize: 25 }} placeholder={user.DailyGoal.toString()} onChangeText={(newGoal) => setDailyGoal(newGoal)} />
+          </Form>
 
           <View style={{ padding: 10 }}>
             <Button
               style={{ justifyContent: "center", alignItems: "center" }}
-              onPress={goToProfile}
+              onPress={() => updateUser()}
             >
               <Text>Save Changes</Text>
             </Button>
           </View>
+
           <View style={{ padding: 10 }}>
             <GoogleLogOut navigate={props.navigation.navigate} />
           </View>
