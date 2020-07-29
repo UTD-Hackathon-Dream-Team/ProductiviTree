@@ -58,11 +58,6 @@ const Settings = (props) => {
         DailyGoal: dailyGoal
       })
       .then(function (response) {
-        Toast.show({
-          text: `You've updated your profile!`,
-          buttonText: "Okay",
-          position: "bottom",
-        });
         props.navigation.navigate("Profile");
       })
       .catch(function (error) {
