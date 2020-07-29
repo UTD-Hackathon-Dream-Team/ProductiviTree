@@ -30,6 +30,7 @@ const AddPost = (props) => {
   };
 
   const updatePoints = async () => {
+    await console.log("Started updatePoints");
     const activityResponse = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`
     );
@@ -61,6 +62,7 @@ const AddPost = (props) => {
             position: "bottom",
           });
         }
+        await console.log("Finished updatePoints");
         props.navigation.navigate("Feed");
       });
   };
@@ -79,8 +81,9 @@ const AddPost = (props) => {
             Activity: response.data.payload,
           })
           .then(async (response) => {
+            await console.log("Calling updatePoints");
             await updatePoints();
-            console.log("Points updated");
+            await console.log("Finished calling updatePoints");
           })
           .catch(function (error) {
             console.log("Error in patching", error);
