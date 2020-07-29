@@ -73,14 +73,14 @@ const AddPost = (props) => {
     await axios
       .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
       .then( async (response) => {
-        let activity = await response.data.payload._id ;
-        console.log(activity);
+        // let activity = await response.data.payload._id ;
+        // console.log(activity);
         let result = await axios
           .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
             Author: auth.googleID,
             Picture: imageURL,
             Caption: enteredText,
-            Activity: activity,
+            Activity: response.data.payload._id,
           })
           console.log(result);
           // This below does not work
