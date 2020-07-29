@@ -73,30 +73,27 @@ const AddPost = (props) => {
     await axios
       .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
       .then( async (response) => {
-        // let activity = await response.data.payload._id ;
-        // console.log(activity);
-        let result = await axios
+        // This below does not work
+        await axios
           .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
             Author: auth.googleID,
             Picture: imageURL,
             Caption: enteredText,
             Activity: response.data.payload._id,
           })
-          console.log(result);
-          // This below does not work
-          // .then( (response) => {
-          //   console.log("Calling updatePoints");
-          //   //await updatePoints();
-          //   //console.log("Finished calling updatePoints");
-          // })
-          // .catch(function (error) {
-          //   console.log(error);
-          //   Toast.show({
-          //     text: `There was an error. Please try again later.`,
-          //     buttonText: "Okay",
-          //     position: "bottom",
-          //   });
-          // });
+          .then( (response) => {
+            console.log("Calling updatePoints");
+            updatePoints();
+            console.log("Finished calling updatePoints");
+          })
+          .catch(function (error) {
+            console.log(error);
+            Toast.show({
+              text: `There was an error. Please try again later.`,
+              buttonText: "Okay",
+              position: "bottom",
+            });
+          });
       });
   };
 
