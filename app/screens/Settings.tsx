@@ -86,6 +86,7 @@ const Settings = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.secure_url);
         setImageURL(data.secure_url);
       });
   };
