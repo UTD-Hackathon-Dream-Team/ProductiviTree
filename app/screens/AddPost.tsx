@@ -39,11 +39,11 @@ const AddPost = (props) => {
     );
     const oldPoints = userResponse.data.payload.Points;
     const oldTrees = userResponse.data.payload.Trees;
-    axios
+    await axios
       .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
         Points: oldPoints + newPoints,
       })
-      .then(function (response) {
+      .then(async function (response) {
         Toast.show({
           text: `You've earned ${newPoints} points!`,
           buttonText: "Okay",
@@ -51,7 +51,7 @@ const AddPost = (props) => {
         });
 
         if (oldPoints + newPoints > 1000) {
-          axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+          await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
             Points: oldPoints + newPoints - 1000,
             Trees: oldTrees + 1,
           });
@@ -61,32 +61,29 @@ const AddPost = (props) => {
             position: "bottom",
           });
         }
-        setTimeout(() => {
-          console.log("Go to feed / previous page here");
-          props.navigation.navigate("Feed");
-        }, 1000);
+        props.navigation.navigate("Feed");
       });
   };
 
   const submitPost = async () => {
     console.log("Submit post");
     await getImageURL();
-    console.log("Image", imageURL);
     await axios
       .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
-      .then((response) => {
-        axios
+      .then( async (response) => {
+        await axios
           .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
             Author: auth.googleID,
             Picture: imageURL,
             Caption: enteredText,
             Activity: response.data.payload,
           })
-          .then(function (response) {
-            updatePoints();
+          .then(async (response) => {
+            await updatePoints();
+            console.log("Points updated");
           })
           .catch(function (error) {
-            console.log(error);
+            console.log("Error in patching", error);
             Toast.show({
               text: `There was an error. Please try again later.`,
               buttonText: "Okay",
@@ -106,7 +103,8 @@ const AddPost = (props) => {
       body: data,
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
+        console.log(data.secure_url);
         setImageURL(data.secure_url);
       });
   };
