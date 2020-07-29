@@ -37,44 +37,32 @@ const Following = (props) => {
   }
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={navigation} backButton={true} />
       <Text style={{ fontSize: 20, padding: 20 }}>Following:</Text>
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {following.map(function (user, i) {
           return (
             <View key={i}>
               {user == auth.googleID.toString() ? (
                 <></>
               ) : (
-                <UserList user={user} navigation={navigation}/>
+                <UserList user={user} navigation={navigation} />
               )}
             </View>
           );
         })}
       </ScrollView>
-      
-      
+
       {props.route.params.user == auth.googleID.toString() ? (
         <View style={{ padding: 30 }}>
-          <Button
-            style={{ justifyContent: "center", alignItems: "center" }}
-            onPress={goToSearch}
-          >
+          <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={goToSearch}>
             <Text>Follow More Users</Text>
           </Button>
         </View>
-        ) : (
+      ) : (
         <></>
       )}
-
     </LinearGradient>
   );
 };

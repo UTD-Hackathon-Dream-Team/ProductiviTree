@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, View, Card, CardItem, Left, Body, Thumbnail } from "native-base";
+import { Text, View, Card, CardItem, Left, Body, Thumbnail, Right } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
 
-const UserList = (props) => {
+const BoardList = (props) => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
 
@@ -39,11 +39,22 @@ const UserList = (props) => {
         <TouchableOpacity onPress={goToUser}>
           <CardItem>
             <Left>
+              <Text> # {props.position} </Text>
               <Thumbnail
                 source={{ uri: user.ProfilePic }}
                 style={{ height: 30, width: 30, borderRadius: 30 }}
               />
               <Text>{user.Username}</Text>
+              <Text>{user.Trees}</Text>
+              <Thumbnail
+                source={ require('../assets/tree_icon.png') }
+                style={{ height: 30, width: 30, borderRadius: 30 }}
+              />
+              <Text>{user.Points}</Text>
+              <Thumbnail
+                source={ require('../assets/study_icon.png') }
+                style={{ height: 30, width: 30, borderRadius: 30 }}
+              />
             </Left>
           </CardItem>
         </TouchableOpacity>
@@ -52,4 +63,4 @@ const UserList = (props) => {
   );
 };
 
-export default UserList;
+export default BoardList;

@@ -1,15 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Container,
-  Content,
-  Button,
-  Card,
-  Textarea,
-  Text,
-  Form,
-  Toast,
-  Root,
-} from "native-base";
+import { Container, Content, Button, Card, Textarea, Text, Form, Toast, Root } from "native-base";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
@@ -39,7 +29,6 @@ const AddPost = (props) => {
     }
   };
 
-
   const updatePoints = async () => {
     const activityResponse = await axios(
       `https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`
@@ -51,12 +40,9 @@ const AddPost = (props) => {
     const oldPoints = userResponse.data.payload.Points;
     const oldTrees = userResponse.data.payload.Trees;
     axios
-      .patch(
-        `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
-        {
-          Points: oldPoints + newPoints,
-        }
-      )
+      .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+        Points: oldPoints + newPoints,
+      })
       .then(function (response) {
         Toast.show({
           text: `You've earned ${newPoints} points!`,
@@ -65,13 +51,10 @@ const AddPost = (props) => {
         });
 
         if (oldPoints + newPoints > 1000) {
-          axios.patch(
-            `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
-            {
-              Points: oldPoints + newPoints - 1000,
-              Trees: oldTrees + 1,
-            }
-          );
+          axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+            Points: oldPoints + newPoints - 1000,
+            Trees: oldTrees + 1,
+          });
           Toast.show({
             text: `You've planted one more tree and earned ${newPoints} points!`,
             buttonText: "Okay",
@@ -90,9 +73,7 @@ const AddPost = (props) => {
     await getImageURL();
     console.log("Image", imageURL);
     await axios
-      .get(
-        `https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`
-      )
+      .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
       .then((response) => {
         axios
           .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
@@ -151,10 +132,7 @@ const AddPost = (props) => {
   return (
     <Root>
       <Container>
-        <LinearGradient
-          colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-          style={{ flex: 1 }}
-        >
+        <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
           <Header navigation={props.navigation} backButton={true} />
           <Content padder>
             <Card>
@@ -162,10 +140,7 @@ const AddPost = (props) => {
                 <Button onPress={pickImage}>
                   <Text>Add Image</Text>
                 </Button>
-                <Image
-                  source={{ uri: image }}
-                  style={{ height: 200, width: null, flex: 1 }}
-                />
+                <Image source={{ uri: image }} style={{ height: 200, width: null, flex: 1 }} />
                 <Textarea
                   rowSpan={4}
                   rounded

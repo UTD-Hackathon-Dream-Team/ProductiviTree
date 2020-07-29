@@ -1,17 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 var moment = require("moment");
 import { Image, TouchableOpacity } from "react-native";
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-} from "native-base";
+import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from "native-base";
 import { AuthContext } from "../AuthContext";
 const axios = require("axios").default;
 
@@ -31,12 +21,10 @@ const PostCard = (props) => {
   }, []);
 
   function goToUser() {
-    const userID = (user.googleID).toString();
+    const userID = user.googleID.toString();
     console.log(userID);
-    if (userID == auth.googleID)
-      props.navigation.navigate("Profile");
-    else
-      props.navigation.navigate("FriendProfile", { user: user.googleID });
+    if (userID == auth.googleID) props.navigation.navigate("Profile");
+    else props.navigation.navigate("FriendProfile", { user: user.googleID });
   }
 
   function likePost() {
@@ -63,10 +51,7 @@ const PostCard = (props) => {
         </Left>
       </CardItem>
       <CardItem cardBody>
-        <Image
-          source={{ uri: post.Picture }}
-          style={{ height: 300, width: null, flex: 1 }}
-        />
+        <Image source={{ uri: post.Picture }} style={{ height: 300, width: null, flex: 1 }} />
       </CardItem>
       <CardItem>
         <Left>

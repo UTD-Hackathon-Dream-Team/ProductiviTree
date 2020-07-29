@@ -20,9 +20,7 @@ const Feed = (props) => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
     );
     const following = result.data.payload.Following;
-    const response = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/posts`
-    );
+    const response = await axios(`https://productivitree.wl.r.appspot.com/api/v1/posts`);
     const posts = response.data.payload;
     const newFeed: [] = [];
     posts.forEach((post: { Author: String }) => {
@@ -43,27 +41,17 @@ const Feed = (props) => {
   }, []);
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} />
       <ScrollView
         style={{ padding: 15 }}
         refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={async () => await fetchData()}
-          />
+          <RefreshControl refreshing={refreshing} onRefresh={async () => await fetchData()} />
         }
       >
         {feed &&
           feed!.map((post: {}) => (
-            <PostCard
-              key={post._id}
-              post={post}
-              navigation={props.navigation}
-            />
+            <PostCard key={post._id} post={post} navigation={props.navigation} />
           ))}
       </ScrollView>
       <Fab

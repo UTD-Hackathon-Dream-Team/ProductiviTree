@@ -6,9 +6,7 @@ exports.getPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate("Activity");
 
-    return res
-      .status(200)
-      .json({ success: true, count: posts.length, payload: posts });
+    return res.status(200).json({ success: true, count: posts.length, payload: posts });
   } catch (err) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }
@@ -82,9 +80,7 @@ exports.deletePost = async (req, res) => {
       });
     }
     user = searchAuthor[0];
-    user.Posts = user.Posts.filter(
-      (val) => JSON.stringify(val) !== JSON.stringify(post._id)
-    );
+    user.Posts = user.Posts.filter((val) => JSON.stringify(val) !== JSON.stringify(post._id));
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await post.remove({ session: sess });
@@ -131,13 +127,9 @@ exports.updatePost = async (req, res) => {
 
 exports.getUserPost = async (req, res) => {
   try {
-    const posts = await Post.find({ Author: req.params.userid }).populate(
-      "Activity"
-    );
+    const posts = await Post.find({ Author: req.params.userid }).populate("Activity");
 
-    return res
-      .status(200)
-      .json({ success: true, count: posts.length, payload: posts });
+    return res.status(200).json({ success: true, count: posts.length, payload: posts });
   } catch (err) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }

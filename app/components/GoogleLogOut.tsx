@@ -16,7 +16,7 @@ import {
 
 const GoogleLogOut = (props) => {
   const auth = useContext(AuthContext);
-  
+
   const signOutWithGoogle = async () => {
     //reset context
     console.log("Logging out");
@@ -31,7 +31,7 @@ const GoogleLogOut = (props) => {
         scopes: ["profile", "email"],
       });
 
-      if (type === "success" || type === "default" ) {
+      if (type === "success" || type === "default") {
         console.log("Logged out", user);
         auth.logout();
         props.navigate("LogIn");

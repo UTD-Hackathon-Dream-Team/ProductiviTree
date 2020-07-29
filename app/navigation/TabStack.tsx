@@ -2,14 +2,13 @@ import React from "react";
 import { Icon } from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Feed from '../screens/Feed';
-import Profile from '../screens/Profile';
-import FriendProfile from '../screens/FriendProfile';
-import StatsGroup from '../screens/StatsGroup';
-import Challenges from '../screens/Challenges';
-import AddPost from '../screens/AddPost';
-import Search from '../screens/Search';
-
+import Feed from "../screens/Feed";
+import Profile from "../screens/Profile";
+import FriendProfile from "../screens/FriendProfile";
+import StatsGroup from "../screens/StatsGroup";
+import Challenges from "../screens/Challenges";
+import AddPost from "../screens/AddPost";
+import Search from "../screens/Search";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,27 +19,21 @@ const TabStack = () => {
         name="Feed"
         component={Feed}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon active={focused} name="ios-paper" />
-          ),
+          tabBarIcon: ({ focused }) => <Icon active={focused} name="ios-paper" />,
         }}
       />
       <Tab.Screen
         name="Stats"
         component={StatsGroup}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon active={focused} name="md-stats" />
-          ),
+          tabBarIcon: ({ focused }) => <Icon active={focused} name="md-stats" />,
         }}
       />
       <Tab.Screen
         name="Challenges"
         component={Challenges}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon active={focused} name="md-trophy" />
-          ),
+          tabBarIcon: ({ focused }) => <Icon active={focused} name="md-trophy" />,
         }}
       />
     </Tab.Navigator>

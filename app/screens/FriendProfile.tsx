@@ -97,17 +97,10 @@ const FriendProfile = (props) => {
   }, [refreshing]);
 
   return (
-    <LinearGradient
-      colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} backButton={true} />
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {user && <ProfileInfo user={user} navigate={props.navigation.navigate}/>}
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        {user && <ProfileInfo user={user} navigate={props.navigation.navigate} />}
         {user && followers.includes(user.googleID) ? (
           <View>
             <Text>Follows You</Text>
@@ -126,10 +119,7 @@ const FriendProfile = (props) => {
           </View>
         ) : (
           <View>
-            <Button
-              style={{ justifyContent: "center", alignItems: "center" }}
-              onPress={followUser}
-            >
+            <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={followUser}>
               <Text>Follow</Text>
             </Button>
           </View>

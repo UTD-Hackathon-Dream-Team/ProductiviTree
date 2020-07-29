@@ -1,14 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import {
-  Header,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Text,
-  Thumbnail,
-  Button,
-} from "native-base";
+import { Header, Left, Right, Body, Icon, Text, Thumbnail, Button } from "native-base";
 import { AuthContext } from "../AuthContext";
 
 const axios = require("axios").default;
@@ -42,18 +33,12 @@ const CustomHeader = (props) => {
       <Right>
         {!props.settings ? (
           user && (
-            <Button
-              transparent
-              onPress={() => props.navigation.navigate("Profile")}
-            >
+            <Button transparent onPress={() => props.navigation.navigate("Profile")}>
               <Thumbnail small source={{ uri: user!.ProfilePic }} />
             </Button>
           )
         ) : (
-          <Button
-            transparent
-            onPress={() => props.navigation.navigate("Settings")}
-          >
+          <Button transparent onPress={() => props.navigation.navigate("Settings")}>
             <Icon name="md-settings" />
           </Button>
         )}
