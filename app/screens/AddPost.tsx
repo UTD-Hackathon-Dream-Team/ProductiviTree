@@ -68,14 +68,21 @@ const AddPost = (props) => {
   };
 
   const submitPost = async () => {
-    await getImageURL();
+    //await getImageURL();
+    const postPic = await getImageURL();
+    console.log(postPic);
+
+    const newPost = {
+      Author: auth.googleID,
+      Picture: imageURL,
+      Caption: enteredText,
+      Activity: activity,
+    };
+
+    console.log(newPost);
+
     await axios
-      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
-        Author: auth.googleID,
-        Picture: imageURL,
-        Caption: enteredText,
-        Activity: activity,
-      })
+      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", newPost)
       .then( async (response) => {
         console.log("Calling updatePoints");
         await updatePoints();
@@ -105,7 +112,8 @@ const AddPost = (props) => {
       .then((res) => res.json())
       .then(async (data) => {
         console.log( "Inside getImageURL", data.secure_url);
-        setImageURL(data.secure_url);
+        await setImageURL(data.secure_url);
+        return data.secure_url;
       });
   };
 
