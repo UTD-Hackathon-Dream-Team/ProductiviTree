@@ -97,10 +97,10 @@ const AddPost = (props) => {
     await axios
       .post("https://productivitree.wl.r.appspot.com/api/v1/posts", newPost)
       .then( async (response) => {
-        console.log("Calling updatePoints");
         await updatePoints();
-        props.navigation.navigate("Feed");
-        console.log("Finished calling updatePoints");
+        setTimeout(() => {
+          props.navigation.navigate("Feed");
+        }, 1000);
       })
       .catch(function (error) {
         console.log(error);
