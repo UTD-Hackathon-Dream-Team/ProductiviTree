@@ -95,12 +95,7 @@ const AddPost = (props) => {
     console.log(newPost);
 
     await axios
-      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
-        Author: auth.googleID,
-        Picture: imageURL,
-        Caption: enteredText,
-        Activity: activity,
-      })
+      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", newPost)
       .then( async (response) => {
         console.log("Calling updatePoints");
         await updatePoints();
