@@ -11,6 +11,7 @@ const Stats = () => {
   const auth = useContext(AuthContext);
   let [user, setUser] = useState(null);
   let [trees, setTrees] = useState(0);
+  let [points, setPoints] = useState(0);
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -26,6 +27,24 @@ const Stats = () => {
       totalTress += otherUser.Trees;
     });
     setTrees(totalTress);
+    const postResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/posts/user/${auth.googleID}`);
+    const allPosts = postResponse.data.payload;
+    let totalPoints = 0;
+    allPosts.forEach((post: { TimeStamp: Number , Activity: any }) => {
+      let today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      let currentDate = yyyy + '-' + mm + '-' + dd;
+
+      let postDate = (post.TimeStamp).toString();
+      // console.log("Today", currentDate);
+      // console.log((postDate).substr(0, postDate.indexOf('T')));
+
+      if( (postDate).substr(0, postDate.indexOf('T')) ===  (currentDate) )
+        totalPoints += post.Activity.Points;
+    });
+    setPoints(totalPoints);
     setRefreshing(false);
   }
 
@@ -47,13 +66,13 @@ const Stats = () => {
           <Text style={{ fontSize: 20 }}>
             <Text style={{ fontWeight: "bold" }}>
               {" "}
-              {100} / {user.DailyGoal}{" "}
+              {points} / {user.DailyGoal}{" "}
             </Text>
             Daily Goal Points
           </Text>
-          <Progress.Bar progress={100 / user.DailyGoal} width={250} />
+          <Progress.Bar progress={points / user.DailyGoal} width={250} />
           <Text style={{ fontSize: 20 }}>
-            <Text style={{ fontWeight: "bold" }}> {(100 / user.DailyGoal) * 100}% </Text>
+            <Text style={{ fontWeight: "bold" }}> {(points / user.DailyGoal) * 100}% </Text>
             of Daily Goal Achieved
           </Text>
         </View>
