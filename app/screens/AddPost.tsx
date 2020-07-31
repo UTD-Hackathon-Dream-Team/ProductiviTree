@@ -69,12 +69,25 @@ const AddPost = (props) => {
 
   const submitPost = async () => {
     //await getImageURL();
-    const postPic = await getImageURL();
-    console.log(postPic);
+    let url;
+    const data = new FormData();
+    data.append("file", "data:image/jpeg;base64," + img64);
+    data.append("upload_preset", "productivitree");
+    data.append("cloud_name", "utd-hdt");
+    await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        console.log( "Inside getImageURL", data.secure_url);
+        await setImageURL(data.secure_url);
+        url = data.secure_url;
+      });
 
-    const newPost = {
+    const newPost = await {
       Author: auth.googleID,
-      Picture: imageURL,
+      Picture: url,
       Caption: enteredText,
       Activity: activity,
     };
@@ -82,7 +95,12 @@ const AddPost = (props) => {
     console.log(newPost);
 
     await axios
-      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", newPost)
+      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
+        Author: auth.googleID,
+        Picture: imageURL,
+        Caption: enteredText,
+        Activity: activity,
+      })
       .then( async (response) => {
         console.log("Calling updatePoints");
         await updatePoints();
@@ -113,7 +131,6 @@ const AddPost = (props) => {
       .then(async (data) => {
         console.log( "Inside getImageURL", data.secure_url);
         await setImageURL(data.secure_url);
-        return data.secure_url;
       });
   };
 
