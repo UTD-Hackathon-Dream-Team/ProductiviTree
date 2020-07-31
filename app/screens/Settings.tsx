@@ -52,7 +52,7 @@ const Settings = (props) => {
     await getImageURL();
     await axios
       .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-        ProfilePic: image,
+        ProfilePic: imageURL,
         Username: userName,
         Bio: bio,
         DailyGoal: dailyGoal
