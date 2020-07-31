@@ -69,6 +69,7 @@ const AddPost = (props) => {
 
   const submitPost = async () => {
     //await getImageURL();
+    
     let url;
     const data = new FormData();
     data.append("file", "data:image/jpeg;base64," + img64);
@@ -80,22 +81,17 @@ const AddPost = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log( "Inside getImageURL", data.secure_url);
         await setImageURL(data.secure_url);
         url = data.secure_url;
       });
 
-    const newPost = await {
-      Author: auth.googleID,
-      Picture: url,
-      Caption: enteredText,
-      Activity: activity,
-    };
-
-    console.log(newPost);
-
     await axios
-      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", newPost)
+      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
+        Author: auth.googleID,
+        Picture: url,
+        Caption: enteredText,
+        Activity: activity,
+      })
       .then( async (response) => {
         await updatePoints();
         setTimeout(() => {
@@ -124,7 +120,6 @@ const AddPost = (props) => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log( "Inside getImageURL", data.secure_url);
         await setImageURL(data.secure_url);
       });
   };
