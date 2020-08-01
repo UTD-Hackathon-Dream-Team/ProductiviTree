@@ -31,7 +31,16 @@ const Settings = (props) => {
     }
   };
 
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = async () => {
+    
+    
+    await axios
+      .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+        ReceiveNotifications: !isEnabled
+      })
+    setIsEnabled(!isEnabled);
+    
+  }
 
   async function fetchData() {
     const result = await axios(
@@ -42,6 +51,7 @@ const Settings = (props) => {
     setBio(result.data.payload.Bio);
     setDailyGoal(result.data.payload.DailyGoal);
     setImage(result.data.payload.ProfilePic);
+    setIsEnabled(result.data.payload.ReceiveNotifications)
   }
 
   useEffect(() => {
@@ -164,32 +174,21 @@ const Settings = (props) => {
             <GoogleLogOut navigate={props.navigation.navigate} />
           </View>
 
-          {/* <View>
-            <ListItem>
+          <View>
+
               <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-                Push Notifications  
+                Set Private:
               </Text>
+              {/* <Text>{isEnabled ? 'Switch is ON' : 'Switch is OFF'}</Text> */}
               <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
                 thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
                 value={isEnabled}
-              />          
-            </ListItem>
-            <ListItem>
-              <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-                Email Notifications  
-              </Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />    
-            </ListItem>
-          </View>   */}
+              />           
+            
+          </View>   
         </Content>
       )}
     </LinearGradient>
