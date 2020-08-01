@@ -32,7 +32,7 @@ const PostCard = (props) => {
   }
 
   return (
-    <Card>
+    <Card style={ { marginBottom: 20 } }>
       <CardItem button onPress={goToUser}>
         <Left>
           <Thumbnail
