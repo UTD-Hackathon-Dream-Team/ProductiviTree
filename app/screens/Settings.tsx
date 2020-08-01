@@ -49,10 +49,26 @@ const Settings = (props) => {
   }, []);
 
   const updateUser = async () => {
-    await getImageURL();
+    //await getImageURL();
+
+    let url;
+    const data = new FormData();
+    data.append("file", "data:image/jpeg;base64," + img64);
+    data.append("upload_preset", "productivitree");
+    data.append("cloud_name", "utd-hdt");
+    await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImageURL(data.secure_url);
+        url = data.secure_url;
+      });
+
     await axios
       .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-        ProfilePic: image,
+        ProfilePic: url,
         Username: userName,
         Bio: bio,
         DailyGoal: dailyGoal

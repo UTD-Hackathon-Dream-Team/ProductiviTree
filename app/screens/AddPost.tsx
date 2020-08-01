@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Content, Button, Card, Textarea, Text, Form, Toast, Root } from "native-base";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,6 +19,20 @@ const AddPost = (props) => {
   );
   let [img64, setImg64] = useState(null);
   let [imageURL, setImageURL] = useState(null);
+  let [oldPoints, setOldPoints] = useState(0);
+  let [newPoints, setNewPoints] = useState(0);
+  let [trees, setTrees] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const activityResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`);
+      setNewPoints(activityResponse.data.payload.Points);
+      const userResponse = await axios( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
+      setOldPoints(userResponse.data.payload.Points);
+      setTrees(userResponse.data.payload.Trees);
+    };
+    fetchData();
+  }, []);
 
   const getPickerPermission = async () => {
     if (Constants.platform.ios) {
@@ -30,70 +44,69 @@ const AddPost = (props) => {
   };
 
   const updatePoints = async () => {
-    const activityResponse = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`
-    );
-    const newPoints = activityResponse.data.payload.Points;
-    const userResponse = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
-    );
-    const oldPoints = userResponse.data.payload.Points;
-    const oldTrees = userResponse.data.payload.Trees;
-    axios
-      .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-        Points: oldPoints + newPoints,
-      })
-      .then(function (response) {
-        Toast.show({
-          text: `You've earned ${newPoints} points!`,
-          buttonText: "Okay",
-          position: "bottom",
-        });
-
-        if (oldPoints + newPoints > 1000) {
-          axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-            Points: oldPoints + newPoints - 1000,
-            Trees: oldTrees + 1,
-          });
-          Toast.show({
-            text: `You've planted one more tree and earned ${newPoints} points!`,
-            buttonText: "Okay",
-            position: "bottom",
-          });
-        }
-        setTimeout(() => {
-          console.log("Go to feed / previous page here");
-          props.navigation.navigate("Feed");
-        }, 1000);
+    if (oldPoints + newPoints > 1000) {
+      await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+        Points: oldPoints + newPoints - 1000,
+        Trees: trees + 1
       });
+      Toast.show({
+        text: `You've planted one more tree and earned ${newPoints} points!`,
+        buttonText: "Okay",
+        position: "bottom",
+      });
+    }
+    else {
+      await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
+        Points: oldPoints + newPoints
+      });
+      Toast.show({
+        text: `You've earned ${newPoints} points!`,
+        buttonText: "Okay",
+        position: "bottom",
+      });
+    }
   };
 
   const submitPost = async () => {
-    console.log("Submit post");
-    await getImageURL();
-    console.log("Image", imageURL);
-    await axios
-      .get(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`)
-      .then((response) => {
-        axios
-          .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
-            Author: auth.googleID,
-            Picture: imageURL,
-            Caption: enteredText,
-            Activity: response.data.payload,
-          })
-          .then(function (response) {
-            updatePoints();
-          })
-          .catch(function (error) {
-            console.log(error);
-            Toast.show({
-              text: `There was an error. Please try again later.`,
-              buttonText: "Okay",
-              position: "bottom",
-            });
-          });
+    //await getImageURL();
+    
+    let url;
+    const data = new FormData();
+    data.append("file", "data:image/jpeg;base64," + img64);
+    data.append("upload_preset", "productivitree");
+    data.append("cloud_name", "utd-hdt");
+    await fetch("https://api.cloudinary.com/v1_1/utd-hdt/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        await setImageURL(data.secure_url);
+        url = data.secure_url;
       });
+
+    await axios
+      .post("https://productivitree.wl.r.appspot.com/api/v1/posts", {
+        Author: auth.googleID,
+        Picture: url,
+        Caption: enteredText,
+        Activity: activity,
+      })
+      .then( async (response) => {
+        await updatePoints();
+        setTimeout(() => {
+          props.navigation.navigate("Feed");
+        }, 1000);
+      })
+      .catch(function (error) {
+        console.log(error);
+        Toast.show({
+          text: `There was an error. Please try again later.`,
+          buttonText: "Okay",
+          position: "bottom",
+        });
+      });
+      
   };
 
   const getImageURL = async () => {
@@ -106,8 +119,8 @@ const AddPost = (props) => {
       body: data,
     })
       .then((res) => res.json())
-      .then((data) => {
-        setImageURL(data.secure_url);
+      .then(async (data) => {
+        await setImageURL(data.secure_url);
       });
   };
 
