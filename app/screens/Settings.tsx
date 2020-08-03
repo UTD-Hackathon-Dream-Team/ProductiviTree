@@ -26,7 +26,7 @@ const Settings = (props) => {
   }, []);
 
   function goToProfile() {
-    props.navigation.navigate("Profile");
+    props.navigation.push("Profile");
   }
 
   return (
@@ -69,7 +69,7 @@ const Settings = (props) => {
             </Button>
           </View>
           <View style={{ padding: 10 }}>
-            <GoogleLogOut navigate={props.navigation.navigate} />
+            <GoogleLogOut navigate={props.navigation.push} />
           </View>
 
           {/* <View>

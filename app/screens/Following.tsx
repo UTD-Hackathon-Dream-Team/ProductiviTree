@@ -33,7 +33,7 @@ const Following = (props) => {
   }, [refreshing]);
 
   function goToSearch() {
-    navigation.navigate("Search");
+    navigation.push("Search");
   }
 
   return (

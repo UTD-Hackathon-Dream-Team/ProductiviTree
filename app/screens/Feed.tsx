@@ -58,7 +58,7 @@ const Feed = (props) => {
         active={true}
         style={{ backgroundColor: "#5067FF" }}
         position="bottomRight"
-        onPress={() => props.navigation.navigate("ChooseActivity")}
+        onPress={() => props.navigation.push("ChooseActivity")}
       >
         <Icon name="ios-add" />
       </Fab>

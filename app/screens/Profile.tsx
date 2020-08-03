@@ -32,13 +32,13 @@ const Profile = (props: any) => {
   }, [refreshing]);
 
   function goToSettings() {
-    props.navigation.navigate("Settings");
+    props.navigation.push("Settings");
   }
   return (
     <LinearGradient colors={["#C8F0EE", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={props.navigation} backButton={true} settings={true} />
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {user && <ProfileInfo user={user} navigate={props.navigation.navigate} />}
+        {user && <ProfileInfo user={user} navigate={props.navigation.push} />}
         <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={goToSettings}>
           <Text>Settings</Text>
         </Button>

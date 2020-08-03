@@ -63,7 +63,7 @@ const AddPost = (props) => {
         }
         setTimeout(() => {
           console.log("Go to feed / previous page here");
-          props.navigation.navigate("Feed");
+          props.navigation.push("Feed");
         }, 1000);
       });
   };
