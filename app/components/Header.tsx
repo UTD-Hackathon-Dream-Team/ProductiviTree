@@ -33,12 +33,12 @@ const CustomHeader = (props) => {
       <Right>
         {!props.settings ? (
           user && (
-            <Button transparent onPress={() => props.navigation.navigate("Profile")}>
+            <Button transparent onPress={() => props.navigation.push("Profile")}>
               <Thumbnail small source={{ uri: user!.ProfilePic }} />
             </Button>
           )
         ) : (
-          <Button transparent onPress={() => props.navigation.navigate("Settings")}>
+          <Button transparent onPress={() => props.navigation.push("Settings")}>
             <Icon name="md-settings" />
           </Button>
         )}

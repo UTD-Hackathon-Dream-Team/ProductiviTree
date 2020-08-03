@@ -26,10 +26,10 @@ const UserList = (props) => {
     console.log(userID);
     if (userID == auth.googleID) {
       console.log("Your profile here");
-      props.navigation.navigate("Profile");
+      props.navigation.push("Profile");
     } else {
       console.log("Friend's profile here", user.googleID);
-      props.navigation.navigate("FriendProfile", { user: user.googleID });
+      props.navigation.push("FriendProfile", { user: user.googleID });
     }
   }
 
