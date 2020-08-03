@@ -124,7 +124,19 @@ const FriendProfile = (props) => {
             </Button>
           </View>
         )}
-        {(user && user.Privacy) ? ((following && (following.indexOf(user.googleID) == -1)) ? <Text>This user is private.</Text> : (user && <Post user={user.googleID} />)) : (user && <Post user={user.googleID} />)}
+        {(user && user.Privacy) ? 
+          ((following && (following.indexOf(user.googleID) == -1)) ? 
+          <View style={{ justifyContent: "center", alignItems: "center" , paddingVertical: 50}}>
+            <Text style={{textAlign: "center"}} >
+              This user is private.
+            </Text>
+            <Text style={{textAlign: "center"}} >
+              Follow them to see their posts.
+            </Text>
+          </View> : 
+            (user && <Post user={user.googleID} />)) : 
+          (user && <Post user={user.googleID} />)
+        }
       </ScrollView>
     </LinearGradient>
   );
