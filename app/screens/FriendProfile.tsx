@@ -41,8 +41,26 @@ const FriendProfile = (props) => {
   const followUser = React.useCallback(async () => {
     const newFollowing = following;
     await newFollowing.push(user.googleID);
-    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-      Following: newFollowing,
+    await axios.patch(
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
+      {
+        Following: newFollowing,
+      }
+    );
+    await axios
+    .get( `https://productivitree.wl.r.appspot.com/api/v1/users/${user.googleID}`)
+    .then(async function (response) {
+      const newFollower = response.data.payload.Followers;
+      await newFollower.push(auth.googleID);
+      await axios.patch(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${user.googleID}`,
+        {
+          Followers: newFollower,
+        }
+      );
+    })
+    .catch(function (error) {
+      console.log("Error", error.response);
     });
     console.log(`Following user ${user.googleID} now`);
     await fetchData();
@@ -52,8 +70,27 @@ const FriendProfile = (props) => {
     const newFollowing = following;
     var index = newFollowing.indexOf(user.googleID);
     if (index !== -1) newFollowing.splice(index, 1);
-    await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-      Following: newFollowing,
+    await axios.patch(
+      `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`,
+      {
+        Following: newFollowing,
+      }
+    );
+    await axios
+    .get( `https://productivitree.wl.r.appspot.com/api/v1/users/${user.googleID}`)
+    .then(async function (response) {
+      const newFollower = response.data.payload.Followers;
+      var index = newFollower.indexOf(auth.googleID);
+      if (index !== -1) newFollower.splice(index, 1);
+      await axios.patch(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${user.googleID}`,
+        {
+          Followers: newFollower,
+        }
+      );
+    })
+    .catch(function (error) {
+      console.log("Error", error.response);
     });
     console.log(`Unfollowing user ${user.googleID} now`);
     await fetchData();

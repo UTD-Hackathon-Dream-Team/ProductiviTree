@@ -19,7 +19,7 @@ const CustomHeader = (props) => {
   }, []);
 
   return (
-    <Header>
+    <Header style={{ backgroundColor: "#3F51B5" }}>
       <Left>
         {props.backButton && (
           <Button transparent onPress={() => props.navigation.goBack()}>

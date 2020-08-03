@@ -36,6 +36,7 @@ const ChooseActivity = (props) => {
         <List
           dataArray={props.category}
           horizontal={true}
+          keyExtractor={(item) => item._id}
           renderRow={(item) => (
             <ListItem>
               <Card>
