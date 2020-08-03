@@ -43,13 +43,13 @@ const Following = (props) => {
       <Header navigation={navigation} backButton={true} />
       <Text style={{ fontSize: 20, padding: 20 }}> {user.Username}'s  Following:</Text>
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {following.map(function (user, i) {
+        {following.map(function (followingUser, i) {
           return (
             <View key={i}>
-              {user == auth.googleID.toString() ? (
+              {followingUser == (props.route.params.user) ? (
                 <></>
               ) : (
-                <UserList user={user} navigation={navigation} />
+                <UserList user={followingUser} navigation={navigation} />
               )}
             </View>
           );
