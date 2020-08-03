@@ -124,7 +124,7 @@ const FriendProfile = (props) => {
             </Button>
           </View>
         )}
-        {user && <Post user={user.googleID} />}
+        {(user && user.Privacy) ? ((following && (following.indexOf(user.googleID) == -1)) ? <Text>This user is private.</Text> : (user && <Post user={user.googleID} />)) : (user && <Post user={user.googleID} />)}
       </ScrollView>
     </LinearGradient>
   );
