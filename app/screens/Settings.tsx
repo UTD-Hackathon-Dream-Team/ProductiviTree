@@ -32,14 +32,11 @@ const Settings = (props) => {
   };
 
   const toggleSwitch = async () => {
-    
-    
     await axios
       .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-        ReceiveNotifications: !isEnabled
+        Privacy: !isEnabled
       })
-    setIsEnabled(!isEnabled);
-    
+    setIsEnabled(!isEnabled); 
   }
 
   async function fetchData() {
