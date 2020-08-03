@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import logo from "./logo.svg";
 import "./App.css";
 
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import Home from "./screens/Home";
 import About from "./screens/About";
 import Feed from "./screens/Feed";
@@ -10,23 +12,8 @@ import Stats from "./screens/Stats";
 
 function App() {
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
     <Router>
+      <NavBar />
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -42,6 +29,7 @@ function App() {
         </Route>
         <Redirect to="/" />
       </Switch>
+      <Footer />
     </Router>
   );
 }
