@@ -23,8 +23,8 @@ const PostCard = (props) => {
   function goToUser() {
     const userID = user.googleID.toString();
     console.log(userID);
-    if (userID == auth.googleID) props.navigation.navigate("Profile");
-    else props.navigation.navigate("FriendProfile", { user: user.googleID });
+    if (userID == auth.googleID) props.navigation.push("Profile");
+    else props.navigation.push("FriendProfile", { user: user.googleID });
   }
 
   function likePost() {

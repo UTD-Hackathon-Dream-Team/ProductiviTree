@@ -95,16 +95,14 @@ const Challenges = (props) => {
           </Container>
         </Content>
       </ScrollView>
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        <Fab
-          active={true}
-          style={{ backgroundColor: "#5067FF" }}
-          position="bottomRight"
-          onPress={() => props.navigation.navigate("ChooseActivity")}
-        >
-          <Icon name="ios-add" />
-        </Fab>
-      </View>
+      <Fab
+        active={true}
+        style={{ backgroundColor: "#5067FF" }}
+        position="bottomRight"
+        onPress={() => props.navigation.push("ChooseActivity")}
+      >
+        <Icon name="ios-add" />
+      </Fab>
     </LinearGradient>
   );
 };

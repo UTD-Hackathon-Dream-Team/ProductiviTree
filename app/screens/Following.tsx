@@ -13,6 +13,7 @@ const Following = (props) => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   let [following, setFollowing] = useState([]);
+  let [user, setUser] = useState({});
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -21,6 +22,7 @@ const Following = (props) => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/${props.route.params.user}`
     );
     setFollowing(result.data.payload.Following);
+    setUser(result.data.payload);
     setRefreshing(false);
   }
 
@@ -33,21 +35,21 @@ const Following = (props) => {
   }, [refreshing]);
 
   function goToSearch() {
-    navigation.navigate("Search");
+    navigation.push("Search");
   }
 
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={navigation} backButton={true} />
-      <Text style={{ fontSize: 20, padding: 20 }}>Following:</Text>
+      <Text style={{ fontSize: 20, padding: 20 }}> {user.Username}'s  Following:</Text>
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {following.map(function (user, i) {
+        {following.map(function (followingUser, i) {
           return (
             <View key={i}>
-              {user == auth.googleID.toString() ? (
+              {followingUser == (props.route.params.user) ? (
                 <></>
               ) : (
-                <UserList user={user} navigation={navigation} />
+                <UserList user={followingUser} navigation={navigation} />
               )}
             </View>
           );

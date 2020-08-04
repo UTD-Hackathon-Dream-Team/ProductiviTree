@@ -1,5 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Container, Content, Text, View, Body, Title, Button, ListItem, Textarea, Form, Toast, Root} from "native-base";
+import {
+  Container,
+  Content,
+  Text,
+  View,
+  Body,
+  Title,
+  Button,
+  ListItem,
+  Textarea,
+  Form,
+  Toast,
+  Root,
+} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Switch, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AuthContext } from "../AuthContext";
@@ -17,7 +30,7 @@ const Settings = (props) => {
   let [userName, setUserName] = useState("");
   let [bio, setBio] = useState("");
   let [dailyGoal, setDailyGoal] = useState("");
-  let [image, setImage] = useState( "" );
+  let [image, setImage] = useState("");
   const [isEnabled, setIsEnabled] = useState(false);
   let [img64, setImg64] = useState(null);
   let [imageURL, setImageURL] = useState(null);
@@ -78,10 +91,10 @@ const Settings = (props) => {
         ProfilePic: url,
         Username: userName,
         Bio: bio,
-        DailyGoal: dailyGoal
+        DailyGoal: dailyGoal,
       })
       .then(function (response) {
-        props.navigation.navigate("Profile");
+        props.navigation.push("Profile");
       })
       .catch(function (error) {
         console.log(error);
@@ -91,7 +104,7 @@ const Settings = (props) => {
           position: "bottom",
         });
       });
-  }
+  };
 
   const getImageURL = async () => {
     const data = new FormData();
@@ -147,13 +160,25 @@ const Settings = (props) => {
             </TouchableOpacity>
 
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>Username:</Text>
-            <Textarea style={{ fontSize: 25 }} placeholder={user.Username} onChangeText={(newUserName) => setUserName(newUserName)} />
+            <Textarea
+              style={{ fontSize: 25 }}
+              placeholder={user.Username}
+              onChangeText={(newUserName) => setUserName(newUserName)}
+            />
 
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>Bio:</Text>
-            <Textarea style={{ fontSize: 25 }} placeholder={user.Bio} onChangeText={(newBio) => setBio(newBio)} />
+            <Textarea
+              style={{ fontSize: 25 }}
+              placeholder={user.Bio}
+              onChangeText={(newBio) => setBio(newBio)}
+            />
 
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>Daily Points Goal:</Text>
-            <Textarea style={{ fontSize: 25 }} placeholder={user.DailyGoal.toString()} onChangeText={(newGoal) => setDailyGoal(newGoal)} />
+            <Textarea
+              style={{ fontSize: 25 }}
+              placeholder={user.DailyGoal.toString()}
+              onChangeText={(newGoal) => setDailyGoal(newGoal)}
+            />
           </Form>
 
           <View style={{ padding: 10 }}>
@@ -168,7 +193,7 @@ const Settings = (props) => {
           </View>
 
           <View style={{ padding: 10 }}>
-            <GoogleLogOut navigate={props.navigation.navigate} />
+            <GoogleLogOut navigate={props.navigation.push} />
           </View>
 
           <View>

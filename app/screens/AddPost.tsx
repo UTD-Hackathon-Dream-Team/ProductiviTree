@@ -25,9 +25,13 @@ const AddPost = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const activityResponse = await axios(`https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`);
+      const activityResponse = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/activities/${activity}`
+      );
       setNewPoints(activityResponse.data.payload.Points);
-      const userResponse = await axios( `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`);
+      const userResponse = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+      );
       setOldPoints(userResponse.data.payload.Points);
       setTrees(userResponse.data.payload.Trees);
     };
@@ -47,17 +51,16 @@ const AddPost = (props) => {
     if (oldPoints + newPoints > 1000) {
       await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
         Points: oldPoints + newPoints - 1000,
-        Trees: trees + 1
+        Trees: trees + 1,
       });
       Toast.show({
         text: `You've planted one more tree and earned ${newPoints} points!`,
         buttonText: "Okay",
         position: "bottom",
       });
-    }
-    else {
+    } else {
       await axios.patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-        Points: oldPoints + newPoints
+        Points: oldPoints + newPoints,
       });
       Toast.show({
         text: `You've earned ${newPoints} points!`,
@@ -69,7 +72,7 @@ const AddPost = (props) => {
 
   const submitPost = async () => {
     //await getImageURL();
-    
+
     let url;
     const data = new FormData();
     data.append("file", "data:image/jpeg;base64," + img64);
@@ -92,7 +95,7 @@ const AddPost = (props) => {
         Caption: enteredText,
         Activity: activity,
       })
-      .then( async (response) => {
+      .then(async (response) => {
         await updatePoints();
         setTimeout(() => {
           props.navigation.navigate("Feed");
@@ -106,7 +109,6 @@ const AddPost = (props) => {
           position: "bottom",
         });
       });
-      
   };
 
   const getImageURL = async () => {

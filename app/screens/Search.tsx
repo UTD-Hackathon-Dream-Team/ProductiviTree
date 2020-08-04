@@ -60,7 +60,7 @@ const Search = (props) => {
   };
 
   function goToUser(userId) {
-    props.navigation.navigate("FriendProfile", { user: userId });
+    props.navigation.push("FriendProfile", { user: userId });
   }
 
   const userCard = ({ item }) => {

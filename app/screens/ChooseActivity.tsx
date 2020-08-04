@@ -27,7 +27,7 @@ const ChooseActivity = (props) => {
   }, []);
 
   function goToAddPost(item) {
-    props.navigation.navigate("AddPost", { activity: item._id });
+    props.navigation.push("AddPost", { activity: item._id });
   }
 
   const ActivityList = (props) => {

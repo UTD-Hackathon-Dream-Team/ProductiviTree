@@ -6,6 +6,7 @@ import { AuthContext } from "../AuthContext";
 import UserList from "../components/UserList";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../components/Header";
+import { useHeaderHeight } from "@react-navigation/stack";
 
 const axios = require("axios").default;
 
@@ -13,6 +14,7 @@ const Follower = (props) => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   let [following, setFollowing] = useState([]);
+  let [user, setUser] = useState({});
   let [refreshing, setRefreshing] = useState(false);
 
   async function fetchData() {
@@ -22,6 +24,7 @@ const Follower = (props) => {
       `https://productivitree.wl.r.appspot.com/api/v1/users/${props.route.params.user}`
     );
     setFollowing(result.data.payload.Followers);
+    setUser(result.data.payload);
     setRefreshing(false);
   }
 
@@ -36,7 +39,7 @@ const Follower = (props) => {
   return (
     <LinearGradient colors={["#C8F0EE", "#c8e2f1", "#A1C6F1"]} style={{ flex: 1 }}>
       <Header navigation={navigation} backButton={true} />
-      <Text style={{ fontSize: 20, padding: 20 }}>Followers:</Text>
+      <Text style={{ fontSize: 20, padding: 20 }}> {user.Username}'s Followers:</Text>
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {following.map(function (user, i) {
           return <View key={i}>{user && <UserList user={user} navigation={navigation} />}</View>;
