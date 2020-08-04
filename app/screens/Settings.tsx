@@ -44,7 +44,10 @@ const Settings = (props) => {
     }
   };
 
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = async () => {
+    
+    setIsEnabled(!isEnabled); 
+  }
 
   async function fetchData() {
     const result = await axios(
@@ -55,6 +58,7 @@ const Settings = (props) => {
     setBio(result.data.payload.Bio);
     setDailyGoal(result.data.payload.DailyGoal);
     setImage(result.data.payload.ProfilePic);
+    setIsEnabled(result.data.payload.Privacy)
   }
 
   useEffect(() => {
@@ -85,9 +89,10 @@ const Settings = (props) => {
         Username: userName,
         Bio: bio,
         DailyGoal: dailyGoal,
+        Privacy: isEnabled
       })
       .then(function (response) {
-        props.navigation.push("Profile");
+        props.navigation.pop();
       })
       .catch(function (error) {
         console.log(error);
@@ -172,6 +177,18 @@ const Settings = (props) => {
               placeholder={user.DailyGoal.toString()}
               onChangeText={(newGoal) => setDailyGoal(newGoal)}
             />
+
+            <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
+                Set Private:
+              </Text>
+              {/* <Text>{isEnabled ? 'Switch is ON' : 'Switch is OFF'}</Text> */}
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />   
           </Form>
 
           <View style={{ padding: 10 }}>
@@ -189,32 +206,6 @@ const Settings = (props) => {
             <GoogleLogOut navigate={props.navigation} />
           </View>
 
-          {/* <View>
-            <ListItem>
-              <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-                Push Notifications  
-              </Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />          
-            </ListItem>
-            <ListItem>
-              <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-                Email Notifications  
-              </Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />    
-            </ListItem>
-          </View>   */}
         </Content>
       )}
     </LinearGradient>

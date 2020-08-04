@@ -155,14 +155,14 @@ exports.updateUser = async (req, res, next) => {
         );
     }
 
-    if (req.body.ReceiveNotifications != null) {
+    if (req.body.Privacy != null) {
       await User.find({})
         .where({ googleID: req.params.googleId })
         .replaceOne(
           {},
           {
             $set: {
-              ReceiveNotifications: req.body.ReceiveNotifications,
+              Privacy: req.body.Privacy,
             },
           }
         );
