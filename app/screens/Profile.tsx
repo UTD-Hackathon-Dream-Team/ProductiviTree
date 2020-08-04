@@ -42,7 +42,7 @@ const Profile = (props: any) => {
         <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={goToSettings}>
           <Text>Settings</Text>
         </Button>
-        {user && <Post user={user.googleID} />}
+        {user && <Post user={user.googleID} navigation={props.navigation}/>}
       </ScrollView>
     </LinearGradient>
   );
