@@ -45,10 +45,7 @@ const Settings = (props) => {
   };
 
   const toggleSwitch = async () => {
-    await axios
-      .patch(`https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`, {
-        Privacy: !isEnabled
-      })
+    
     setIsEnabled(!isEnabled); 
   }
 
@@ -92,6 +89,7 @@ const Settings = (props) => {
         Username: userName,
         Bio: bio,
         DailyGoal: dailyGoal,
+        Privacy: isEnabled
       })
       .then(function (response) {
         props.navigation.push("Profile");
@@ -179,6 +177,18 @@ const Settings = (props) => {
               placeholder={user.DailyGoal.toString()}
               onChangeText={(newGoal) => setDailyGoal(newGoal)}
             />
+
+            <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
+                Set Private:
+              </Text>
+              {/* <Text>{isEnabled ? 'Switch is ON' : 'Switch is OFF'}</Text> */}
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />   
           </Form>
 
           <View style={{ padding: 10 }}>
@@ -196,21 +206,6 @@ const Settings = (props) => {
             <GoogleLogOut navigate={props.navigation.push} />
           </View>
 
-          <View>
-
-              <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: "left" }}>
-                Set Private:
-              </Text>
-              {/* <Text>{isEnabled ? 'Switch is ON' : 'Switch is OFF'}</Text> */}
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />           
-            
-          </View>   
         </Content>
       )}
     </LinearGradient>
