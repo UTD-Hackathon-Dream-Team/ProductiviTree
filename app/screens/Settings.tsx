@@ -61,7 +61,7 @@ const Settings = (props) => {
     setBio(result.data.payload.Bio);
     setDailyGoal(result.data.payload.DailyGoal);
     setImage(result.data.payload.ProfilePic);
-    setIsEnabled(result.data.payload.ReceiveNotifications)
+    setIsEnabled(result.data.payload.Privacy)
   }
 
   useEffect(() => {
