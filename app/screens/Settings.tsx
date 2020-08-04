@@ -92,7 +92,7 @@ const Settings = (props) => {
         Privacy: isEnabled
       })
       .then(function (response) {
-        props.navigation.push("Profile");
+        props.navigation.pop();
       })
       .catch(function (error) {
         console.log(error);
