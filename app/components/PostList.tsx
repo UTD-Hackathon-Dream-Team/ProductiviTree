@@ -21,7 +21,7 @@ const Post = (props) => {
   return (
     <View>
       {posts.map(function (post, i) {
-        return <View key={i}>{posts && <PostCard post={post} />}</View>;
+        return <View key={i}>{posts && <PostCard post={post} navigation={props.navigation}/>}</View>;
       })}
     </View>
   );

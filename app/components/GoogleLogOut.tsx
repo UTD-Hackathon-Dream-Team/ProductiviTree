@@ -34,7 +34,8 @@ const GoogleLogOut = (props) => {
       if (type === "success" || type === "default") {
         console.log("Logged out", user);
         auth.logout();
-        props.navigate("LogIn");
+        //props.navigate("LogIn");
+        props.navigate.popToTop();
         return accessToken;
       } else {
         return { cancelled: true };
