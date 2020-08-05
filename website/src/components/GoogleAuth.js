@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
+import { AuthContext } from "../AuthContext";
 import { CLIENT_ID } from "../config";
 
 const GoogleAuth = () => {
-  let [signedIn, setSignedIn] = useState(false);
-  let [googleID, setGoogleID] = useState("");
+  const auth = useContext(AuthContext);
 
   const responseGoogleSuccess = (response) => {
-    console.log(response);
-    setGoogleID(response.Ea);
-    setSignedIn(true);
+    auth.login(response.googleId);
   };
 
   const responseGoogleFail = (response) => {
@@ -18,7 +16,7 @@ const GoogleAuth = () => {
   };
 
   const responseGoogleLogOut = (response) => {
-    setSignedIn(false);
+    auth.logout();
   };
 
   function SignedIn() {
@@ -30,7 +28,6 @@ const GoogleAuth = () => {
           clientId={CLIENT_ID}
           buttonText="Sign out of Google"
           onLogoutSuccess={responseGoogleLogOut}
-          //onFailure={responseGoogleFail}
           cookiePolicy={"single_host_origin"}
           theme="dark"
         />
@@ -54,7 +51,7 @@ const GoogleAuth = () => {
     );
   }
 
-  return <div>{signedIn ? SignedIn() : SignedOut()}</div>;
+  return <div>{auth.isLoggedIn ? SignedIn() : SignedOut()}</div>;
 };
 
 export default GoogleAuth;
