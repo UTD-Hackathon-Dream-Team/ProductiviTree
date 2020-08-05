@@ -1,12 +1,7 @@
-//Source for google auth: https://docs.expo.io/versions/latest/sdk/google/
-//Source for context: https://github.com/ReshmiCode/mern-app/blob/master/src/user/pages/Auth.js
-
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 import { CLIENT_ID } from "../config";
-
-const axios = require("axios").default;
 
 const GoogleAuth = () => {
   let [signedIn, setSignedIn] = useState(false);
