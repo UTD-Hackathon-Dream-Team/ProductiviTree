@@ -4,6 +4,7 @@ import GoogleLogIn from "../components/GoogleLogIn";
 import GoogleLogOut from "../components/GoogleLogOut";
 import PublicFeed from "../components/PublicFeed";
 import YourPosts from "../components/YourPosts";
+import YourFeed from "../components/YourFeed";
 
 function Feed() {
   const auth = useContext(AuthContext);
@@ -14,7 +15,8 @@ function Feed() {
         <div style={{ textAlign: "center" }}>
           <GoogleLogOut />
           {/* <PublicFeed /> */}
-          <YourPosts />
+          <YourFeed />
+          {/* <YourPosts /> */}
         </div>
       ) : (
         <div style={{ textAlign: "center" }}>
