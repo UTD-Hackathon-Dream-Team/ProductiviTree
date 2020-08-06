@@ -16,7 +16,9 @@ function PublicFeed() {
   return (
     <div>
       {posts.map((post) => (
-        <Post post={post._id} key={post._id} />
+        <div style={{ margin: 10 }}>
+          <Post post={post._id} key={post._id} />
+        </div>
       ))}
     </div>
   );
