@@ -16,17 +16,14 @@ const GoogleLogIn = () => {
   };
 
   return (
-    <div>
-      <GoogleLogin
-        clientId={CLIENT_ID}
-        buttonText="Sign in with Google"
-        onSuccess={responseGoogleSuccess}
-        onFailure={responseGoogleFail}
-        cookiePolicy={"single_host_origin"}
-        theme="dark"
-      />
-      <p>Want to see your personalized feed? Login above with your Google account!</p>
-    </div>
+    <GoogleLogin
+      clientId={CLIENT_ID}
+      buttonText="Sign in with Google"
+      onSuccess={responseGoogleSuccess}
+      onFailure={responseGoogleFail}
+      cookiePolicy={"single_host_origin"}
+      theme="dark"
+    />
   );
 };
 
