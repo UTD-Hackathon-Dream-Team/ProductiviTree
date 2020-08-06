@@ -11,10 +11,9 @@ function Feed() {
     <div
       style={{
         background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)",
-        // display: "flex",
+        display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: 100,
       }}
     >
       {auth.isLoggedIn ? (
