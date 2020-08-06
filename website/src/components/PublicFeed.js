@@ -15,7 +15,7 @@ function PublicFeed() {
   }, []);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container style={{ textAlign: "center" }}>
       {posts.map((post) => (
         <div style={{ margin: 10 }}>
           <Post post={post._id} key={post._id} />

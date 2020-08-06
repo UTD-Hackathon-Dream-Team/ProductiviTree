@@ -8,20 +8,13 @@ function Feed() {
   const auth = useContext(AuthContext);
 
   return (
-    <div
-      style={{
-        background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
       {auth.isLoggedIn ? (
         <div>
           <GoogleLogOut />
         </div>
       ) : (
-        <div>
+        <div style={{ textAlign: "center" }}>
           <GoogleLogIn />
           <PublicFeed />
         </div>
