@@ -34,14 +34,17 @@ const GoogleLogOut = (props) => {
       if (type === "success" || type === "default") {
         console.log("Logged out", user);
         auth.logout();
-        //props.navigate("LogIn");
-        props.navigate.popToTop();
+        props.navigate.reset({
+          index: 0,
+          routes: [{ name: 'LogIn' }],
+        });
         return accessToken;
       } else {
         return { cancelled: true };
       }
     } catch (e) {
-      console.log("Error with logout", e);
+      console.log("Error with logout");
+      console.log(e);
       return { error: true };
     }
   };

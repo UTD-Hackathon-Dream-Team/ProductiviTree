@@ -19,13 +19,8 @@
       "package": "com.productivitree.app",
       "icon": "./assets/logo_icon.png",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.productivitree.app",
-      "versionCode": 1,
-      "permissions": [
-        "CAMERA",
-        "MANAGE_DOCUMENTS",
-        "READ_EXTERNAL_STORAGE",
-        "READ_PHONE_STATE"
-      ],
+      "versionCode": 2,
+      "permissions": ["CAMERA", "MANAGE_DOCUMENTS", "READ_EXTERNAL_STORAGE", "READ_PHONE_STATE"],
       "config": {
         "googleSignIn": {
           "apiKey": "775766522335-sj38kehcktqqndjet1o056ajpsnuhnmd.apps.googleusercontent.com",
@@ -35,7 +30,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.productivitree.app",
-      "buildNumber": "1.0.0",
+      "buildNumber": "2.0.0",
       "icon": "./assets/ios_icon.png",
       "supportsTablet": true,
       "usesIcloudStorage": true,
