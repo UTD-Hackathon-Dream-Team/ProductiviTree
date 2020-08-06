@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card } from "@material-ui/core";
+import { Card, CardHeader } from "@material-ui/core";
 
 const axios = require("axios").default;
 
@@ -24,8 +24,10 @@ function Post(props) {
   return (
     <div>
       <Card>
-        <h1>{post.Caption}</h1>
-        <p>User: {user.Username}</p>
+        <CardHeader
+          avatar={<img style={{ height: 30, width: 30, borderRadius: 30 }} src={user.ProfilePic} />}
+          title={user.Username}
+        />
       </Card>
     </div>
   );
