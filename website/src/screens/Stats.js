@@ -26,7 +26,7 @@ function Stats() {
     fetchData();
   }, []);
 
-  const data = users.map((user) => <div><h3>{user.Username}</h3> <p>Points: {user.Points} Trees: {user.Trees}</p></div>);
+  const data = users.map((user, i) => <div><h2>{i+1}</h2><h3>{user.Username}</h3> <p>Points: {user.Points} Trees: {user.Trees}</p></div>);
 
   return (
     <div>
