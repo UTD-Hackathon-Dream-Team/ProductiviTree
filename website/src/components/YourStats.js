@@ -1,0 +1,47 @@
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../AuthContext";
+import BoardPosition from "./BoardPosition";
+const axios = require("axios").default;
+
+function YourStats() {
+  const auth = useContext(AuthContext);
+  let [users, setUsers] = useState([]);
+  let [self, setSelf] = useState([]);
+  let [pos, setPos] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(`https://productivitree.wl.r.appspot.com/api/v1/users/`);
+      const allUsers = result.data.payload;
+      const response = await axios(
+        `https://productivitree.wl.r.appspot.com/api/v1/users/${auth.googleID}`
+      );
+      setSelf(response.data.payload);
+      const following = response.data.payload.Following;
+      let friends = [];
+      allUsers.forEach((user) => {
+        if (following.includes(user.googleID)) {
+          friends.push(user);
+        }
+      });
+      friends.sort(function (a, b) {
+        return 1000 * b.Trees + b.Points - (1000 * a.Trees + a.Points);
+      });
+      setUsers(friends);
+      var index = friends.findIndex((user) => user.googleID === auth.googleID);
+      setPos(index);
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
+      <BoardPosition user={self} pos={pos + 1} />
+      {users.map((user, i) => (
+        <BoardPosition user={user} pos={i + 1} />
+      ))}
+    </div>
+  );
+}
+
+export default YourStats;

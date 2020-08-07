@@ -4,6 +4,7 @@ import { AuthContext } from "../AuthContext";
 import GoogleLogIn from "../components/GoogleLogIn";
 import GoogleLogOut from "../components/GoogleLogOut";
 import PublicStats from "../components/PublicStats";
+import YourStats from "../components/YourStats";
 
 function Stats() {
   const auth = useContext(AuthContext);
@@ -22,7 +23,7 @@ function Stats() {
               Your Stats
             </Button>
           </div>
-          <div>{view == 0 ? <PublicStats /> : <PublicStats />}</div>
+          <div>{view == 0 ? <PublicStats /> : <YourStats />}</div>
         </div>
       ) : (
         <div>
