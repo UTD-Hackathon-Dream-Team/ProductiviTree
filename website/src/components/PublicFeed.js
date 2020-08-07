@@ -15,12 +15,16 @@ function PublicFeed() {
   }, []);
 
   return (
-    <Grid container style={{ textAlign: "center" }}>
-      {posts.map((post) => (
-        <div style={{ margin: 10 }}>
-          <Post post={post._id} key={post._id} />
-        </div>
-      ))}
+    <Grid container style={{ backgroundColor: "white" }}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={2}>
+          {posts.map((post) => (
+            <Grid key={post._id} item>
+              <Post post={post._id} />
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
     </Grid>
   );
 }

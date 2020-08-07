@@ -27,7 +27,7 @@ function Feed() {
               Your Posts
             </Button>
           </div>
-          <div>{view == 0 ? <PublicFeed /> : view == 1 ? <YourFeed /> : <YourPosts />}</div>
+          {view == 0 ? <PublicFeed /> : view == 1 ? <YourFeed /> : <YourPosts />}
         </div>
       ) : (
         <div style={{ textAlign: "center" }}>
