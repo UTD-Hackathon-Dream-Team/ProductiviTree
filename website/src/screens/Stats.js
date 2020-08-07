@@ -28,7 +28,6 @@ function Stats() {
       ) : (
         <div>
           <GoogleLogIn /> To View Your Stats
-          <h1>Global Leaderboard</h1>
           <PublicStats />
         </div>
       )}
