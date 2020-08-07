@@ -3,7 +3,7 @@ import { AuthContext } from "../AuthContext";
 import BoardPosition from "./BoardPosition";
 const axios = require("axios").default;
 
-function PublicLeaderBoard() {
+function PublicStats() {
   const auth = useContext(AuthContext);
   let [users, setUsers] = useState([]);
   let [pos, setPos] = useState(0);
@@ -43,4 +43,4 @@ function PublicLeaderBoard() {
   );
 }
 
-export default PublicLeaderBoard;
+export default PublicStats;
