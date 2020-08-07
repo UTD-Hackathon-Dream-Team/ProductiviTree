@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { CardMedia } from "@material-ui/core";
 import { AuthContext } from "../AuthContext";
 import BoardPosition from "./BoardPosition";
+import "../Stats.css";
+
 const axios = require("axios").default;
 
 function PublicStats() {
@@ -26,15 +28,19 @@ function PublicStats() {
   }, []);
 
   return (
-    <div style={{ display: "flex" }}>
-      <div>
-        <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
-        <h1> {trees} Total Trees Planted</h1>
+    <div className="parent">
+      <div className="section">
+        <div>
+          <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
+          <h1> {trees} Total Trees Planted</h1>
+        </div>
       </div>
-      <div>
-        {users.map((user, i) => (
-          <BoardPosition user={user} pos={i + 1} />
-        ))}
+      <div className="section">
+        <div style={{ width: "70%" }}>
+          {users.map((user, i) => (
+            <BoardPosition user={user} pos={i + 1} />
+          ))}
+        </div>
       </div>
     </div>
   );

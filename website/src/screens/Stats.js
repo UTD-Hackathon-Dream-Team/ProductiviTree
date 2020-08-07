@@ -5,6 +5,7 @@ import GoogleLogIn from "../components/GoogleLogIn";
 import GoogleLogOut from "../components/GoogleLogOut";
 import PublicStats from "../components/PublicStats";
 import YourStats from "../components/YourStats";
+import "../Stats.css";
 
 function Stats() {
   const auth = useContext(AuthContext);
@@ -13,7 +14,7 @@ function Stats() {
   return (
     <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
       {auth.isLoggedIn ? (
-        <div>
+        <div className="body">
           <GoogleLogOut />
           <div>
             <Button variant="outlined" color="primary" onClick={() => setView(0)}>
@@ -26,8 +27,11 @@ function Stats() {
           <div>{view == 0 ? <PublicStats /> : <YourStats />}</div>
         </div>
       ) : (
-        <div>
-          <GoogleLogIn /> To View Your Stats
+        <div className="body">
+          <GoogleLogIn />
+          <p>
+          To View Your Stats
+          </p>
           <PublicStats />
         </div>
       )}
