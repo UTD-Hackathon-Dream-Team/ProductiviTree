@@ -42,14 +42,18 @@ function YourStats() {
   }, []);
 
   return (
-    <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
-      <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
-      <h1> {self.Trees} Trees Planted By You</h1>
-      <h2> {trees} Total Trees Planted</h2>
-      <BoardPosition user={self} pos={pos + 1} />
-      {users.map((user, i) => (
-        <BoardPosition user={user} pos={i + 1} />
-      ))}
+    <div style={{ display: "flex" }}>
+      <div>
+        <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
+        <h1> {self.Trees} Trees Planted By You</h1>
+        <h2> {trees} Total Trees Planted</h2>
+      </div>
+      <div>
+        <BoardPosition user={self} pos={pos + 1} />
+        {users.map((user, i) => (
+          <BoardPosition user={user} pos={i + 1} />
+        ))}
+      </div>
     </div>
   );
 }
