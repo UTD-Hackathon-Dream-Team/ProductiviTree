@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext";
-import GoogleLogIn from "./GoogleLogIn";
-import GoogleLogOut from "./GoogleLogOut";
+import BoardPosition from "./BoardPosition";
 const axios = require("axios").default;
 
 function PublicLeaderBoard() {
@@ -36,7 +35,10 @@ function PublicLeaderBoard() {
 
   return (
     <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
-      <ul>{data}</ul>
+      {/* <ul>{data}</ul> */}
+      {users.map((user, i) => (
+        <BoardPosition user={user} pos={i + 1} />
+      ))}
     </div>
   );
 }
