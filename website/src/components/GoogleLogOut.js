@@ -12,16 +12,13 @@ const GoogleLogOut = () => {
   };
 
   return (
-    <div>
-      <p>Logged In</p>
-      <GoogleLogout
-        clientId={CLIENT_ID}
-        buttonText="Sign out of Google"
-        onLogoutSuccess={responseGoogleLogOut}
-        cookiePolicy={"single_host_origin"}
-        theme="dark"
-      />
-    </div>
+    <GoogleLogout
+      clientId={CLIENT_ID}
+      buttonText="Sign out of Google"
+      onLogoutSuccess={responseGoogleLogOut}
+      cookiePolicy={"single_host_origin"}
+      theme="dark"
+    />
   );
 };
 
