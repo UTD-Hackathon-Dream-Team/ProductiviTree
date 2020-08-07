@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext";
 import GoogleLogIn from "../components/GoogleLogIn";
 import GoogleLogOut from "../components/GoogleLogOut";
+import {API_URL} from "../config"
 const axios = require("axios").default
 
 function Stats() {
@@ -11,7 +12,7 @@ function Stats() {
 
   async function fetchData() {
     const result = await axios(
-      `https://productivitree.wl.r.appspot.com/api/v1/users/`
+      `${API_URL}/users`
     );
     const allUsers = result.data.payload;
     allUsers.sort(function(a, b) {
