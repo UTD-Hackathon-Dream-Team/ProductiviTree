@@ -1,23 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import "../NavBar.css"
 
 function NavBar() {
   return (
-    <nav className="navBar">
-      <Link to="" style={{margin: "auto 0 auto 1rem", textDecoration: "none"}}><h1>Productivitree</h1></Link>
-      <ul className="tabs">
-        <li>
-          <Link to="/about" style={{textDecoration: "none", margin:"1rem"}}>About Us</Link>
-        </li>
-        <li>
-          <Link to="/feed" style={{textDecoration: "none", margin:"1rem"}}>Feed</Link>
-        </li>
-        <li>
-          <Link to="/stats" style={{textDecoration: "none", margin:"1rem"}}>Statistics</Link>
-        </li>
-      </ul>
-    </nav>
+    <Navbar className="navBar" fixed="top" color="dark" expand="md" dark>
+      <NavbarBrand href="/"  style={{ textDecoration: "none", margin:"1rem"}}><h1>Productivitree</h1></NavbarBrand>
+      <Nav className="tabs" navbar>
+        <NavItem>
+          <Link to="/about" style={{ textDecoration: "none", margin: "1rem" }}>About Us</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/feed" style={{ textDecoration: "none", margin: "1rem" }}>Feed</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/stats" style={{ textDecoration: "none", margin: "1rem" }}>Statistics</Link>
+        </NavItem>
+      </Nav>
+    </Navbar>
   );
 }
 
