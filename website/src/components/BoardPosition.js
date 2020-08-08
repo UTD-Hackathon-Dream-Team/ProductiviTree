@@ -4,7 +4,7 @@ import "../Stats.css"
 
 function BoardPosition(props) {
   return (
-    <Card className="card">
+    <Card className="card" style={{borderRadius:"3.5rem"}}>
       <CardContent className="cardContent" >
         <h3 className="pos"> #{props.pos}</h3>
         <div className="profpic">
