@@ -38,7 +38,7 @@ function App() {
       }}
     >
       <Router>
-        <NavBar />
+      <NavBar />
         <Switch>
           <Route path="/" exact>
             <Home />
