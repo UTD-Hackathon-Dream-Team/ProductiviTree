@@ -2,7 +2,8 @@ import React from "react";
 
 function Home() {
   return (
-    <div>
+    <div style={{  height: "100vh",
+      width: "100vw"}}>
       <h1> Home </h1>
     </div>
   );

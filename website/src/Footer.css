@@ -1,0 +1,6 @@
+.footer{
+    display: grid;
+    height: 6rem;
+    background-color: #75BDB9;
+    text-align: center;
+}
