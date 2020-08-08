@@ -29,9 +29,7 @@ function Stats() {
       ) : (
         <div className="body">
           <GoogleLogIn />
-          <p>
           To View Your Stats
-          </p>
           <PublicStats />
         </div>
       )}
