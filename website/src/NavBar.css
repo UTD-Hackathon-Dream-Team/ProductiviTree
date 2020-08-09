@@ -1,0 +1,14 @@
+.navBar{
+    display: flex;
+    flex-direction: row;
+    background-color: #75BDB9;
+}
+
+.tabs{
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+    list-style: none;
+    padding: 0;
+    margin: auto 0 auto auto;
+}
