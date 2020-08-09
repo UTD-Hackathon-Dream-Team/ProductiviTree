@@ -4,7 +4,7 @@ import "../Footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <h3> Made with &lt;3 by Megan Tran, Reshmi Ranjith, Saloni Shivdasani, and Vincent Vu </h3>
+      <h3> Made with 💖 by Megan Tran, Reshmi Ranjith, Saloni Shivdasani, and Vincent Vu </h3>
     </footer>
   );
 }
