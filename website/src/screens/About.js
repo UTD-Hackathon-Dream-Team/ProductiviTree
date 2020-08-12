@@ -1,11 +1,11 @@
 import React from "react";
 import { CardMedia } from "@material-ui/core";
-import "../Home.css";
+import "../about.css";
 
 function About() {
   return (
     <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
-      <div>
+      <section className="info">
         <h1> The Problem </h1>
         <div className="divider"></div>
         <p>
@@ -18,8 +18,8 @@ function About() {
           With ProductiviTree, we aim to change that by incentivizing and sharing your productivity
           with your friends, creating an encouraging, supportive environment.
         </p>
-      </div>
-      <div>
+      </section>
+      <section className="info">
         <h1> The Solution </h1>
         <div className="divider"></div>
         <p>
@@ -39,32 +39,36 @@ function About() {
           accumulated points will automatically be redeemed to plant trees, so users can help the
           environment while helping themselves.
         </p>
-      </div>
-      <div>
+      </section>
+      <section className="devs">
         <h1> The Developers </h1>
         <div className="divider"></div>
-        <div>
-          <CardMedia image={require("../assets/Mei.png")} style={{ height: 260, width: 180 }} />
-          <h3>Megan Tran</h3>
+        <div className="dev-wrapper">
+          <div className="dev">
+            <CardMedia image={require("../assets/Mei.png")} style={{ height: 260, width: 180 }} />
+            <h3>Megan Tran</h3>
+          </div>
+          <div className="dev">
+            <CardMedia image={require("../assets/Reshmi.png")} style={{ height: 260, width: 180 }} />
+            <h3>Reshmi Ranjith</h3>
+          </div>
+          <div className="dev">
+            <CardMedia image={require("../assets/Saloni.png")} style={{ height: 260, width: 180 }} />
+            <h3>Saloni Shivdasani</h3>
+          </div>
+          <div className="dev">
+            <CardMedia image={require("../assets/Vincent.png")} style={{ height: 260, width: 180 }} />
+            <h3>Vincent Vu</h3>
+          </div>
         </div>
-        <div>
-          <CardMedia image={require("../assets/Reshmi.png")} style={{ height: 260, width: 180 }} />
-          <h3>Reshmi Ranjith</h3>
-        </div>
-        <div>
-          <CardMedia image={require("../assets/Saloni.png")} style={{ height: 260, width: 180 }} />
-          <h3>Saloni Shivdasani</h3>
-        </div>
-        <div>
-          <CardMedia image={require("../assets/Vincent.png")} style={{ height: 260, width: 180 }} />
-          <h3>Vincent Vu</h3>
-        </div>
-      </div>
-      <div>
+
+      </section>
+      <div className="btn-wrapper">
         <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/ReshmiCode/ProductiviTree/releases/tag/untagged-132d1301bec1736eeada"
+          style={{marginRight:"1rem"}}
         >
           <button>Release Notes</button>
         </a>
@@ -72,6 +76,7 @@ function About() {
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/ReshmiCode/ProductiviTree"
+          style={{marginLeft:"1rem"}}
         >
           <button>Source Code</button>
         </a>

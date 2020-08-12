@@ -1,0 +1,31 @@
+.divider{
+    background-color: rgba(77, 77, 77, 0.3) ;
+    height: 2px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 2px;
+}
+
+section{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.dev-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+div .dev{
+    margin: 0 5rem 0 5rem;
+}
+
+.btn-wrapper{
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
