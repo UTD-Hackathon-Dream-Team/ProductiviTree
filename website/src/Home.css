@@ -1,13 +1,11 @@
-
-div{
+div {
   overflow: hidden;
 }
 
 .player-wrapper {
   position: relative;
-  margin: 2% 10% 0 10%;
-  padding-top: 40%; /* Player ratio: 100 / (1280 / 720) */
-  
+  /* margin: 2% 10% 0 10%; */
+  padding-top: 45%; /* Player ratio: 100 / (1280 / 720) */
 }
 
 .react-player {
@@ -15,22 +13,22 @@ div{
   top: 0;
   left: 0;
 }
- 
-.tree-wrapper{
+
+.tree-wrapper {
   width: 60%;
   margin: auto;
 }
 
-.tree{
+.tree {
   height: 100%;
   width: 100%;
 }
 
-.p-wrapper{
+.p-wrapper {
   margin: auto;
 }
 
-.play-store{
+.play-store {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +36,7 @@ div{
   flex-wrap: wrap;
 }
 
-.page-link{
+.page-link {
   margin: auto;
 }
 

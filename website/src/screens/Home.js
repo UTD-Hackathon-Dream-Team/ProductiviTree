@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CardMedia } from "@material-ui/core";
-import ReactPlayer from 'react-player'
-import treeImg from "../assets/tree_icon.png"
+import ReactPlayer from "react-player";
+import treeImg from "../assets/tree_icon.png";
 import "../Home.css";
 
 function Home() {
   return (
     <div style={{ background: "linear-gradient(to right bottom, #C8F0EE, #A1C6F1)" }}>
-      <div className='player-wrapper'>
+      <div className="player-wrapper">
         <ReactPlayer
-          className='react-player'
-          url='https://youtu.be/r2eyxjckIYY'
-          width='100%'
-          height='100%'
+          className="react-player"
+          url="https://youtu.be/r2eyxjckIYY"
+          width="100%"
+          height="100%"
         />
       </div>
 
@@ -21,10 +21,10 @@ function Home() {
 
       <div className="section">
         <div className="p-wrapper">
-          <p>
+          <p style={{ fontSize: 36 }}>
             Stay happy, healthy, and productive by keeping track of your exercise, studying, and
             more!
-            </p>
+          </p>
         </div>
         <div className="tree-wrapper">
           <img src={treeImg} className="tree" />
@@ -52,16 +52,14 @@ function Home() {
         </Link>
       </div>
 
-
       {/* Section 2 */}
-
 
       <div className="section">
         <div className="tree-wrapper">
           <img src={treeImg} className="tree" />
         </div>
         <div className="p-wrapper">
-          <p>Check up on your friends to make sure they’re doing well!</p>
+          <p style={{ fontSize: 36 }}>Check up on your friends to make sure they’re doing well!</p>
         </div>
         <Link to="/feed" className="page-link">
           <button> Feed </button>
@@ -86,13 +84,11 @@ function Home() {
         </div>
       </div>
 
-
       {/* Section 3 */}
-
 
       <div className="section">
         <div className="p-wrapper">
-          <p>Gain points to plant trees and help the environment!</p>
+          <p style={{ fontSize: 36 }}>Gain points to plant trees and help the environment!</p>
         </div>
         <div className="tree-wrapper">
           <img src={treeImg} className="tree" />
