@@ -1,13 +1,58 @@
-.parent {
+
+div{
+  overflow: hidden;
+}
+
+.player-wrapper {
+  position: relative;
+  margin: 2% 10% 0 10%;
+  padding-top: 40%; /* Player ratio: 100 / (1280 / 720) */
+  
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+ 
+.tree-wrapper{
+  width: 60%;
+  margin: auto;
+}
+
+.tree{
+  height: 100%;
+  width: 100%;
+}
+
+.p-wrapper{
+  margin: auto;
+}
+
+.play-store{
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
   flex-wrap: wrap;
 }
+
+.page-link{
+  margin: auto;
+}
+
 .section {
   display: grid;
-  place-items: start center;
-  flex: 1 1 150px;
-  width: minmax(40em, 50%);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr;
+  text-align: center;
 }
+
+
+
+
+
 
 .body {
   display: block;
