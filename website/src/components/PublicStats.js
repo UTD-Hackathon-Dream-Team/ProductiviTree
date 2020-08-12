@@ -3,6 +3,7 @@ import { CardMedia } from "@material-ui/core";
 import { AuthContext } from "../AuthContext";
 import BoardPosition from "./BoardPosition";
 import "../Stats.css";
+import tree from "../assets/tree_icon.png";
 
 const axios = require("axios").default;
 
@@ -31,7 +32,7 @@ function PublicStats() {
     <div className="parent">
       <div className="section">
         <div>
-          <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
+          <img style={{ width: "50%", width: "50%" }} alt="Tree" src={tree} />
           <h1> {trees} Total Trees Planted</h1>
         </div>
       </div>

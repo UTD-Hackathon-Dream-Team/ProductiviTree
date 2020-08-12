@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Iframe from "react-iframe";
 import { CardMedia } from "@material-ui/core";
 import "../Home.css";
+import tree from "../assets/tree_icon.png";
 
 function Home() {
   return (
@@ -37,11 +38,8 @@ function Home() {
             </div>
           </div>
           <div className="section">
+            <img style={{ width: "50%", width: "50%" }} alt="Tree" src={tree} />
             <div>
-              <CardMedia
-                image={require("../assets/tree_icon.png")}
-                style={{ height: 350, width: 350 }}
-              />
               <Link to="/about">
                 <button> About Us </button>
               </Link>
@@ -51,10 +49,9 @@ function Home() {
         <div className="parent">
           <div className="section">
             <div>
-              <CardMedia
-                image={require("../assets/tree_icon.png")}
-                style={{ height: 350, width: 350 }}
-              />
+              <img style={{ width: "50%", width: "50%" }} alt="Tree" src={tree} />
+            </div>
+            <div>
               <Link to="/feed">
                 <button> Feed </button>
               </Link>
@@ -106,10 +103,9 @@ function Home() {
           </div>
           <div className="section">
             <div>
-              <CardMedia
-                image={require("../assets/tree_icon.png")}
-                style={{ height: 350, width: 350 }}
-              />
+              <img style={{ width: "50%", width: "50%" }} alt="Tree" src={tree} />
+            </div>
+            <div>
               <Link to="/stats">
                 <button> Statistics </button>
               </Link>
