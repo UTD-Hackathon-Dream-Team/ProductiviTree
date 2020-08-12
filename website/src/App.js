@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
-
 import { AuthContext } from "./AuthContext";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
