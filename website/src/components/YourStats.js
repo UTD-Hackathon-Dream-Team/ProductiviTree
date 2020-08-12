@@ -44,15 +44,15 @@ function YourStats() {
   }, []);
 
   return (
-    <div className="parent">
-      <div className="section">
+    <div className="stats-wrapper">
+      <div className="stats">
         <div>
           <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
           <h1> {self.Trees} Trees Planted By You</h1>
           <h2> {trees} Total Trees Planted</h2>
         </div>
       </div>
-      <div className="section">
+      <div className="stats">
         <div style={{ width: "70%" }}>
           <BoardPosition user={self} pos={pos + 1}/>
           <div className="divider"></div>

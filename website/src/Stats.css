@@ -1,12 +1,13 @@
-.parent{
+.stats-wrapper{
     display: flex;
     flex-wrap: wrap;    
 }
-.section{
+.stats{
     display: grid;
     place-items: start center;
     flex: 1 1 150px; 
-    width: minmax(40em, 50%);
+    min-width: 40rem;
+    max-width: 50%;
     
 }
 
@@ -24,24 +25,20 @@
 }
 
 .cardContent{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 3fr;
 }
 
 .points{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     align-self: center;
     width: auto;
-}
-.name{
-    display: flex;
-    width: 30%;
 }
 
 .profpic{
-    display: flex;
     align-self: center;
-    width: auto;
+    margin: 0;
 }
 
 .pos{

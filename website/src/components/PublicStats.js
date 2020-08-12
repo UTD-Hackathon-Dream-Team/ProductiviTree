@@ -28,14 +28,14 @@ function PublicStats() {
   }, []);
 
   return (
-    <div className="parent">
-      <div className="section">
+    <div className="stats-wrapper">
+      <div className="stats">
         <div>
           <CardMedia image={require("../assets/tree_icon.png")} style={{ height: 500, width: 500 }} />
           <h1> {trees} Total Trees Planted</h1>
         </div>
       </div>
-      <div className="section">
+      <div className="stats">
         <div style={{ width: "70%" }}>
           {users.map((user, i) => (
             <BoardPosition user={user} pos={i + 1} />
