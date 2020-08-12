@@ -4,6 +4,7 @@ import { CardMedia } from "@material-ui/core";
 import ReactPlayer from 'react-player'
 import treeImg from "../assets/tree_icon.png"
 import "../Home.css";
+import tree from "../assets/tree_icon.png";
 
 function Home() {
   return (
