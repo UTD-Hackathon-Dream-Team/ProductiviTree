@@ -10,19 +10,19 @@ function BoardPosition(props) {
         <div className="profpic">
           <CardMedia
             image={props.user.ProfilePic}
-            style={{ height: 50, width: 50, borderRadius: 30, margin: "auto 2rem auto 2rem" }}
+            style={{ height: 50, width: 50, borderRadius: 30 }}
           />
         </div>
         <h4 className="name">{props.user.Username}</h4>
         <div className="points">
           <CardMedia
             image={require("../assets/tree_icon.png")}
-            style={{ height: 50, width: 50, margin: "auto 10px auto 10px" }}
+            style={{ height: 50, width: 50}}
           />
           <h5>{props.user.Trees}</h5>
           <CardMedia
             image={require("../assets/study_icon.png")}
-            style={{ height: 50, width: 50, margin: "auto 10px auto 10px" }}
+            style={{ height: 50, width: 50}}
           />
           <h5>{props.user.Points}</h5>
         </div>

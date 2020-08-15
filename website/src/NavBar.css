@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: row;
     background-color: #75BDB9;
+    flex-wrap: wrap;
+   align-content: center;
 }
 
 .tabs{
@@ -11,4 +13,11 @@
     list-style: none;
     padding: 0;
     margin: auto 0 auto auto;
+    font-size: large;
+}
+
+.logo{
+    height: auto; 
+    width: auto; 
+    max-width: 18rem; 
 }
