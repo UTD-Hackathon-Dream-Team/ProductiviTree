@@ -12,14 +12,14 @@ Planting happiness in our community
 ## Links
 
 [Demo Video](https://www.youtube.com/watch?v=A0GQYn6tABM)  
-[Android App](https://storage.googleapis.com/productivitree/ProductiviTreeV1.apk)
-[Pitch Presentation](https://storage.googleapis.com/productivitree/InternHacks%20Pitch%20Presentation.pdf)
-[Final Presentation](https://storage.googleapis.com/productivitree/IntenHacks%20Final%20Presentation.pdf)
+[Android App](https://play.google.com/store/apps/details?id=com.productivitree.app)  
+[Pitch Presentation](https://storage.googleapis.com/productivitree/SummerHacks%20Pitch%20Presentation.pdf)  
 
 ## Submission
 
-Submitted to SummerHacks 2020
-Received Best Technical Problem prize at InternHacks 2020
+- SummerHacks 2020
+- InternHacks 2020
+  - Best Technical Problem Prize
 
 ## Problem Statement
 
@@ -51,7 +51,7 @@ The key features of our application combine a social network and productivity tr
 
 ## High Level Design
 
-We constructed the front end of our application with React Native on Expo to facilitate cross-environment development along with built-in APIs, and the backend using Node.js and Express. We utilized MongoDB to manage user data.
+We constructed the front end of our application with React Native on Expo to facilitate cross-environment development along with built-in APIs, and the backend using Node.js and Express. We utilized MongoDB to manage user data. We used React for the front end for the website. All backend communications were made using Axios.
 
 We understand that user security is an important issue, hence to ensure user privacy and data security, we used Google Authorization for account creation and sign-in. DevOps are handled with GCP App Engine.
 
