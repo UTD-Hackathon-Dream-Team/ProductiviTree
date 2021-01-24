@@ -1,0 +1,2 @@
+# Set up standard node js gcp app engine
+runtime: nodejs10
